@@ -1,16 +1,16 @@
 var MasterConfig = function() {
     var t = {
                 
-        //baseUrl: "http://www.e-shequ.com/chunhui/wechat/hexie/wechat/",
-        //basePageUrl:"http://www.e-shequ.com/chunhui/weixin/",
-        //appId: "wx89c743b2fa762a2c",
+        baseUrl: "http://www.e-shequ.com/wechat/hexie/wechat/",
+        basePageUrl:"http://www.e-shequ.com/weixin/",
+        appId: "wx89c743b2fa762a2c",
         
         //baseUrl: "http://www.e-shequ.com/wechat-sit/hexie/wechat/",
         //basePageUrl:"http://www.e-shequ.com/wechat-sit/hexie/",
 
-        baseUrl: "http://localhost/",
-        basePageUrl:"http://localhost/",
-        appId: "wx95f46f41ca5e570e",
+        //baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
+        //basePageUrl:"http://test.e-shequ.com/weixin/",
+        //appId: "wx95f46f41ca5e570e",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
@@ -21,7 +21,7 @@ var MasterConfig = function() {
         
         is_debug:true,
         statistics: {
-            baidu_code: "23a1ae591bf2274b3024408e7e3a1fac",
+            baidu_code: "bca1d4564e31c6c46201a8ede08d0fff",
             cnzz_script: '<script src="http://s11.cnzz.com/stat.php?id=1256090623&web_id=1256090623" language="JavaScript"></script>'
         }
     },

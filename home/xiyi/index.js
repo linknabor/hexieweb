@@ -55,7 +55,7 @@ avalon.ready(function(){
 			choseMain(idx);
 		},
 		showXiyiItem:function(idx) {
-			if(idx == 203 || idx == 204){
+			if(idx == 204){
 				alert("该服务即将开通，敬请期待！");
 				return;
 			}
@@ -68,5 +68,5 @@ avalon.ready(function(){
 	getInfo();
 	queryBanner();
 	avalon.scan(document.body);
-	
+
 })

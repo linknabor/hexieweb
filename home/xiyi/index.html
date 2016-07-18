@@ -11,7 +11,7 @@
 		<script src="../../static/js/jquery.js"></script>
 		<script src="../../static/js/avalon.js"></script>
 		<script src="../../static/js/common_v3.js"></script>
-		<script src="index.js?v=6"></script>
+		<script src="index.js"></script>
 		<style type="text/css">
 		[ms-controller]:{display: none;}
 			body{
@@ -90,7 +90,7 @@
 		<div class="device" ms-visible="currentPage=='list'">
 		    <div class="swiper-container">
 		        <div class="swiper-wrapper">
-		           <div class="swiper-slide"  ms-repeat-banner="banners"> 
+		           <div class="swiper-slide"  ms-repeat-banner="banners">
 			           <a ms-href="{{banner.bannerUrl}}">
 						    <img ms-src="{{banner.picture}}">
 			           </a>
@@ -141,7 +141,7 @@ function initSwiper(){
         $('.swiper-container').css({height:a3 + 'px'});
         $('.swiper-slide img').css({height:a3 + 'px'});
 		$('.hideloadingpage').hide();
-		
+
 		//顶部图片滑动代码↓
 	    var mySwiper = new Swiper('.swiper-container',{
 	        speed:750,

@@ -273,32 +273,32 @@ avalon.ready(function() {
      */
     function checkUserRegister(){
     	
-//    	common.checkRegisterStatus();
-    	var n = "GET",
-        a = "userInfo",
-        i = null,
-        e = function(n) {
-			console.log(JSON.stringify(n));
-			if(n.result == null||n.result==""){
-				alert("新用户请先注册。");
-				toRegisterAndBack();
-				return false;
-			}
-			var tel = n.result.tel;
-			if(tel==null || tel == '' ){
-				alert("新用户请先注册。");
-				toRegisterAndBack();
-				return false;
-			}
-    	},
-        r = function(n) {
-        	if(n.errorCode==40001){
-        		alert("新用户请先注册。");
-        		toRegisterAndBack();
-        	}
-	        return false;
-        };
-        common.invokeApi(n, a, i, null, e, r)
+    	common.checkRegisterStatus();
+//    	var n = "GET",
+//        a = "userInfo",
+//        i = null,
+//        e = function(n) {
+//			console.log(JSON.stringify(n));
+//			if(n.result == null||n.result==""){
+//				alert("新用户请先注册。");
+//				toRegisterAndBack();
+//				return false;
+//			}
+//			var tel = n.result.tel;
+//			if(tel==null || tel == '' ){
+//				alert("新用户请先注册。");
+//				toRegisterAndBack();
+//				return false;
+//			}
+//    	},
+//        r = function(n) {
+//        	if(n.errorCode==40001){
+//        		alert("新用户请先注册。");
+//        		toRegisterAndBack();
+//        	}
+//	        return false;
+//        };
+//        common.invokeApi(n, a, i, null, e, r)
     	
     }
     
