@@ -70,15 +70,15 @@ avalon.ready(function() {
         $id: "root",
         tabs: [
             {
-                name: '快捷缴费',
+                name: '帐单缴费',
                 active: true
             },
             {
-                name: '账单缴费',
+                name: '物业缴费',
                 active: false
             },
             {
-                name: '停车账单缴费',
+                name: '停车缴费',
                 active: false
             }
         ],
