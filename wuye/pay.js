@@ -1,6 +1,7 @@
 avalon.ready(function() {
 	var page = 1;
 	var normalPage = 1;
+	var carnormalPage = 1;
 	var today = new Date();
 	var threemonthago = (new Date(today.getTime()-92*24*3600000)).format('yyyy-MM-dd');
 	var halfyearbefore = (new Date(today.getTime()-183*24*3600000)).format('yyyy-MM-dd');
@@ -173,46 +174,27 @@ avalon.ready(function() {
         /**快捷**/
         
         select: function(idx) {
+        	var price = 0;
         	if(o.quickpermit_skip_pay==1) {/*不可跳 必须连续*/
         		for (var i = 0; i <= idx; i++) {
-        			if(!o.bills[idx].selected)
-					{
-						if(!o.bills[i].selected)
-						{
-							o.price = parseFloat(o.price) + parseFloat(o.bills[i].fee_price);
-							o.price = o.price.toFixed(2);
-							o.bills[i].selected=true;
-						}
-					}else
-					{
-						if(i==idx)
-						{
-							o.price-=parseFloat(o.bills[idx].fee_price);
-							o.price = o.price.toFixed(2);
-							o.bills[idx].selected=false;
-						}
-					}
+        			o.bills[i].selected=true;
+        			price+=parseFloat(o.bills[i].fee_price);
                 }
         		for (var i = idx+1; i < o.bills.length; i++) {
-        			if(o.bills[i].selected)
-					{
-						o.price-=parseFloat(o.bills[i].fee_price);
-						o.price = o.price.toFixed(2);
-					}
-					o.bills[i].selected=false;
+        			o.bills[i].selected=false;
                 }
         		o.selectedAll = idx == o.bills.length-1;
-        	}else{
-				o.bills[idx].selected = !o.bills[idx].selected;
-				var selectedAll = true;
-            
-				for (var i = 0, len = o.bills.length; i < len; i++) {
-					selectedAll &= o.bills[i].selected;
-					o.price+=o.bills[i].selected?parseFloat(o.bills[i].fee_price):0;
-				}
-				o.selectedAll = selectedAll;
-    		}
-        	o.totalPrice=o.price;
+        	} else {
+        		o.bills[idx].selected = !o.bills[idx].selected;
+                var selectedAll = true;
+                
+                for (var i = 0, len = o.bills.length; i < len; i++) {
+                    selectedAll &= o.bills[i].selected;
+                    price+=o.bills[i].selected?parseFloat(o.bills[i].fee_price):0;
+                }
+                o.selectedAll = selectedAll;
+        	}
+        	o.totalPrice=price.toFixed(2);
         },
         selectedAll: false,
         toggleSelectedAll: function() {
@@ -235,46 +217,27 @@ avalon.ready(function() {
         },
         
         carselect: function(idx) {
-			if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
-    			for (var i = 0; i <= idx; i++) {
-    				if(!o.carbills[idx].selected)
-					{
-						if(!o.carbills[i].selected)
-						{
-							o.carprice = parseFloat(o.carprice) + parseFloat(o.carbills[i].fee_price);
-							o.carprice = o.carprice.toFixed(2);
-							o.carbills[i].selected=true;
-						}
-					}else
-					{
-						if(i==idx)
-						{
-							o.carprice-=parseFloat(o.carbills[idx].fee_price);
-							o.carprice = o.carprice.toFixed(2);
-							o.carbills[idx].selected=false;
-						}
-					}
+        	var price = 0;
+        	if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
+        		for (var i = 0; i <= idx; i++) {
+        			o.carbills[i].selected=true;
+        			price+=parseFloat(o.carbills[i].fee_price);
                 }
         		for (var i = idx+1; i < o.carbills.length; i++) {
-        			if(o.carbills[i].selected)
-					{
-						o.carprice-=parseFloat(o.carbills[i].fee_price);
-						o.carprice = o.carprice.toFixed(2);
-					}
-					o.carbills[i].selected=false;
+        			o.carbills[i].selected=false;
                 }
-			}else
-    		{
-    			o.carbills[idx].selected = !o.carbills[idx].selected;
-                var carselectedAll = true;
+        		o.carselectedAll = idx == o.carbills.length-1;
+        	} else {
+        		o.carbills[idx].selected = !o.carbills[idx].selected;
+                var selectedAll = true;
                 
                 for (var i = 0, len = o.carbills.length; i < len; i++) {
-                	carselectedAll &= o.carbills[i].selected;
-                    o.carprice+=o.carbills[i].selected?parseFloat(o.carbills[i].fee_price):0;
+                    selectedAll &= o.carbills[i].selected;
+                    price+=o.carbills[i].selected?parseFloat(o.carbills[i].fee_price):0;
                 }
-                o.carselectedAll = carselectedAll;
-    		}
-        	o.cartotalPrice=o.carprice;
+                o.carselectedAll = selectedAll;
+        	}
+        	o.cartotalPrice=price.toFixed(2);
         },
         carselectedAll: false,
         cartoggleSelectedAll: function() {
@@ -493,14 +456,21 @@ avalon.ready(function() {
 			tmp = normalPage;
 		}
 
-        if(hook<800&&hasNext&&!isloadPage&&tmp>1){
+		if(hook<800&&hasNext&&!isloadPage&&tmp>1){
             isloadPage=true;
             commonui.showAjaxLoading();
             
             if(is_active){
             	loadNextPage();
             }else {
-				loadNextPageNormal();
+            	var is_flag = o.tabs[1].active;
+            	if(is_flag)
+            	{
+            		loadNextPageNormal();
+            	}else
+            	{
+            		loadNextPageNormalCar();
+            	}
 			}
         }
     })
@@ -557,7 +527,32 @@ avalon.ready(function() {
         common.invokeApi(n, a, i, null, e, r)
     }
     
-    
+    function loadNextPageNormalCar(){
+    	
+    	var n = "GET",
+        a = "billList?startDate="+o.startDate+"&endDate="+o.endDate +"&payStatus=02&currentPage="+carnormalPage+"&totalCount="+o.totalCountNormal,
+        i = null,
+        e = function(n) {
+    		if(n.result==null) {
+                hasNext=false;
+                isloadPage = false;
+            	commonui.showMessage("没有更多啦");
+            	commonui.hideAjaxLoading();
+    		} else {
+    			o.carbills= o.carbills.concat(n.result.car_bill_info);
+                isloadPage = false;
+                commonui.hideAjaxLoading();
+    		}
+    		carnormalPage++;
+        },
+        r = function() {
+        	isloadPage = false;
+        	commonui.showMessage("加载账单信息失败");
+        	commonui.hideAjaxLoading();
+        };
+        common.invokeApi(n, a, i, null, e, r)
+    }
+
     checkUserRegister();
     initWechat(['scanQRCode']);
     queryBillList();
