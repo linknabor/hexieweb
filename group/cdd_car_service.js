@@ -88,6 +88,8 @@ function saveCarInfo(){
 		alert("请选择车型");
 	}else if(!yearId || yearId==""){
 		alert("请选择年款");
+	}else if(!licensePlateProvince || licensePlateProvince==""){
+		alert("请选择车牌省份");
 	}else if(licensePlate==""){
 		alert("请填写车牌");
 	}else if(requireDate==""){
