@@ -56,10 +56,12 @@ avalon.ready(function() {
 	            }
 	            
 	            o.totalCountNormal = n.result.total_count;
+				o.cartotalCountNormal = n.result.car_bill_info.lenght;
 			} else {
 				o.bills = [];
 			}
 			normalPage++;
+			carnormalPage++;
         },
         r = function() {
         	alert("获取账单记录失败！");
@@ -92,6 +94,7 @@ avalon.ready(function() {
         endDate:"",
         totalCount:0,
         totalCountNormal:0,
+		cartotalCountNormal:0,
 		price:0.00,
 		carprice:0.00,
 		quickprice:0.00,
@@ -530,7 +533,7 @@ avalon.ready(function() {
     function loadNextPageNormalCar(){
     	
     	var n = "GET",
-        a = "billList?startDate="+o.startDate+"&endDate="+o.endDate +"&payStatus=02&currentPage="+carnormalPage+"&totalCount="+o.totalCountNormal,
+        a = "billList?startDate="+o.startDate+"&endDate="+o.endDate +"&payStatus=02&currentPage="+carnormalPage+"&totalCount="+o.cartotalCountNormal,
         i = null,
         e = function(n) {
     		if(n.result==null) {
