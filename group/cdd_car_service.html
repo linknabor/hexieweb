@@ -13,7 +13,6 @@
 <script src="cdd_car_service.js"></script>
 <style type="text/css">
 ._banner{position:relative ;width: 100%;height: 100%;}
-._banner img:nth-child(1){width: 100%;display:block;}
 ._content{
 position: relative;width: 100%;height: 100%;top:0;background-color: #619547;
 }
@@ -23,15 +22,11 @@ position: relative;left:5.33%;width: 89.34%;height: 100%;
 ._content ._center ._center_img{
 position: relative;height: 100%;width: 100%;padding-top:30px;
 }
-._content ._center ._center_img img{
-width: 100%;height: 100%;
-}
+
 ._content ._center ._center_button_carinfo{
 position: relative;height: 100%;width: 100%;margin-top:30px;
 }
-._content ._center ._center_button_carinfo img{
-width: 100%;height: 100%;display:block;
-}
+
 ._content ._center ._select_div{
 	position: relative;height: 100%;width: 98%;margin-top:30px;margin-bottom:30px;
 	background-color: #FFFFFF;border:2px solid #32CD32;border-radius:3px;height: 30px;
@@ -66,9 +61,8 @@ width: 100%;height: 100%;display:block;
 ._content ._center ._baocun{
 	position: relative;height: 100%;width: 100%;margin-top:50px;margin-bottom:50px;
 }
-._content ._center ._baocun img{
-	width: 100%;height: 100%;
-}
+
+img{width: 100%;display:block;}
 </style>
 </head>
 <body>
@@ -127,7 +121,8 @@ width: 100%;height: 100%;display:block;
 		<div class="_select_div">
 				<div>车牌：</div>
 				<div>
-					<select style="width:12%;" name="licensePlateProvince">
+					<select style="width:20%;" name="licensePlateProvince">
+						<option value="沪">选择</option>
 						<option value="沪">沪</option>
 						<option value="苏">苏</option>
 						<option value="浙">浙</option>
@@ -160,7 +155,7 @@ width: 100%;height: 100%;display:block;
 						<option value="川">川</option>
 						<option value="宁">宁</option>
 					</select>
-					<input name="licensePlate" style="width:86%;" maxlength="15" value="" placeholder="输入车牌"/>
+					<input name="licensePlate" style="width:79%;" maxlength="15" value="" placeholder="输入车牌"/>
 				</div>
 		</div>
 		<!-- 其他车型 -->
