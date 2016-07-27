@@ -72,7 +72,7 @@ avalon.ready(function() {
 	            o.rule = n.result.park_discount_rule;
 	            buildRuleDisplay(o.ruleId, o.rule);
 	            o.totalCountNormal = n.result.total_count;
-				o.cartotalCountNormal = n.result.car_bill_info.lenght;
+				o.cartotalCountNormal = n.result.bills_size;
 			} else {
 				o.bills = [];
 			}
