@@ -55,10 +55,12 @@ avalon.ready(function(){
 			choseMain(idx);
 		},
 		showXiyiItem:function(idx) {
+			/*
 			if(idx == 204){
 				alert("该服务即将开通，敬请期待！");
 				return;
 			}
+			*/
 			location.href="bags.html?type="+idx;
 		},
 		banners:[]

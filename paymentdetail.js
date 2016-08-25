@@ -74,12 +74,28 @@ avalon.ready(function() {
         	o.userPayType = n.result.user_pay_type;
         	o.tradeWaterId = n.result.trade_water_id;
         	o.packageId = n.result.packageId;
+/*
+			var token_id = n.result.token_id;
+        	var url = "https://pay.swiftpass.cn/pay/jspay?token_id=TOKEN_ID&showwxtitle=1";
+        	url = url.replace("TOKEN_ID",token_id);
+        	window.location.href = url;
+*/	
+
+			wx.config({
+    		    appId: n.result.appid, // 必填，公众号的唯一标识
+    		    timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+    		    nonceStr: n.result.noncestr, // 必填，生成签名的随机串
+    		    signature: n.result.paysign,// 必填，签名，见附录1
+    		    jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    		});
+
             wx.chooseWXPay({
                 "timestamp":n.result.timestamp,
                 "nonceStr":n.result.noncestr,
                 "package":n.result.packageValue,
                 "signType":n.result.signtype,
                 "paySign":n.result.paysign,
+				"appId":n.result.appid,
           	    success: function (res) {
                 	notifyPaySuccess();
           	    },
@@ -98,8 +114,6 @@ avalon.ready(function() {
           	    
           	});
             
-//            o.userPayType = "9"
-//        	notifyPaySuccess();
 
         },
         r = function(n) {
@@ -291,7 +305,7 @@ avalon.ready(function() {
     });
     //n();
     getBillId();
-    initWechat(['chooseWXPay']) ;
+    //initWechat(['chooseWXPay']) ;
     getDetailInfo();
     updateCouponStatus();
     avalon.scan(document.body);
