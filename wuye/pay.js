@@ -63,6 +63,7 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
 			console.log(JSON.stringify(n));
+		
 			if(n.result!=null) {
 	            o.bills = n.result.bill_info;
 	            o.carbills = n.result.car_bill_info;
@@ -72,8 +73,16 @@ avalon.ready(function() {
 	            o.rule = n.result.park_discount_rule;
 	            buildRuleDisplay(o.ruleId, o.rule);
 	            o.totalCountNormal = n.result.total_count;
-				o.cartotalCountNormal = n.result.car_bill_info.lenght;
+				o.cartotalCountNormal = n.result.bills_size;
+				if(o.tabs[2].active && o.cartotalCountNormal==0){
+					o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
+				}
+				
 			} else {
+
+				if(o.tabs[2].active){
+					o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
+				}
 				o.bills = [];
 			}
 			normalPage++;
@@ -105,6 +114,7 @@ avalon.ready(function() {
         quickbills:[],
         quickpermit_skip_pay:1,
         park:'',
+        hint:'',
         ruleDisplay:'',
         ruleId: '0',
         rule:'',
@@ -126,6 +136,9 @@ avalon.ready(function() {
             o.tabs[idx].active = true;
             hasNext=true;
             isloadPage=false;
+			if(o.tabs[2].active && o.cartotalCountNormal==0){
+				o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
+			}
         },
         bills: [],
         carbills: [],
@@ -436,8 +449,8 @@ avalon.ready(function() {
      */
     function checkUserRegister(){
     	
-//    	common.checkRegisterStatus();
-    	var n = "GET",
+    	common.checkRegisterStatus();
+    	/*var n = "GET",
         a = "userInfo",
         i = null,
         e = function(n) {
@@ -461,7 +474,7 @@ avalon.ready(function() {
         	}
 	        return false;
         };
-        common.invokeApi(n, a, i, null, e, r)
+        common.invokeApi(n, a, i, null, e, r)*/
     	
     }
     
