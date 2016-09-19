@@ -74,12 +74,6 @@ avalon.ready(function() {
         	o.userPayType = n.result.user_pay_type;
         	o.tradeWaterId = n.result.trade_water_id;
         	o.packageId = n.result.packageId;
-/*
-			var token_id = n.result.token_id;
-        	var url = "https://pay.swiftpass.cn/pay/jspay?token_id=TOKEN_ID&showwxtitle=1";
-        	url = url.replace("TOKEN_ID",token_id);
-        	window.location.href = url;
-*/	
 
 			wx.config({
     		    appId: n.result.appid, // 必填，公众号的唯一标识
