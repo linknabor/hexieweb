@@ -13,6 +13,9 @@ var MasterConfig = function() {
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
         bindAppId: "wxa48ca61b68163483",
         
+		payPageFolder:"http://test.e-shequ.com/pay/",
+        payPageSuffix:"hx",		//hexie
+
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "合协",
         
