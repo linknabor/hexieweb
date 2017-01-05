@@ -127,7 +127,7 @@ avalon.ready(function() {
         $id: "root",
         page:"main",
         item:"",
-    	hours:2,
+    	hours:4,
     	amount:0,
     	serviceItemId:6,
     	realMoney:0,
