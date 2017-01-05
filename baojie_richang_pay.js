@@ -133,16 +133,16 @@ avalon.ready(function() {
     	realMoney:0,
     	realAmount:0,
     	addhours:function(){
-    	    if(!o.hours||o.hours<2){
-    	        o.hours=2;
+    	    if(!o.hours||o.hours<4){
+    	        o.hours=4;
     	    } else {
     	        o.hours+=0.5;
     	    }
     	    computeAmount();
     	},
     	subhours:function(){
-    	    if(!o.hours||o.hours<=2){
-                o.hours=2;
+    	    if(!o.hours||o.hours<=4){
+                o.hours=4;
             } else {
                 o.hours-=0.5;
             }
