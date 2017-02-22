@@ -1,16 +1,16 @@
 var MasterConfig = function() {
     var t = {
                 
-        baseUrl: "http://www.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"http://www.e-shequ.com/weixin/",
-        appId: "wx89c743b2fa762a2c",
+        //baseUrl: "http://www.e-shequ.com/wechat/hexie/wechat/",
+        //basePageUrl:"http://www.e-shequ.com/weixin/",
+        //appId: "wx89c743b2fa762a2c",
         
         //baseUrl: "http://www.e-shequ.com/wechat-sit/hexie/wechat/",
         //basePageUrl:"http://www.e-shequ.com/wechat-sit/hexie/",
 
-        //baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        //basePageUrl:"http://test.e-shequ.com/weixin/",
-        //appId: "wx95f46f41ca5e570e",
+        baseUrl: "http://127.0.0.1/",
+        basePageUrl:"http://127.0.0.1/",
+        appId: "wx95f46f41ca5e570e",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
@@ -46,7 +46,7 @@ var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "http://www.e-shequ.com/weixin/static/images/logo.jpg",
+            avatar: "http://127.0.0.1/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -56,7 +56,7 @@ var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"http://www.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"http://127.0.0.1/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
@@ -277,9 +277,9 @@ function isRegisted(){
 	return tel&&tel!='null';
 }
 
-function toRegisterAndBack(){
+function toRegisterAndBack(sn){
 	var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
-	location.href=MasterConfig.C('basePageUrl')+"person/register.html?comeFrom="+encodeURIComponent(n);
+	location.href=MasterConfig.C('basePageUrl')+"person/register.html?comeFrom="+encodeURIComponent(n)+"&sn="+sn;
 }
 /*增加访问统计*/
 var _hmt = _hmt || []; !
@@ -344,14 +344,14 @@ var common = {
             location.href = location.origin +common.removeParamFromUrl(["code"]);
         })
     },
-    checkRegisterStatus:function(){
+    checkRegisterStatus:function(sn){
         if(!getCookie("UID")){
         	common.login();/**不应该出现*/
         	return false;
         }
         if(!isRegisted()){
         	alert("请先完成注册！");
-        	toRegisterAndBack();
+        	toRegisterAndBack(sn);
         	return false;
         }
     	return true;

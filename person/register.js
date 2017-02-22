@@ -17,6 +17,12 @@ avalon.ready(function() {
 	
 	function getComeFrom(){
 		o.comeFrom=getUrlParam("comeFrom");
+		o.sn=getUrlParam("sn");//充电桩设备号
+	}
+	//拼接请求参数
+	function mosParam()
+	{
+		
 	}
 	
 	function simpleRegister() {
@@ -25,7 +31,7 @@ avalon.ready(function() {
         i = {
     			mobile:o.user.tel,
     			name:o.user.name,
-    			yzm:o.captcha
+    			yzm:o.captcha,
     		},
         e = function(n) {
     		updateUserStatus(n.result);
@@ -45,49 +51,15 @@ avalon.ready(function() {
 				location.href = page+"?comeFrom="+forwardPage;
 			}else{
 				alert("注册成功。");
-				location.href = forwardPage;
+				if(!o.sn)
+				{
+					//组参数
+					
+					location.href="http://ev.evchar.cn/evcnw/partner_scan.php?appKey=&openId=&phone=&sn=&sign=";//跳转到第三方页面
+				}else{
+					location.href = forwardPage;
+				}
 			}
-    		
-//    		var isInAct = "";
-//    		function sendMsg(){
-//				
-//				var n = "GET",
-//	    		a = "sendNotification",
-//	    		i = null,
-//	    		e = function(n) {
-//	    			isInAct = n.result;
-//	    			var page = "";
-//		    		if("true"==isInAct){
-//		    			page = MasterConfig.C('basePageUrl')+"wuye/act.html";
-//		    		}
-//					
-//					var forwardPage = "";
-//					
-//					if(o.comeFrom){
-//		        		forwardPage = o.comeFrom;
-//		        	} else {
-//		        		forwardPage = MasterConfig.C('basePageUrl')+"person/index.html";
-//		        	}
-//					
-//					if (page) {
-//						location.href = page+"?comeFrom="+forwardPage;
-//					}else{
-//						alert("注册成功。");
-//						location.href = forwardPage;
-//					}
-//	    		},
-//	    		r = function() {
-//					if(o.comeFrom){
-//		        		location.href = o.comeFrom;
-//		        	} else {
-//		        		location.href = MasterConfig.C('basePageUrl')+"person/index.html";
-//		        	}
-//	    		};
-//	    		common.invokeApi(n, a, i, null, e, r)
-//	    		
-//			}
-//    		sendMsg();
-			
         },
         r = function(n) {
         	commonui.hideAjaxLoading();
@@ -119,6 +91,7 @@ avalon.ready(function() {
         $id: "root",
         comeFrom:"",
         isClick: false,
+        sn : "",
         
         user:{},
         save:function(){
