@@ -22,8 +22,8 @@ avalon.ready(function() {
             initSwiper();
         }, function() {})
     }
-    
-    var a = 0,
+
+	var a = 0,
     o = avalon.define({
         $id: "root",
        jumpToDetail:function(mid) {
@@ -37,11 +37,25 @@ avalon.ready(function() {
     		   window.location.href="message.html?messageId="+mid;
     	   }
        },
+
+	   gotopay:function(isPark) {
+
+			var payUrl = MasterConfig.C("basePageUrl")+"wuye/pay.html";
+			if(isPark=="1"){
+				payUrl += "?park=1"
+			}
+			var encodedUrl = encodeURI(payUrl);
+			var authUrl = MasterConfig.C("oauthUrl")+"appid="+MasterConfig.C("appId")+"&redirect_uri="+encodedUrl+MasterConfig.C("oauthUrlPostFix");
+			window.location.href=authUrl;
+	   },
+
        banners:[],
        zixuns:[],
        city:"上海",
        xiaoquName:"合协社区"
     });
+
+
     
     query();
     queryUserInfo();
