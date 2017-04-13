@@ -411,7 +411,7 @@ avalon.ready(function() {
             }else{
             	var total = 0.00;
             	for(var i=0;i<o.quickbills.length;i++){
-            		if(o.quickbills[i].selected == true){
+            		if(o.quickbills[i].selected == true  && o.quickbills[i].pay_status=="02"){
             			total+=parseFloat(o.quickbills[i].fee_price);
             		}
             	}
