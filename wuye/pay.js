@@ -427,7 +427,7 @@ avalon.ready(function() {
         	var pay_addr = "";
         	var total = 0.00;
         	var total_pay = 0.00;
-        	var sel_not_pay_count = o.totalNotPay; //已选账单中未付账单的数量
+        	var sel_not_pay_count = 0; //已选账单中未付账单的数量
         	var sel_bill_arr = new Array();
             for (var i = 0, len = billList.length; i < len; i++) {
             	if(billList[i].is_onlinepay=='false'){
@@ -442,8 +442,8 @@ avalon.ready(function() {
                 	var ret = jQuery.inArray(billList[i].service_fee_cycle, sel_bill_arr);
                 	if(-1==ret){
                 		sel_bill_arr.push(billList[i].service_fee_cycle);
+                		sel_not_pay_count++;
                 	}
-                	sel_not_pay_count--;
                 	
                 }
             }
@@ -452,11 +452,11 @@ avalon.ready(function() {
             	return;
             }
             
-          //校验选择的账单是否达到可以支付的账单月份数量， pay_least_month代表至少需要支付的月份数。此值默认为0，不进行校验
+            //校验选择的账单是否达到可以支付的账单月份数量， pay_least_month代表至少需要支付的月份数。此值默认为0，不进行校验
             if (o.pay_least_month>0) {
             	 if (o.pay_least_month>sel_bill_arr.length) {
-                 	//当前选中的未支付账单如果少于总的未支付账单数据
-                     if (sel_not_pay_count < o.totalNotPay) {
+            		 //当前选中的未支付账单如果少于总的未支付账单数据
+            		 if (sel_not_pay_count < o.totalNotPay) {
          				alert("请至少选择"+o.pay_least_month+"个月的账单进行支付。");
          				return false;
          			}
