@@ -649,7 +649,7 @@ avalon.ready(function() {
 
     change2parkTab();
 	initWechat(['scanQRCode']);
-//	checkUserRegister();
+	checkUserRegister();
     queryBillList();
 	avalon.scan(document.body);
     //share.default_send();
