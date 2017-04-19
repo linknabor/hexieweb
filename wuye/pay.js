@@ -322,46 +322,51 @@ avalon.ready(function() {
         		o.permit_skip_car_pay=1;
         		if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
         			for (var i = 0; i <= idx; i++) {
-						if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
-						{
-							if(!o.quickbills[idx].selected)	//选中
+        				if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
 							{
-								if(!o.quickbills[i].selected)
+								if(!o.quickbills[idx].selected)	//选中
 								{
-									o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
-									o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
-									o.quickbills[i].selected=true;
-								}
-							}else	//反选
-							{
-								if(i==idx)
+									if(!o.quickbills[i].selected)
+									{
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
+										o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+										o.quickbills[i].selected=true;
+									}
+								}else	//反选
 								{
-									o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
-									o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
-									o.quickbills[idx].selected=false;
+									if(i==idx)
+									{
+										o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
+										o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+										o.quickbills[idx].selected=false;
+									}
 								}
 							}
-						}
+        				}
                     }
             		for (var i = idx+1; i < o.quickbills.length; i++) {
-						if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
-						{
-							if(o.quickbills[i].selected)
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
 							{
-								o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
-								o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+								if(o.quickbills[i].selected)
+								{
+									o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
+									o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+								}
+								o.quickbills[i].selected=false;
 							}
-							o.quickbills[i].selected=false;
 						}
                     }
         		}else
         		{
         			o.quickbills[idx].selected = !o.quickbills[idx].selected;
                     var selectedAll = true;
-                    
-                    for (var i = 0, len = o.bills.length; i < len; i++) {
-                        selectedAll &= o.quickbills[i].selected;
-                        o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    for (var i = 0, len = o.quickbills.length; i < len; i++) {
+                    	if (o.quickbills[i].pay_status=="02") {
+	                        selectedAll &= o.quickbills[i].selected;
+	                        o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    	}
                     }
                     o.quickselectedAll = selectedAll;
         		}
@@ -369,46 +374,52 @@ avalon.ready(function() {
         		/*物业费选择 */
         		if(o.quickpermit_skip_pay==1) {/*不可跳 必须连续*/
             		for (var i = 0; i <= idx; i++) {
-						if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
-						{
-							if(!o.quickbills[idx].selected)	//选中
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
 							{
-								if(!o.quickbills[i].selected)
+								if(!o.quickbills[idx].selected)	//选中
 								{
-									o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
-									o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
-									o.quickbills[i].selected=true;
-								}
-							}else	//反选
-							{
-								if(i==idx)
+									if(!o.quickbills[i].selected)
+									{
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+										o.quickbills[i].selected=true;
+									}
+								}else	//反选
 								{
-									o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
-									o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
-									o.quickbills[idx].selected=false;
+									if(i==idx)
+									{
+										o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+										o.quickbills[idx].selected=false;
+									}
 								}
 							}
 						}
                     }
             		for (var i = idx+1; i < o.quickbills.length; i++) {
-						if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
-						{
-							if(o.quickbills[i].selected)
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
 							{
-								o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
-								o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+								if(o.quickbills[i].selected)
+								{
+									o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
+									o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+								}
+								o.quickbills[i].selected=false;
 							}
-							o.quickbills[i].selected=false;
-						}
+            			}
                     }
             		o.quickselectedAll = idx == o.quickbills.length-1;
             	} else {
             		o.quickbills[idx].selected = !o.quickbills[idx].selected;
                     var selectedAll = true;
                     
-                    for (var i = 0, len = o.bills.length; i < len; i++) {
-                        selectedAll &= o.quickbills[i].selected;
-                        o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    for (var i = 0, len = o.quickbills.length; i < len; i++) {
+                    	if (o.quickbills[i].pay_status=="02") {
+                    		selectedAll &= o.quickbills[i].selected;
+                    		o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    	}
                     }
                     o.quickselectedAll = selectedAll;
             	}
@@ -638,7 +649,7 @@ avalon.ready(function() {
 
     change2parkTab();
 	initWechat(['scanQRCode']);
-	checkUserRegister();
+//	checkUserRegister();
     queryBillList();
 	avalon.scan(document.body);
     //share.default_send();
