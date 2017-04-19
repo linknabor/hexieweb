@@ -131,6 +131,7 @@ avalon.ready(function() {
 		price:0.00,
 		carprice:0.00,
 		quickprice:0.00,
+		quicktotalPrice: 0.00,
 		totalPrice: 0.00,
 		cartotalPrice:0.00,
         changeTab: function(idx) {
@@ -211,9 +212,13 @@ avalon.ready(function() {
         	page = 1;
         	quickPayBillList();
         },
-        /**快捷**/
         
+        /*绑定房屋支付--选择账单 */
         select: function(idx) {
+        	
+        	if(o.bills[idx].pay_status!="02"){
+        		return;
+        	}
         	var price = 0;
         	if(o.quickpermit_skip_pay==1) {/*不可跳 必须连续*/
         		for (var i = 0; i <= idx; i++) {
@@ -236,7 +241,10 @@ avalon.ready(function() {
         	}
         	o.totalPrice=price.toFixed(2);
         },
+        
         selectedAll: false,
+        
+        /*绑定房屋支付--全选  start */
         toggleSelectedAll: function() {
             o.selectedAll = !o.selectedAll;
             for (var i = 0, len = o.bills.length; i < len; i++) {
@@ -248,15 +256,19 @@ avalon.ready(function() {
             }else{
             	var total = 0.00;
             	for(var i=0;i<o.bills.length;i++){
-            		if(o.bills[i].selected == true){
+            		if(o.bills[i].selected == true && o.bills[i].pay_status=="02"){
             			total+=parseFloat(o.bills[i].fee_price);
             		}
             	}
             	o.totalPrice = total.toFixed(2);
             }
         },
-        
+        /*停车费支付--选择账单*/
         carselect: function(idx) {
+        	
+        	if(o.carbills[idx].pay_status!="02"){
+        		return;
+        	}
         	var price = 0;
         	if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
         		for (var i = 0; i <= idx; i++) {
@@ -280,6 +292,7 @@ avalon.ready(function() {
         	o.cartotalPrice=price.toFixed(2);
         },
         carselectedAll: false,
+        /*停车费支付--全选、反选*/
         cartoggleSelectedAll: function() {
             o.carselectedAll = !o.carselectedAll;
             for (var i = 0, len = o.carbills.length; i < len; i++) {
@@ -291,122 +304,137 @@ avalon.ready(function() {
             }else{
             	var total = 0.00;
             	for(var i=0;i<o.carbills.length;i++){
-            		if(o.carbills[i].selected == true){
+            		if(o.carbills[i].selected == true && o.carbills[i].pay_status=="02"){
             			total+=parseFloat(o.carbills[i].fee_price);
             		}
             	}
             	o.cartotalPrice = total.toFixed(2);
             }
         },
-        
+        /*快捷支付--选择账单*/
         quickselect: function(idx,service_fee_name) {
+        	
+        	if(o.quickbills[idx].pay_status!="02"){
+        		return;
+        	}
         	if(service_fee_name=='公共车位停车费' || service_fee_name=='固定车位停车费')
         	{
-				o.permit_skip_car_pay=1;
+        		o.permit_skip_car_pay=1;
         		if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
         			for (var i = 0; i <= idx; i++) {
-						if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
-						{
-							if(!o.quickbills[idx].selected)
+        				if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
 							{
-								if(!o.quickbills[i].selected)
+								if(!o.quickbills[idx].selected)	//选中
 								{
-									o.quickprice = parseFloat(o.quickprice) + parseFloat(o.quickbills[i].fee_price);
-									o.quickprice = o.quickprice.toFixed(2);
-									o.quickbills[i].selected=true;
-								}
-							}else
-							{
-								if(i==idx)
+									if(!o.quickbills[i].selected)
+									{
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
+										o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+										o.quickbills[i].selected=true;
+									}
+								}else	//反选
 								{
-									o.quickprice-=parseFloat(o.quickbills[idx].fee_price);
-									o.quickprice = o.quickprice.toFixed(2);
-									o.quickbills[idx].selected=false;
+									if(i==idx)
+									{
+										o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
+										o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+										o.quickbills[idx].selected=false;
+									}
 								}
 							}
-						}
+        				}
                     }
             		for (var i = idx+1; i < o.quickbills.length; i++) {
-						if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
-						{
-							if(o.quickbills[i].selected)
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name=='公共车位停车费' || o.quickbills[i].service_fee_name=='固定车位停车费')
 							{
-								o.quickprice-=parseFloat(o.quickbills[i].fee_price);
-								o.quickprice = o.quickprice.toFixed(2);
+								if(o.quickbills[i].selected)
+								{
+									o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
+									o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+								}
+								o.quickbills[i].selected=false;
 							}
-							o.quickbills[i].selected=false;
 						}
                     }
         		}else
         		{
         			o.quickbills[idx].selected = !o.quickbills[idx].selected;
                     var selectedAll = true;
-                    
-                    for (var i = 0, len = o.bills.length; i < len; i++) {
-                        selectedAll &= o.quickbills[i].selected;
-                        o.quickprice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    for (var i = 0, len = o.quickbills.length; i < len; i++) {
+                    	if (o.quickbills[i].pay_status=="02") {
+	                        selectedAll &= o.quickbills[i].selected;
+	                        o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    	}
                     }
                     o.quickselectedAll = selectedAll;
         		}
-        	}else
-        	{
+        	} else { 
+        		/*物业费选择 */
         		if(o.quickpermit_skip_pay==1) {/*不可跳 必须连续*/
             		for (var i = 0; i <= idx; i++) {
-						if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
-						{
-							if(!o.quickbills[idx].selected)
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
 							{
-								if(!o.quickbills[i].selected)
+								if(!o.quickbills[idx].selected)	//选中
 								{
-									o.quickprice = parseFloat(o.quickprice) + parseFloat(o.quickbills[i].fee_price);
-									o.quickprice = o.quickprice.toFixed(2);
-									o.quickbills[i].selected=true;
-								}
-							}else
-							{
-								if(i==idx)
+									if(!o.quickbills[i].selected)
+									{
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice) + parseFloat(o.quickbills[i].fee_price);
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+										o.quickbills[i].selected=true;
+									}
+								}else	//反选
 								{
-									o.quickprice-=parseFloat(o.quickbills[idx].fee_price);
-									o.quickprice = o.quickprice.toFixed(2);
-									o.quickbills[idx].selected=false;
+									if(i==idx)
+									{
+										o.quicktotalPrice-=parseFloat(o.quickbills[idx].fee_price);
+										o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+										o.quickbills[idx].selected=false;
+									}
 								}
 							}
 						}
                     }
             		for (var i = idx+1; i < o.quickbills.length; i++) {
-						if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
-						{
-							if(o.quickbills[i].selected)
+            			if (o.quickbills[i].pay_status=="02") {
+							if(o.quickbills[i].service_fee_name!='公共车位停车费' && o.quickbills[i].service_fee_name!='固定车位停车费')
 							{
-								o.quickprice-=parseFloat(o.quickbills[i].fee_price);
-								o.quickprice = o.quickprice.toFixed(2);
+								if(o.quickbills[i].selected)
+								{
+									o.quicktotalPrice-=parseFloat(o.quickbills[i].fee_price);
+									o.quicktotalPrice = parseFloat(o.quicktotalPrice).toFixed(2);
+								}
+								o.quickbills[i].selected=false;
 							}
-							o.quickbills[i].selected=false;
-						}
+            			}
                     }
             		o.quickselectedAll = idx == o.quickbills.length-1;
             	} else {
             		o.quickbills[idx].selected = !o.quickbills[idx].selected;
                     var selectedAll = true;
                     
-                    for (var i = 0, len = o.bills.length; i < len; i++) {
-                        selectedAll &= o.quickbills[i].selected;
-                        o.quickprice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    for (var i = 0, len = o.quickbills.length; i < len; i++) {
+                    	if (o.quickbills[i].pay_status=="02") {
+                    		selectedAll &= o.quickbills[i].selected;
+                    		o.quicktotalPrice+=o.quickbills[i].selected?parseFloat(o.quickbills[i].fee_price):0;
+                    	}
                     }
                     o.quickselectedAll = selectedAll;
             	}
         	}
-			o.quicktotalPrice=o.quickprice;
         },
         quickselectedAll: false,
+        
+        /*快捷支付--全选、反选*/
         quicktoggleSelectedAll: function() {
         	
             o.quickselectedAll = !o.quickselectedAll;
             for (var i = 0, len = o.quickbills.length; i < len; i++) {
                 o.quickbills[i].selected = o.quickselectedAll;
             }
-            
-            if(!o.quickselectedAll){
+            if(!o.quickselectedAll){	//全部反选
         		o.quicktotalPrice = 0.00;
             }else{
             	var total = 0.00;
@@ -419,8 +447,6 @@ avalon.ready(function() {
             }
             
         },
-        quicktotalPrice: 0.00,
-        
         
         pay: function(billList) {
         	var bills = "";
@@ -473,7 +499,6 @@ avalon.ready(function() {
      * 1.判断用户是否为注册用户，如为注册用户，则走正常缴费流程。如果不为注册用户则跳转到注册页面。
      */
     function checkUserRegister(){
-    	
     	common.checkRegisterStatus();
     	/*var n = "GET",
         a = "userInfo",
