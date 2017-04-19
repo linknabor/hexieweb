@@ -215,6 +215,10 @@ avalon.ready(function() {
         
         /*绑定房屋支付--选择账单 */
         select: function(idx) {
+        	
+        	if(o.bills[idx].pay_status!="02"){
+        		return;
+        	}
         	var price = 0;
         	if(o.quickpermit_skip_pay==1) {/*不可跳 必须连续*/
         		for (var i = 0; i <= idx; i++) {
@@ -252,7 +256,7 @@ avalon.ready(function() {
             }else{
             	var total = 0.00;
             	for(var i=0;i<o.bills.length;i++){
-            		if(o.bills[i].selected == true){
+            		if(o.bills[i].selected == true && o.bills[i].pay_status=="02"){
             			total+=parseFloat(o.bills[i].fee_price);
             		}
             	}
@@ -261,6 +265,10 @@ avalon.ready(function() {
         },
         /*停车费支付--选择账单*/
         carselect: function(idx) {
+        	
+        	if(o.carbills[idx].pay_status!="02"){
+        		return;
+        	}
         	var price = 0;
         	if(o.permit_skip_car_pay==1) {/*不可跳 必须连续*/
         		for (var i = 0; i <= idx; i++) {
@@ -296,7 +304,7 @@ avalon.ready(function() {
             }else{
             	var total = 0.00;
             	for(var i=0;i<o.carbills.length;i++){
-            		if(o.carbills[i].selected == true){
+            		if(o.carbills[i].selected == true && o.carbills[i].pay_status=="02"){
             			total+=parseFloat(o.carbills[i].fee_price);
             		}
             	}
@@ -305,6 +313,10 @@ avalon.ready(function() {
         },
         /*快捷支付--选择账单*/
         quickselect: function(idx,service_fee_name) {
+        	
+        	if(o.quickbills[idx].pay_status!="02"){
+        		return;
+        	}
         	if(service_fee_name=='公共车位停车费' || service_fee_name=='固定车位停车费')
         	{
         		o.permit_skip_car_pay=1;
