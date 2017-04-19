@@ -426,12 +426,13 @@ avalon.ready(function() {
             if(!o.quickselectedAll){	//全部反选
         		o.quicktotalPrice = 0.00;
             }else{
+            	var total = 0.00;
             	for(var i=0;i<o.quickbills.length;i++){
             		if(o.quickbills[i].selected == true  && o.quickbills[i].pay_status=="02"){
-            			o.quicktotalPrice = parseFloat(o.quicktotalPrice)+parseFloat(o.quickbills[i].fee_price);
+            			total+=parseFloat(o.quickbills[i].fee_price);
             		}
             	}
-            	o.quicktotalPrice = o.quicktotalPrice.toFixed(2);
+            	o.quicktotalPrice = total.toFixed(2);
             }
             
         },
