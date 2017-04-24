@@ -21,7 +21,7 @@ avalon.ready(function() {
 	            o.ruleId = n.result.park_discount_rule_conf;
 	            o.rule = n.result.park_discount_rule;
 	            o.pay_least_month = n.result.pay_least_month;
-//	            o.reduceMode = n.result.reduce_mode;
+	            o.reduceMode = n.result.reduce_mode;
 	            buildRuleDisplay(o.ruleId, o.rule);
 	            
 	            if(o.quickbills==null||o.quickbills.size()==0){
