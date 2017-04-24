@@ -21,7 +21,7 @@ avalon.ready(function() {
 	            o.ruleId = n.result.park_discount_rule_conf;
 	            o.rule = n.result.park_discount_rule;
 	            o.pay_least_month = n.result.pay_least_month;
-//	            o.reduceMode = n.result.reduce_mode;
+	            o.reduceMode = n.result.reduce_mode;
 	            buildRuleDisplay(o.ruleId, o.rule);
 	            
 	            if(o.quickbills==null||o.quickbills.size()==0){
@@ -79,6 +79,7 @@ avalon.ready(function() {
 				o.cartotalCountNormal = n.result.bills_size;
 				o.pay_least_month = n.result.pay_least_month;
 				o.totalNotPay = n.result.total_not_pay;
+				o.reduceMode = n.result.reduce_mode;
 				if(o.tabs[2].active && o.cartotalCountNormal==0){
 					o.hint = "缴纳停车费需要先绑定房屋哦。  请在  “社区物业-->我是业主” 中进行绑定。"
 				}
