@@ -18,11 +18,22 @@ avalon.ready(function() {
 	function getComeFrom(){
 		o.comeFrom=getUrlParam("comeFrom");
 		o.sn=getUrlParam("sn");//充电桩设备号
+		o.sn=getUrlParam("sectId");//设备所在小区ID servplat
 	}
+	
 	//拼接请求参数
 	function mosParam()
 	{
-		
+		 var n = "GET",
+	        a = "mosParam/"+o.sn,
+	        i = null,
+	        e = function(n) {
+	            o.urlParam = n.result.paramUrl;
+	        },
+	        r = function() {
+	    		alert("获取banner异常");
+	        };
+	        common.invokeApi(n, a, i, null, e, r)
 	}
 	
 	function simpleRegister() {
@@ -32,6 +43,8 @@ avalon.ready(function() {
     			mobile:o.user.tel,
     			name:o.user.name,
     			yzm:o.captcha,
+    			sn:o.sn,
+    			sectId:o.sectId
     		},
         e = function(n) {
     		updateUserStatus(n.result);
@@ -54,8 +67,8 @@ avalon.ready(function() {
 				if(!o.sn)
 				{
 					//组参数
-					
-					location.href="http://ev.evchar.cn/evcnw/partner_scan.php?appKey=&openId=&phone=&sn=&sign=";//跳转到第三方页面
+					mosParam();
+					location.href="http://ev.evchar.cn/evcnw/partner_scan.php?"+o.urlParam;//跳转到第三方页面
 				}else{
 					location.href = forwardPage;
 				}
@@ -92,6 +105,8 @@ avalon.ready(function() {
         comeFrom:"",
         isClick: false,
         sn : "",
+        sectId:"",
+        urlParam:"",
         
         user:{},
         save:function(){

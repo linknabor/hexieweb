@@ -8,34 +8,37 @@ avalon.ready(function() {
 	
 	var o = avalon.define({
         $id: "root",
-        sn: ""
+        sn: "",
+        sectId: "",
+        urlParam:""
     });
 	
 	//接收参数
 	function ParamValue()
 	{
 		o.sn = getUrlParam("sn");//设备号
+		o.sectId = getUrlParam("sectId");//设备所在小区ID servplat
 	}
 	
 	//检查是否是注册用户
 	function checkUserRegister(){
 		if(!isRegisted())//未注册用户
 		{
-			common.checkRegisterStatus(o.sn);
+			common.checkRegisterStatus(o.sn,o.sectId);
 		}else//已注册用户直接跳转到云充画面
 		{
 			isChargerUser();
-			location.href="http://ev.evchar.cn/evcnw/partner_scan.php ?appKey=&openId=&phone=&sn=&sign=";//跳转到第三方页面
+			location.href="http://ev.evchar.cn/evcnw/partner_scan.php?"+o.urlParam;//跳转到第三方页面
 		}
 	}
 	
 	function isChargerUser()
 	{
 		var n = "GET",
-        a = "getChargerUser?sn="+o.sn,
+        a = "getChargerUser?sn="+o.sn+"&sectId="+sectId,
         i = null,
         e = function(n) {
-            console.log(JSON.stringify(n));
+            o.urlParam = n.result.paramUrl;
         },
         r = function() {
             alert("注册用户失败");

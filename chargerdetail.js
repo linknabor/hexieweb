@@ -12,6 +12,7 @@ avalon.ready(function() {
         device_no: '',
         packageId:'',
 		classtype:'white',
+		paramUrl:"",
         
         pay: function() {
         	
@@ -42,13 +43,6 @@ avalon.ready(function() {
         
     });
 
-	//云充带过来的参数有：手机号,设备号
-	//o.phone=getUrlParam("phone");
-	//o.device_no = getUrlParam("device_no");
-	
-	o.phone=getCookie("tel");
-	o.device_no = "100001";
-	
 	function payAction() {
 		
 		var fact = parseFloat(o.money);
@@ -66,7 +60,7 @@ avalon.ready(function() {
     	}
 		o.isPaying = true;
         var n = "POST",
-        a = "getChargerPay?phone="+o.phone+"&money="+o.money+"&device_no="+o.device_no,
+        a = "getChargerPay?phone="+o.phone+"&money="+o.money,
         i = null,
         e = function(n) {
         	o.userPayType = n.result.user_pay_type;
@@ -120,6 +114,9 @@ avalon.ready(function() {
 
 	function getChargerType()
 	{
+		//云充带过来的参数有：手机号,设备号
+		o.phone=getUrlParam("phone");
+		
 		checkUserRegister();
 
 		var n = "GET",
@@ -142,11 +139,11 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
     		console.log(JSON.stringify(n));
-			var forwardUrl = MasterConfig.C("basePageUrl");
-			
+			//var forwardUrl = MasterConfig.C("basePageUrl");
+			o.paramUrl = n.result;
 			alert("支付成功。");
-			forwardUrl += "charger/query.html";//跳云充画面
-			location.href = forwardUrl;
+			forwardUrl = "http://ev.evchar.cn/partner/index.php?";//跳云充画面
+			location.href = forwardUrl+o.paramUrl;
     	},
         r = function() {
     		o.isPaying=false;
