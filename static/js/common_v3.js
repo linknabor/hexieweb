@@ -1,22 +1,22 @@
 var MasterConfig = function() {
     var t = {
                 
-       // baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        //basePageUrl:"http://test.e-shequ.com/weixin/",
-        //appId: "wx89c743b2fa762a2c",
+        baseUrl: "http://www.e-shequ.com/wechat/hexie/wechat/",
+        basePageUrl:"http://www.e-shequ.com/weixin/",
+        appId: "wx89c743b2fa762a2c",
         
-        //baseUrl: "http://test.e-shequ.com/wechat-sit/hexie/wechat/",
-        //basePageUrl:"http://test.e-shequ.com/wechat-sit/hexie/",
+        //baseUrl: "http://www.e-shequ.com/wechat-sit/hexie/wechat/",
+        //basePageUrl:"http://www.e-shequ.com/wechat-sit/hexie/",
 
-        baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"http://test.e-shequ.com/weixin/",
-        appId: "wx95f46f41ca5e570e",
+        //baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
+        //basePageUrl:"http://test.e-shequ.com/weixin/",
+        //appId: "wx95f46f41ca5e570e",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
         bindAppId: "wxa48ca61b68163483",
         
-		//payPageFolder:"http://test.e-shequ.com/pay/",
+		payPageFolder:"http://www.e-shequ.com/pay/",
         payPageSuffix:"hx",		//hexie
 
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
@@ -46,7 +46,7 @@ var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "http://test.e-shequ.com/weixin/static/images/logo.jpg",
+            avatar: "http://www.e-shequ.com/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -56,7 +56,7 @@ var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"http://test.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"http://www.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
