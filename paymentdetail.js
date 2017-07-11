@@ -95,8 +95,11 @@ avalon.ready(function() {
     	}
 		o.isPaying = true;
         var n = "POST",
-        a = "getPrePayInfo?billId="+o.billId+"&stmtId="+o.stmtId+"&couponUnit="+o.model.couponAmout+
-        	"&couponNum=1&couponId="+o.model.couponId+"&mianBill="+o.mianBill+"&mianAmt="+o.mianAmt+"&reduceAmt="+o.reduceAmt,
+        //a = "getPrePayInfo?billId="+o.billId+"&stmtId="+o.stmtId+"&couponUnit="+o.model.couponAmout+
+        //	"&couponNum=1&couponId="+o.model.couponId+"&mianBill="+o.mianBill+"&mianAmt="+o.mianAmt+"&reduceAmt="+o.reduceAmt,
+
+		a = "getPrePayInfo?billId="+o.billId+"&stmtId="+o.stmtId+"&couponUnit="+o.model.couponAmout+
+        	"&couponNum=1&couponId="+o.model.couponId+"&mianBill="+o.mianBill+"&mianAmt="+o.mianAmt+"&reduceAmt="+o.reduceAmt+"&invoice_title_type="+o.invoice_title_type+"&credit_code="+o.credit_code+"&invoice_title="+o.invoice_title,
         i = null,
         e = function(n) {
             //alert(JSON.stringify(n));
@@ -195,6 +198,10 @@ avalon.ready(function() {
 				}
             }
             o.mianAmt = n.result.mianAmt;
+			o.show_com_flag = n.result.show_com_flag;
+			o.show_invoice_flag = n.result.show_invoice_flag;
+			o.invoice_title = n.result.invoice_title;
+			o.init_title = n.result.invoice_title;
             var totalPrice = parseFloat(o.totalPrice)-parseFloat(o.mianAmt);
             o.totalPrice = totalPrice.toFixed(2);
         },
@@ -294,7 +301,14 @@ avalon.ready(function() {
         reduceMode:0,
         hasReduce:0,
         reduceAmt:0.00,
-        
+		invoice_title:'',//发票抬头
+		credit_code:'',//信用代码
+		invoice_switch:'1',//是否开具发票,默认:是
+		invoice_title_type:'01',//发票类型;个人/公司,默认:个人
+        show_invoice_flag:'0',//是否开通电子发票功能，默认不开通
+		show_com_flag:'0',//是否允许开具公司发票，默认不允许
+		readonly:'readonly',//发票抬头是否只读
+		init_title:'',
         model:{
         	couponNum:0,
         	coupon:null,
@@ -314,6 +328,18 @@ avalon.ready(function() {
         		o.isPaying = false;
         		return;
         	}
+			if(o.invoice_switch==1){
+				if(o.invoice_title==''){
+					alert('请填写发票抬头信息!');
+					return;
+				}
+				if(o.invoice_title_type=='02'){
+					if(o.credit_code==''){
+						alert('请填写发票公司税号信息!');
+						return;
+					}
+				}
+			}
         	payAction();
         },
         
@@ -323,11 +349,87 @@ avalon.ready(function() {
         	}
         	o.currentPage='coupons';
         },
+
+		InvoiceSelected:function(obj,flag,type){
+			var boxArray = document.getElementsByName("flag");
+			for(var i=0;i<=boxArray.length-1;i++){
+				if(boxArray[i]==obj && obj.checked){
+					boxArray[i].checked = true;
+					o.invoice_switch = flag;
+					
+					if(flag==1)
+					{
+						if(type==false)
+						{
+							document.getElementById("div").style.display="block";
+							document.getElementById("div2").style.display="block";
+						}else
+						{
+							document.getElementById("zdiv").style.display="block";
+							document.getElementById("zdiv2").style.display="block";
+						}
+						
+					}else
+					{
+						if(type==false)
+						{
+							document.getElementById("div").style.display="none";
+							document.getElementById("div2").style.display="none";
+							document.getElementById("div3").style.display="none";
+						}else
+						{
+							document.getElementById("zdiv").style.display="none";
+							document.getElementById("zdiv2").style.display="none";
+							document.getElementById("zdiv3").style.display="none";
+						}
+					}
+				}else{
+					boxArray[i].checked = false; 
+				}
+			}
+        },
+
+		getType:function(obj,flag,type){
+			var boxArray = document.getElementsByName("per");
+			for(var i=0;i<=boxArray.length-1;i++){ 
+				if(boxArray[i]==obj && obj.checked){ 
+					boxArray[i].checked = true;
+					o.invoice_title_type = flag;
+					if(flag=='02')
+					{
+						if(type==false)
+						{
+							document.getElementById("div3").style.display="block";
+						}else
+						{
+							document.getElementById("zdiv3").style.display="block";
+						}
+						o.readonly='';
+					}else
+					{
+						if(type==false)
+						{
+							document.getElementById("div3").style.display="none";
+						}else
+						{
+							document.getElementById("zdiv3").style.display="none";
+						}
+						o.readonly='readonly';
+						o.invoice_title = o.init_title;
+					}
+				}else{
+					boxArray[i].checked = false;
+				}
+			}
+        },
+
         
         payInfo:{},
         payInfofee_data:[]
         
     });
+	
+
     //n();
     getBillId();
     //initWechat(['chooseWXPay']) ;
