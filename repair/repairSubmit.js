@@ -16,6 +16,11 @@ function chooseAddress(address){
 	}
 	o.currentPage='main';
 }
+
+function choosetime(){
+	$('#datetimepicker2').datetimepicker('show');
+}
+
 var uploadImgMap = {};
 avalon.ready(function() {
 	initWechat(['chooseImage','previewImage','uploadImage','downloadImage']);
@@ -147,8 +152,11 @@ avalon.ready(function() {
             }
         }
     });
+
+	
     avalon.scan(document.body);
     common.checkRegisterStatus();
+	//alert(avalon.version);
     queryProject();
     $('#datetimepicker2').datetimepicker({
     	onChangeDateTime:function(x){
@@ -162,7 +170,9 @@ avalon.ready(function() {
     	format:'Y-m-d H:i',
     	formatDate:'Y-m-d H:i'
     });
+
     $('#timetaker').click(function(){
     	$('#datetimepicker2').datetimepicker('show');
     });
 });
+
