@@ -1,16 +1,16 @@
 var MasterConfig = function() {
     var t = {
                 
-       // baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        //basePageUrl:"http://test.e-shequ.com/weixin/",
-        //appId: "wx89c743b2fa762a2c",
+        baseUrl: "https://www.e-shequ.com/wechat/hexie/wechat/",
+        basePageUrl:"https://www.e-shequ.com/weixin/",
+        appId: "wx89c743b2fa762a2c",
         
         //baseUrl: "http://test.e-shequ.com/wechat-sit/hexie/wechat/",
         //basePageUrl:"http://test.e-shequ.com/wechat-sit/hexie/",
 
-        baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"http://test.e-shequ.com/weixin/",
-        appId: "wx95f46f41ca5e570e",
+        //baseUrl: "http://test.e-shequ.com/wechat/hexie/wechat/",
+        //basePageUrl:"http://test.e-shequ.com/weixin/",
+        //appId: "wx95f46f41ca5e570e",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
