@@ -1,176 +1,187 @@
- var o;
-avalon.ready(function() {
 
-    o = avalon.define({
-        $id: "root",
-        yzmtime : 60,
-        yzmstr:"获取验证码",
-        captcha: '',//验证码
-		invoice_title:'',//发票抬头
-		userId: '12345',
-		isClick: false,
-		trade_water_id: getUrlParam("trade_water_id"),//交易ID
-		tel:'',//手机号
-		invoice_title_type:'0',//发票类型;个人/公司,默认:个人
-		credit_code:'',//信用代码
-        directSave: true,//使用该属性改变页面的按钮状态和提示信息的显示或者隐藏
-		check1:true,
-		check2:'',
-		showcom:'1',
-		readonly:'readonly',
-		init_title:'',
-        getCaptcha: function() {
-        	var reg = /^1[3-9][0-9]\d{8}$/;
-	       	if (!reg.test(o.tel)) {
-	       	     alert("请输入正确的手机号");
-	       	     return;
-	       	};
-	       	if(o.yzmstr=="获取验证码"||o.yzmstr=="重新获取"){
-	       		o.yzmstr="获取中";
-	       		yzmreq();
-	       	}
-        },
-        getType:function(obj,flag){
-			var boxArray = document.getElementsByName("per");
-			for(var i=0;i<=boxArray.length-1;i++){
-				if(boxArray[i]==obj && obj.checked){
-					boxArray[i].checked = true;
-					o.invoice_title_type = flag;
-					showdiw(flag);
-				}else{
-					boxArray[i].checked = false;
-				}
-			}
-        },
-        applyInvoice:function(){
-        	if (o.isClick == true) {
-				alert("请勿重复提交。");
-				return;
-			}
-			
-			if(o.tel=='')
-			{
-				alert("手机号码不能为空！");
-				return;
-			}
-			
-			if(o.captcha=='')
-			{
-				alert("验证码不能为空！");
-				return;
-			}
-
-			if(o.invoice_title=='')
-			{
-				alert("发票抬头不能为空！");
-				return;
-			}
-
-			if(o.invoice_title_type=='02'){
-				if(o.credit_code==''){
-					alert('请填写电子发票公司信用代码信息!');
-					return;
-				}
-			}
-
-        	o.isClick = true;
-        	var n = "POST",
-			a = "applyInvoice?mobile="+o.tel+"&yzm="+o.captcha+"&trade_water_id="+o.trade_water_id+"&invoice_title_type="+o.invoice_title_type+"&credit_code="+o.credit_code+"&invoice_title="+o.invoice_title,
-			i = null,
-			e = function(n) {
-        		console.log("success:" + JSON.stringify(n));
-        		alert("电子发票申请成功！");
-			},
-			r = function(n) {
-				commonui.hideAjaxLoading();
-	    		$("#zzmb").hide();
-	    		o.isClick = false;
-	        	alert("验证码不正确或信息保存失败，请重试！");
-			};
-			common.invokeApi(n, a, i, null, e, r)
-        },
-    });
-
-	function yzmreq(){
-    	var n = "POST",
-        a = "getyzm1",
-        i = {
-			mobile:o.tel
-		},
-        e = function(n) {
-			console.log(JSON.stringify(n));
-			alert("验证码已下发，请查收短信");
-			o.yzmtime = 60;
-			var tt=setInterval("updateBtn()",1000);
-			var ss = setTimeout(function(){clearInterval(tt);}, 61*1000);
-        },
-        r = function() {
-			alert("验证码获取失败,请重新获取");
-			o.yzmtime = 60;
-        	o.yzmstr="重新获取";
-        };
-        common.invokeApi(n, a, i, null, e, r)
-    }
-
-
-	
-	function showdiw(flag)
-	{
-		if(flag=='02')
-		{
-			document.getElementById("div3").style.display="block";
-			o.readonly = '';
-		}else
-		{
-			document.getElementById("div3").style.display="none";
-			o.readonly = 'readonly';
-			o.invoice_title = o.init_title;
-		}
-	}
-
-	function getInvoiceInfo()
+	$(document).ready(function() {
+		var trade_water_id  =getUrlParam("trade_water_id");//交易编号,接口ur获取
+		var type = '01';//类型’
+		var telInput = $("input[name='tel']");//手机号input 框
+		var invoiceTitle = $("input[name='invoice_title']");//发票抬头框
+		var checkBox2 = $('#checkbox_b2');
+		var creditCode = $("input[name='credit_code']");//公司税号
+		var captcha = $("input[name='captcha']");//验证码
+		var tempSelfTitle = '';//title临时储存
+		var tempCspTitle ="";//公司title临时储存
+		var tempCreditCode = ""
+		//获取发票抬头
+		function getInvoiceInfo()
 	{
 		var n = "POST",
-		a = "getInvoice?trade_water_id="+o.trade_water_id,
+		a = "getInvoice?trade_water_id="+trade_water_id,
         i = null,
         e = function(n) {
 			console.log(JSON.stringify(n));
 
 			if(n.result!=null)
 			{
-				o.tel = n.result.mobile;
-				o.invoice_title=n.result.invoice_title;
-				o.init_title = n.result.invoice_title;
-				o.showcom = n.result.showcom;
-				o.invoice_title_type=n.result.invoice_title_type;
-				if(o.invoice_title_type=='02')
-				{
-					o.readonly = '';
-				}
+				//两个title
+				tempSelfTitle = n.result.invoice_title;
+				tempCspTitle =  n.result.csp_invoice_title;
+				//保存税号
+				tempCreditCode = n.result.credit_code;
+				//赋初始值
+				telInput.val(n.result.mobile) ;
+				//invoiceTitle.val(n.result.invoice_title)  ;
+				//判断公司是否显示 1是允许公司选项显示 0是不允许公司选项
+					if(n.result.showcom == 0){
+
+						$('#csp').css('display','none');
+					}
+				//判断默认勾选的是谁 01是个人 02是公司
+				 if(n.result.invoice_title_type == '02'){
+				 	checkBox2.attr('checked','checked');
+				 	$('#div3').css('display','block');
+
+				 	invoiceTitle.val(tempCspTitle)  ;
+				 }else{
+				 	//个人只读
+				 	invoiceTitle.attr('readonly','readonly')
+
+				 	invoiceTitle.val(tempSelfTitle)  ;
+				 }
 				if(n.result.credit_code!=null)
 				{
-					o.credit_code=n.result.credit_code;
-					o.check1 = false;
-					o.check2 = true;
-					showdiw(o.invoice_title_type);
+					creditCode.val(n.result.credit_code) ;
 				}
 			}
         },
         r = function() {
+        	alert('无法获取发票抬头')
         };
         common.invokeApi(n, a, i, null, e, r)
 	}
-
+	var isClick = true;
 	getInvoiceInfo();
-    avalon.scan(document.body);
-    common.setTitle("申请电子发票");
-});
+        //判断是个人还是公司
+        $("#checkbox_b2,#checkbox_b1").click(function(){
+          	if(this.id == 'checkbox_b2'){//公司
+          		$('#div3').css('display','block');
+          		invoiceTitle.val(tempCspTitle);
+          		invoiceTitle.removeAttr('readonly');
+          		creditCode.val(tempCreditCode)
+          		type = '02';
+          	}else{//个人
+          		type = '01';
+          		creditCode.val("");
+          		$('#div3').css('display','none')
+          		invoiceTitle.attr('readonly','readonly')
+          		invoiceTitle.val(tempSelfTitle);	
+          	} 
+  		});
+  		//点击申请开票 判断input框是否为空
+  		$("#submit").click(function(){
+  			var a = $('.input');
+  			var next = true;//执行请求接口操作
+  			a.each(function(){
+  				//判断是否为空
+  				if($(this).val().trim() == ''){
+  					if(type == '01' && $(this).attr('name') == 'credit_code'){//税号
+  						//个人不需要税号
+  						return true;
+  					}else{
+  						next = false;
+  						if($(this).attr('name') == 'captcha'){
+  							alert('请输入验证码');	
+  						}else{
+  							alert($(this).attr('placeholder'));	
+  						}
+  						return false;
+  					}
+  				};
+  				//判断手机号是否为正确格式
+  				if($(this).attr('name') == 'tel'){
+  					var a = $(this).val()
+  					var reg = /^1[3-9][0-9]\d{8}$/;
+  					if( !reg.test(a) ){
+  						next = false;
+  						alert('请输入正确的手机号')
+  						return false;
+  					}
+  				};
 
-	function updateBtn(){
-		o.yzmstr=o.yzmtime+"秒后重新获取";
-		console.log(o.yzmstr);
-		o.yzmtime--;
-		if(o.yzmtime<=0){
-			o.yzmstr="重新获取";
-		}
-	}
+  				
+  			});
+
+  			if( next == true && isClick == true){
+  				//调接口
+  				isClick= false;
+  				var n = "POST",
+				a = "applyInvoice?mobile="+telInput.val()+"&yzm="+captcha.val()+"&trade_water_id="+trade_water_id+"&invoice_title_type="+type
+					+ "&credit_code="+creditCode.val()+"&invoice_title="+invoiceTitle.val(),
+				i = null,
+				e = function(n) {
+	        		console.log("success:" + JSON.stringify(n));
+	        		alert("电子发票申请成功！");
+				},
+				r = function(n) {
+					isClick= true;
+					commonui.hideAjaxLoading();
+		    		$("#zzmb").hide();
+		        	alert("验证码不正确或信息保存失败，请重试！");
+				};
+				common.invokeApi(n, a, i, null, e, r);
+				isClick = false;
+  			}
+  		});
+
+  		
+		
+		$('.button1').click(function(){//获取验证码
+			
+			time(this);
+			//获取手机号值
+			var phoneNumber = telInput.val();
+			var reg = /^1[3-9][0-9]\d{8}$/;
+			if( !reg.test(phoneNumber)){
+				alert('请输入正确的手机号')
+			}else{
+				yzmreq(phoneNumber)
+			}
+			
+		});
+		function yzmreq(tel){//请求验证码
+	    	var n = "POST",
+	        a = "getyzm1",
+	        i = {
+				mobile: tel
+			},
+	        e = function(n) {
+				console.log(JSON.stringify(n));
+				alert("验证码已下发，请查收短信");
+				wait = 60;
+				//var tt=setInterval("updateBtn()",1000);
+				//var ss = setTimeout(function(){clearInterval(tt);}, 61*1000);
+	        },
+	        r = function() {
+				alert("验证码获取失败,请重新获取");
+				wait = 60;
+	        	$('.button1').val()="重新获取";
+	        };
+	        common.invokeApi(n, a, i, null, e, r)
+    	};
+    	//验证码倒计时
+    	var wait=60; 
+		function time(o) {  //倒计时
+	        if (wait == 0) {  
+	            o.removeAttribute("disabled");            
+	            o.value="获取验证码";  
+	            wait = 60;  
+	        } else {  
+	            o.setAttribute("disabled", true);  
+	            o.value="重新发送(" + wait + ")";  
+	            wait--;  
+	            setTimeout(function() {  
+	                time(o)  
+	            },  
+	            1000)  
+	        }  
+		}; 
+
+	})
