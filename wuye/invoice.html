@@ -12,7 +12,7 @@
 	<script src="../static/js/fastclick.min-1.0.6.js?v=20151217"></script>
 	<script src="../static/js/avalon.js?v=1"></script>
 	<script src="../static/js/common_invoice_v1.js?v=20151217"></script>
-	<script src="invoice.js?v=20160117"></script>
+	<script src="invoice.js?v=20160127"></script>
 	<style>
 
 	.card {
@@ -151,7 +151,7 @@
 				<span class="fl fs15" style="padding:15px 10px 0px 50px;">验证码：</span>
 				<div class="ov fs15" style="padding:15px 10px 0px 0px;">
 					<input class="input" style="width:80px;" ms-duplex-string="captcha" placeholder="验证码" />&nbsp;
-					<span class="button1" name="" ms-class="useless:o.yzmstr!='获取验证码'&&o.yzmstr!='重新获取'" ms-click="getCaptcha">{{yzmstr}}<span>
+					<span class="button1" name="" ms-class="useless:yzmstr!='获取验证码'&&yzmstr!='重新获取'" ms-click="getCaptcha">{{yzmstr}}<span>
 				</div>
             </div>
 			
