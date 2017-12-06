@@ -10,9 +10,9 @@
 
 	<script src="../static/js/zepto.min.js?v=20151217"></script>
 	<script src="../static/js/fastclick.min-1.0.6.js?v=20151217"></script>
-	<script src="../static/js/avalon.js?v=1"></script>
 	<script src="../static/js/common_invoice_v1.js?v=20151217"></script>
-	<script src="invoice.js?v=20160127"></script>
+	<script src="invoice.js?v=20111027"></script>
+	
 	<style>
 
 	.card {
@@ -82,7 +82,7 @@
 	vertical-align: text-top;
 }
 
-.input{
+		.input{
 			padding:2px 8px 0pt 3px;
 			height:25px;
 			width:150px;
@@ -90,14 +90,14 @@
 			background-color:#FFF;
 		}
 
-				.button1 {
+		.button1 {
 			text-align: center;
 			font: 10px/100% 'SimSun',Arial, Helvetica, sans-serif;
 			padding: .3em 0.5em .277em;
 			color: #606060;
 			border: solid 1px #b7b7b7;
 			background: #fff;
-			width:25%;
+			width:80px;
 		}
 
 				.button {
@@ -115,52 +115,61 @@
 	</style>
 </head>
 
-<body ms-controller="root">
+<body>
 <div class="p15" style="padding-bottom: 0px;">
 		<div class="card fs15">
 
 			<div class="ov fs13 item">
                 <span class="fl fs15" style="padding:10px 10px 0px 5px;">申请发票类型：</span>
                <div class="ov fs15" style="padding:5px 10px 5px 0px;">
-					<input type="checkbox" id="checkbox_b1" name="per" class="chk_2" ms-attr-checked="check1" ms-click="getType(this,'01')"/><label for="checkbox_b1"></label><span>个人&nbsp;&nbsp;</span>
-					<input type="checkbox" id="checkbox_b2" name="per" class="chk_2" ms-attr-checked="check2" ms-if="showcom==1" ms-click="getType(this,'02')" /><label for="checkbox_b2"></label><span ms-if="showcom==1">公司</span>
+					<input type="radio" id="checkbox_b1" name="per" checked class="chk_2"/><label for="checkbox_b1"></label><span>个人&nbsp;&nbsp;</span>
+					<span id="csp">
+						<input type="radio" id="checkbox_b2" name="per" class="chk_2"/><label for="checkbox_b2"></label><span >公司</span>	
+					</span>
+					
 				</div>
             </div>
-			
 			<div class="ov fs13">
 				<span class="fl fs15" style="padding:10px 10px 0px 35px;">发票抬头：</span>
 				<div class="ov fs15" style="padding:5px 10px 0px 0px;">
-					<input class="input" ms-duplex-string="invoice_title" ms-attr-readonly="readonly" placeholder="请输入发票抬头"/>&nbsp;<span style="color:red">*</span>
+					<input class="input" name="invoice_title" placeholder="请输入发票抬头"/>&nbsp;<span style="color:red">*</span>
 				</div>
             </div>
 			
 			<div class="ov fs13" id="div3" style="display:none">
 				<span class="fl fs15" style="padding:15px 10px 0px 35px;">公司税号：</span>
 				<div class="ov fs15" style="padding:15px 10px 0px 0px;">
-					<input class="input" ms-duplex-string="credit_code" placeholder="请输入公司税号"/>&nbsp;<span style="color:red">*</span>
+					<input class="input" name="credit_code"  placeholder="请输入公司税号"/>&nbsp;<span style="color:red">*</span>
 				</div>
             </div>
 
 			<div class="ov fs13">
 				<span class="fl fs15" style="padding:15px 10px 0px 35px;">手机号码：</span>
 				<div class="ov fs15" style="padding:15px 10px 0px 0px;">
-					<input class="input" ms-duplex-string="tel" placeholder="请输入您的手机"/>&nbsp;<span style="color:red">*</span>
+					<input class="input" name="tel"  placeholder="请输入您的手机"/>&nbsp;<span style="color:red">*</span>
 				</div>
             </div>
 			<div class="ov fs13" id="div2">
 				<span class="fl fs15" style="padding:15px 10px 0px 50px;">验证码：</span>
 				<div class="ov fs15" style="padding:15px 10px 0px 0px;">
-					<input class="input" style="width:80px;" ms-duplex-string="captcha" placeholder="验证码" />&nbsp;
-					<span class="button1" name="" ms-class="useless:yzmstr!='获取验证码'&&yzmstr!='重新获取'" ms-click="getCaptcha">{{yzmstr}}<span>
+					<input class="input" name="captcha" style="width:80px;"  placeholder="验证码" />&nbsp;
+					<!-- <button type="submit" class="button1" name="获取验证码">获取验证码</button> -->
+					<input type="button"  class="button1" value="获取验证码" />  
 				</div>
             </div>
 			
 			<div class="ov" align="center" style="padding:15px 10px 10px 5px;">
-				<a href="#" class="button" ms-click="applyInvoice">申请开票</a><br>
+				<a href="#" class="button" id="submit">申请开票</a><br>
 			<div style="padding-top: 10px;"><span style="color: red;font-size: 12px;">申请的发票预计在3个工作日内通过短信发送至您手机上。</span></div>
             </div>
 
         </div>
 	</div>
 </body>
+<script>
+
+</script>
+		
+	
+
 </html>
