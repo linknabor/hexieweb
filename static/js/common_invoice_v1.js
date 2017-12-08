@@ -8,8 +8,8 @@ var MasterConfig = function() {
         //baseUrl: "https://test.e-shequ.com/wechat-sit/hexie/wechat/",
         //basePageUrl:"https://test.e-shequ.com/wechat-sit/hexie/",
 
-        baseUrl: "https://test.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"https://test.e-shequ.com/weixin/",
+        baseUrl: "https://www.e-shequ.com/wechat/hexie/wechat/",
+        basePageUrl:"https://www.e-shequ.com/weixin/",
         appId: "wx95f46f41ca5e570e",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
