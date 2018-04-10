@@ -253,20 +253,20 @@
 					<input type="checkbox" id="checkbox_a2" name="flag" class="chk_1" ms-click="InvoiceSelected(this,'0',false)" /><label for="checkbox_a2"></label><span>否</span>
 				</div>
             </div>
-            <div class="ov fs13" id="div" ms-if="show_com_flag==1">
+            <div class="ov fs13" id="div">
                 <span class="fl" style="padding:15px 10px 5px 25px;">申请发票类型：</span>
                <div class="ov" style="padding:10px 10px 5px 0px;">
 					<input type="checkbox" id="checkbox_b1" name="per" class="chk_2" checked ms-click="getType(this,'01',false)"/><label for="checkbox_b1"></label><span>个人&nbsp;&nbsp;</span>
 					<input type="checkbox" id="checkbox_b2" name="per" class="chk_2" ms-if="show_com_flag==1" ms-click="getType(this,'02',false)" /><label for="checkbox_b2"></label><span ms-if="show_com_flag==1">公司</span>
 				</div>
             </div>
-			<div class="ov fs13" id="div2" ms-if="show_com_flag==1">
+			<div class="ov fs13" id="div2" ms-if="invoice_title_type=='02'">
 				<span class="fl" style="padding:15px 10px 5px 50px;">发票抬头：</span>
 				<div class="ov" style="padding:10px 10px 5px 0px;">
 					<input class="input" ms-duplex-string="invoice_title" ms-attr-readonly="readonly" placeholder="请输入发票抬头" />&nbsp;<span style="color:red">*</span>
 				</div>
             </div>
-			<div class="ov fs13" id="div3" style="display:none" ms-if="show_com_flag==1">
+			<div class="ov fs13" id="div3" style="display:none" ms-if="invoice_title_type=='02'">
 				<span class="fl" style="padding:15px 10px 5px 50px;">公司税号：</span>
 				<div class="ov" style="padding:10px 10px 5px 0px;">
 					<input class="input" ms-duplex-string="credit_code" placeholder="请输入公司税号" />&nbsp;<span style="color:red">*</span>
@@ -285,20 +285,20 @@
 					<input type="checkbox" id="checkbox_c2" name="flag" class="chk_3" ms-click="InvoiceSelected(this,'0',true)" /><label for="checkbox_c2"></label><span>否</span>
 				</div>
             </div>
-            <div class="ov fs13" id="zdiv" ms-if="show_com_flag==1">
+            <div class="ov fs13" id="zdiv">
                 <span class="fl" style="padding:15px 10px 5px 25px;">申请发票类型：</span>
                <div class="ov" style="padding:10px 10px 5px 0px;">
 					<input type="checkbox" id="checkbox_d1" name="per" class="chk_4" checked ms-click="getType(this,'01',true)"/><label for="checkbox_d1"></label><span>个人&nbsp;&nbsp;</span>
 					<input type="checkbox" id="checkbox_d2" name="per" class="chk_4" ms-if="show_com_flag==1" ms-click="getType(this,'02',true)" /><label for="checkbox_d2"></label><span ms-if="show_com_flag==1">公司</span>
 				</div>
             </div>
-			<div class="ov fs13" id="zdiv2" ms-if="show_com_flag==1">
+			<div class="ov fs13" id="zdiv2" ms-if="invoice_title_type=='02'">
 				<span class="fl" style="padding:15px 10px 5px 50px;">发票抬头：</span>
 				<div class="ov" style="padding:10px 10px 5px 0px;">
 					<input class="input" ms-duplex-string="invoice_title" ms-attr-readonly="readonly" placeholder="请输入发票抬头" />&nbsp;<span style="color:red">*</span>
 				</div>
             </div>
-			<div class="ov fs13" id="zdiv3" style="display:none" ms-if="show_com_flag==1">
+			<div class="ov fs13" id="zdiv3" style="display:none" ms-if="invoice_title_type=='02'">
 				<span class="fl" style="padding:15px 10px 5px 50px;">公司税号：</span>
 				<div class="ov" style="padding:10px 10px 5px 0px;">
 					<input class="input" ms-duplex-string="credit_code" placeholder="请输入公司税号" />&nbsp;<span style="color:red">*</span>
