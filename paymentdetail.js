@@ -318,7 +318,6 @@ avalon.ready(function() {
         },
         
         pay: function() {
-        	
         	if(o.isPaying){
         		alert("订单处理中，请勿重复提交！");
         		return;
@@ -329,11 +328,11 @@ avalon.ready(function() {
         		return;
         	}
 			if(o.invoice_switch==1){
-				if(o.invoice_title==''){
-					alert('请填写发票抬头信息!');
-					return;
-				}
 				if(o.invoice_title_type=='02'){
+					if(o.invoice_title==''){
+						alert('请填写发票抬头信息!');
+						return;
+					}
 					if(o.credit_code==''){
 						alert('请填写发票公司税号信息!');
 						return;
@@ -356,31 +355,33 @@ avalon.ready(function() {
 				if(boxArray[i]==obj && obj.checked){
 					boxArray[i].checked = true;
 					o.invoice_switch = flag;
-					
-					if(flag==1)
-					{
-						if(type==false)
-						{
-							document.getElementById("div").style.display="block";
-							document.getElementById("div2").style.display="block";
-						}else
-						{
-							document.getElementById("zdiv").style.display="block";
-							document.getElementById("zdiv2").style.display="block";
+					if(flag==1) {
+						if(type==false) {
+							if($('#checkbox_b2').is(":checked")) {
+								$('#div').show();
+								$('#div2').show();
+								$('#div3').show();
+							}else {
+								$('#div').show();
+							}
+						} else {
+							if($('#checkbox_d2').is(":checked")) {
+								$('#zdiv').show();
+								$('#zdiv2').show();
+								$('#zdiv3').show();
+							}else {
+								$('#zdiv').show();
+							}
 						}
-						
-					}else
-					{
-						if(type==false)
-						{
-							document.getElementById("div").style.display="none";
-							document.getElementById("div2").style.display="none";
-							document.getElementById("div3").style.display="none";
-						}else
-						{
-							document.getElementById("zdiv").style.display="none";
-							document.getElementById("zdiv2").style.display="none";
-							document.getElementById("zdiv3").style.display="none";
+					} else {
+						if(type==false) {
+							$('#div').hide();
+							$('#div2').hide();
+							$('#div3').hide();
+						} else {
+							$('#zdiv').hide();
+							$('#zdiv2').hide();
+							$('#zdiv3').hide();
 						}
 					}
 				}else{
@@ -392,27 +393,25 @@ avalon.ready(function() {
 		getType:function(obj,flag,type){
 			var boxArray = document.getElementsByName("per");
 			for(var i=0;i<=boxArray.length-1;i++){ 
-				if(boxArray[i]==obj && obj.checked){ 
+				if(boxArray[i]==obj && obj.checked) { 
 					boxArray[i].checked = true;
 					o.invoice_title_type = flag;
-					if(flag=='02')
-					{
-						if(type==false)
-						{
-							document.getElementById("div3").style.display="block";
-						}else
-						{
-							document.getElementById("zdiv3").style.display="block";
+					if(flag=='02') {
+						if(type==false) {
+							$('#div2').show();
+							$('#div3').show();
+						} else {
+							$('#zdiv2').show();
+							$('#zdiv3').show();
 						}
 						o.readonly='';
-					}else
-					{
-						if(type==false)
-						{
-							document.getElementById("div3").style.display="none";
-						}else
-						{
-							document.getElementById("zdiv3").style.display="none";
+					} else {
+						if(type==false) {
+							$('#div2').hide();
+							$('#div3').hide();
+						} else {
+							$('#zdiv2').hide();
+							$('#zdiv3').hide();
 						}
 						o.readonly='readonly';
 						o.invoice_title = o.init_title;
