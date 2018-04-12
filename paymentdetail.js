@@ -328,11 +328,11 @@ avalon.ready(function() {
         		return;
         	}
 			if(o.invoice_switch==1){
-				if(o.invoice_title==''){
-					alert('请填写发票抬头信息!');
-					return;
-				}
 				if(o.invoice_title_type=='02'){
+					if(o.invoice_title==''){
+						alert('请填写发票抬头信息!');
+						return;
+					}
 					if(o.credit_code==''){
 						alert('请填写发票公司税号信息!');
 						return;
