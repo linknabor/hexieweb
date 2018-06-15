@@ -23,6 +23,7 @@ $(document).ready(function() {
 				if(n.result.pdf!=null) {
 					$('.pdf').css('display','block');
 					$('#pdfClick').attr('href',n.result.pdf);
+					$('.card').hide();
 				}
 				tempSelfTitle = n.result.invoice_title;  //个人抬头
 				tempCspTitle =  n.result.csp_invoice_title;  //公司抬头
