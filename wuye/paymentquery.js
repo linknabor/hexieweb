@@ -88,6 +88,8 @@ avalon.ready(function() {
             }
         }
     });
+	
+	common.setTitle("缴费查询");
     query();
     avalon.scan(document.body);
     //share.default_send();
