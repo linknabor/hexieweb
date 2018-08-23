@@ -10,7 +10,7 @@ var MasterConfig = function() {
 
         baseUrl: "https://www.e-shequ.com/wechat/hexie/wechat/",
         basePageUrl:"https://www.e-shequ.com/weixin/",
-        appId: "wx95f46f41ca5e570e",
+        appId: "wxbd214f5765f346c1",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
