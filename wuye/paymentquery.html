@@ -7,12 +7,12 @@
     <title>缴费查询</title>
     <link rel="stylesheet" href="../static/css/common.css">
     <link rel="stylesheet" href="../static/css/header.css">
-	<script type="text/jscript" src="../static/js/zepto.min.js"></script>
-	<script src="../static/js/fastclick.min-1.0.6.js"></script>
-	<script src="../static/js/avalon.js"></script>
-	<script src="../static/js/common_v3.js"></script>
-	<script src="paymentquery.js"></script>
- 	<style type="text/css">
+    <script type="text/jscript" src="../static/js/zepto.min.js"></script>
+    <script src="../static/js/fastclick.min-1.0.6.js"></script>
+    <script src="../static/js/avalon.js"></script>
+    <script src="../static/js/common_v3.js"></script>
+    <script src="paymentquery.js"></script>
+    <style type="text/css">
         .card-header {
             border-bottom: 1px solid #d4cfc8;
             padding: 20px 10px;
@@ -23,11 +23,11 @@
             background: #fdfdef;
         }
         .card {
-		    margin-bottom: 15px;
-		    border: 1px solid #d4cfc8;
-		    border-radius: 3px;
-		    color: #666;
-		}
+            margin-bottom: 15px;
+            border: 1px solid #d4cfc8;
+            border-radius: 3px;
+            color: #666;
+        }
         .icon-item {
             margin-bottom: 15px;
             font-size: 13px;
@@ -50,6 +50,7 @@
             width: 15px;
             height: 3px;
         }
+        .xiangqing{height:20px;font-size:14px;padding-bottom:1px;border-bottom:1px solid #ccc;}
         .top-icon {
             width: 12px;
             height: 7px;
@@ -72,18 +73,21 @@
         }
         .emptytip{
           padding: 50px 0;
-		  text-align: center;
-		  font-size: 30px;
-		  background-position: 35px center;
-		  background-size: 35px;
-		  color: #ff8a00;
+          text-align: center;
+          font-size: 30px;
+          background-position: 35px center;
+          background-size: 35px;
+          color: #ff8a00;
         }
- 	</style>
+        .dropdown-wrap{
+            background-position:90px;
+        }
+    </style>
 </head>
 
 <body class="p15" ms-controller="root">
 <section ms-visible="currentpage=='list'">
-	<div class="dropdown-wrap" ms-class-collapsed="dropdownCollapsed" ms-click="toggleDropdown">
+    <div class="dropdown-wrap" ms-class-collapsed="dropdownCollapsed" ms-click="toggleDropdown">
         <span ms-visible="selectedDropdown==''">账单筛选</span>
         {{selectedDropdown.name}}
         <div class="dropdown" ms-visible="!dropdownCollapsed">
@@ -91,7 +95,7 @@
         </div>
     </div>
     <div class="card" ms-repeat-item="paymentHises">
-        <div class="card-header">
+        <div class="card-header" ms-click="showDetail($index)">
             <div class="ov" style="margin-bottom:25px">
                 <span class="fs15" style="color:#3b3937">{{item.tran_time}}</span>
                 <span class="fr fs18 highlight">¥&nbsp;{{item.bill_tran_amt}}</span>
@@ -102,7 +106,8 @@
             </div>
         </div>
         <div class="fold-btn" ms-click="showDetail($index)">
-            <i ms-class-more-icon="!item.folded" ms-class-top-icon="item.folded"></i>
+         <!--   <i ms-class-more-icon="!item.folded" ms-class-top-icon="item.folded"></i>  -->
+            <strong class="xiangqing">详情..</strong>
         </div>
     </div>
 </section>
@@ -110,7 +115,7 @@
 <div class="emptytip">没有缴费记录，快用微信进行缴费吧！</div>
 </section>
 <section ms-visible="currentpage=='detail'">
-	 <div class="info-wrap">
+     <div class="info-wrap">
         <div class="input-wrap lite-divider">
             <span class="fl fs15">交易时间</span>
             <span class="fr fs14">{{payInfo.tran_time}}</span>
@@ -135,7 +140,7 @@
         <div class="card fs15" ms-repeat-feename="data.fee_name">
             <div class="ov item" style="border:none">
                 <span class="card-title">{{feename.service_fee_name}}</span>
-                <span class="fs15 fr highlight">¥{{feename.totalFee}}</span>
+                <span class="fs15 fr highlight">¥{{feename.totalFee.toFixed(2)}}</span>
             </div>
             <div class="ov fs13 item" ms-repeat-detail="feename.fee_detail">
                 {{detail.service_fee_cycle}}
