@@ -13,11 +13,11 @@ var MasterConfig = function() {
         // bindAppId: "wx9ffe0a2b5a64a285",
 
         baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/wechat/hexie/wechat/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/xsq/wechat/hexie/wechat/':
         'https://www.e-shequ.com/shijiazhuang/wechat/hexie/wechat/',
         
         basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/xsq/weixin/':
         'https://www.e-shequ.com/shijiazhuang/weixin/',
         
         // payPageFolder:/127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
@@ -36,7 +36,7 @@ var MasterConfig = function() {
 
         oauthUrl: "http://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
-        oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
         
         
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
