@@ -261,7 +261,7 @@ function toRegisterAndBack(){
     location.href=MasterConfig.C('basePageUrl')+"person/index.html?#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
 }
 
-let AJAXFlag = !0;
+var AJAXFlag = !0;
 window.common = {
     isDebug: !1,
     getApi: function(e) {
