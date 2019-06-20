@@ -354,4 +354,4 @@ updateUserStatus(user) {
 checkBindAndBind();
 checkCodeAndLogin();
 // common.setTitle(MasterConfig.C("shop_name") );
-export default common
+// export default common
