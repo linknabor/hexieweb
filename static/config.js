@@ -20,10 +20,10 @@ window.config={
         group:html+'/group/onsales.html?v=20160229'
     },
     //绑定房子
-    wuye_house:{
+    wuye_myhouse:{
         url:/127|test/.test(location.origin)?'test.e-shequ.com':
-            /uat/.test(location.origin)?'uat.e-shequ.com':
-            'www.e-shequ.com'       //提示框网址
+                /uat/.test(location.origin)?'uat.e-shequ.com':
+                'www.e-shequ.com'       //提示框网址
     },
     // 物业支付
     wuye_pay:{
