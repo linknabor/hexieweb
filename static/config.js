@@ -21,9 +21,9 @@ window.config={
     },
     //绑定房子
     wuye_house:{
-        url: /127|test/.test(location.origin)?'test.e-shequ.com':
-                /uat/.test(location.origin)?'uat.e-shequ.com':
-                'www.e-shequ.com'       //提示框网址
+        url:/127|test/.test(location.origin)?'test.e-shequ.com':
+            /uat/.test(location.origin)?'uat.e-shequ.com':
+            'www.e-shequ.com'       //提示框网址
     },
     // 物业支付
     wuye_pay:{
