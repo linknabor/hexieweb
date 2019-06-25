@@ -31,10 +31,10 @@ window.config={
     },
     // 集市跳转支付
     Buy:{
-        url:pay+'hxgroup.html#/buy'
+        url:pay+'hxgroup.html?state=123#/buy'
     },
     Mulybuy:{
-        url:pay+'hxgroup.html'
+        url:pay+'hxgroup.html?state=123'
     },
     //个人中心
     wuye_index:{
