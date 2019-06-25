@@ -17,7 +17,7 @@ window.config={
     footer:{
         wuye:html+'/wuye/index.html?v=20162299',
         person:html+'/person/index.html?v=20160229',
-        group:html+'/group/onsales.html?v=20160229'
+        group:html+'/group/onsales.html?v=20160229?type=3'
     },
     //绑定房子
     wuye_myhouse:{
@@ -48,6 +48,9 @@ window.config={
     },
     repaircom:{
         url:pay+'hxorderpay.html?state=123#/commentxiu?'
+    },
+    person_notices:{
+        url:html+'/person/index.html?v=20160229#/notices'
     },
     notices:{
         url:pay+'hxorderpay.html?start=123#/orderdetail?',
