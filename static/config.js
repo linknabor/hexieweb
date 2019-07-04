@@ -29,6 +29,10 @@ window.config={
     wuye_pay:{
         url:pay+'hxwuyepay.html?#/?'
     },
+    //团购
+    rgroups_url :{
+        url:html+'group/rgroups.html?state=123'
+    },
     // 集市跳转支付
     Buy:{
         url:pay+'hxgroup.html?state=123#/buy'
