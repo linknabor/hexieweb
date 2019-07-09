@@ -1,6 +1,7 @@
 avalon.ready(function() {
 	var firstQuery = true;
 	var page = 0;
+	$("#div11").hide();
 	function initShareSetting(){
 		var title = "社区团购";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroups.html";
@@ -14,6 +15,14 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
             o.rgroups = n.result;
+			if(o.rgroups.length ==0) {
+				
+				$("#div11").html("<span style='font-size: 18px;'>您的小区尚未开通报名，敬请期待！</span>");
+				//alert("您的小区尚未开通报名，敬请期待！");
+				$("#div11").show();
+				$("#div12").hide();
+				return false;
+			}
             if(firstQuery) {
        	    	commonui.initPage();
        	    	firstQuery = false;

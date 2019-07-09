@@ -25,9 +25,16 @@ window.config={
     },
     // 物业支付
     wuye_pay:{
-        url:html+'paymentdetail.html?#/?'
+        url:html+'wuyepay.html?#/?'
+    },
+    //团购
+    rgroups_url :{
+        url:html+'group/rgroups.html?state=123'
+    },
+     //支付成功跳转详细
+     wuye_detail:{
+        url:html+"wuye/index.html?state=123#/paymentquery"
     }
    
 }
 
-export default config
