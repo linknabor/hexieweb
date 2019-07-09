@@ -75,9 +75,7 @@ avalon.ready(function() {
         gotosgrouprulr:function(){
         	location.href=MasterConfig.C('basePageUrl')+"group/sgrouprule.html";
         },
-        gotorGroupDetail(ruleId) {
-            location.href=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+ruleId+"&shareCode="+o.shareCode;
-        },
+      
     });
     avalon.scan(document.body);
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);

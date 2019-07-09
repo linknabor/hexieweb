@@ -94,7 +94,7 @@ avalon.ready(function() {
     notifyPaySuccess();
     query();
 	initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-	initShareConfig(name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId=228&from=singlemessage&isappinstalled=0&shareCode="+o.shareCode,img,"快来参加合协社区的优惠商品抢购吧");
+	initShareConfig(name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.img,"快来参加合协社区的优惠商品抢购吧");
     
     avalon.scan(document.body);
 });

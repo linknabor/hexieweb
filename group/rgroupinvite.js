@@ -41,9 +41,9 @@ avalon.ready(function() {
     }
 	function initShareSetting(product){
 		var title = o.rule.name;
-		var link=MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId+"&from=singlemessage&isappinstalled=0&shareCode="+o.shareCode;
+		var link=MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId;
 		var img=product.smallPicture;
-		var desc="我在合协社区参与了一个"+rule.name+"的团购，大家一起来参与吧";
+		var desc="我在合协社区参与了一个"+o.rule.name+"的团购，大家一起来参与吧";
 		initShareConfig(title,link,img,desc);
 	}
     function product(productId) {

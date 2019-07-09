@@ -32,7 +32,8 @@ avalon.ready(function() {
             console.log(JSON.stringify(n));
             o.order = n.result;
             o.timeStr = getTimeStr();
-			o.groupStatusStr = getGroupState();
+            o.groupStatusStr = getGroupState();
+            initShareConfig(o.order.productName,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.order.productThumbPic,"快来参加合协社区的优惠商品抢购吧");
         },
         r = function() {
         	alert("获取订单信息失败！");
@@ -133,7 +134,7 @@ avalon.ready(function() {
         groupLeftTime:"已结束"
     });
 
-    initWechat(['chooseWXPay']) ;
+    initWechat(['chooseWXPay,onMenuShareTimeline','onMenuShareAppMessage']) ;  
     getOrderId();
     getOrder();
     avalon.scan(document.body);
