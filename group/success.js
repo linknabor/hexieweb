@@ -2,9 +2,6 @@ avalon.ready(function() {
 	function getOrderId(){
 		o.orderId=getUrlParam("orderId");
 		o.type=getUrlParam("type");
-		o.shareCode=getUrlParam("shareCode");
-		o.name=getUrlParam("name");
-		o.img=getUrlParam("img");
 	}
 	function notifyPaySuccess() {
         common.invokeApi("GET", "notifyPayed/"+o.orderId, null, null, function(n) {
@@ -15,7 +12,7 @@ avalon.ready(function() {
 	
 	function initShareSetting(order){
 		var title = order.productName;
-		var link=MasterConfig.C('basePageUrl')+"group/onsalesindex.html";
+		var link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		if(order.orderType==4){
 			link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+order.groupRuleId;
 		}else if(order.orderType==0&&order.groupId!=0){
@@ -74,9 +71,6 @@ avalon.ready(function() {
         $id: "root",
         order:{seedStr:""},
 		orderId:"",
-		name:"",
-		img:"",
-		shareCode:"",
         coupon:{id:0},
         goback:function(){
         	if(o.type==4){
@@ -94,7 +88,5 @@ avalon.ready(function() {
     notifyPaySuccess();
     query();
 	initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-	initShareConfig(name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.img,"快来参加合协社区的优惠商品抢购吧");
-    
     avalon.scan(document.body);
 });
