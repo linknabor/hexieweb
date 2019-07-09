@@ -3,7 +3,7 @@ avalon.ready(function() {
 	var page = 0;
 	$("#div11").hide();
 	function initShareSetting(){
-		var title = "社区团购";
+        var title = "社区团购";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroups.html";
 		var img=MasterConfig.C("basePageUrl")+"static/images/share_tuan.jpg";
 		var desc="【合协社区】为您提供精选商品，团购比特卖更优惠哦！";
@@ -52,9 +52,14 @@ avalon.ready(function() {
     function drawItem(item,process) {
     	drawProcess($("#products canvas")[item],35,35,28,process,'#E5E2DD','#FF8A00','#FF8A00');
     }
+    function getShareCode(){
+        o.shareCode=getUrlParam("shareCode");
+        
+	}
     var o = avalon.define({
         $id: "root",
         rgroups: [],
+        shareCode:"",
         drawP:function(item,process){
         	console.log("---->"+item+":"+process );
         	drawItem(item,process);
@@ -69,7 +74,10 @@ avalon.ready(function() {
         },
         gotosgrouprulr:function(){
         	location.href=MasterConfig.C('basePageUrl')+"group/sgrouprule.html";
-        }
+        },
+        gotorGroupDetail(ruleId) {
+            location.href=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+ruleId+"&shareCode="+o.shareCode;
+        },
     });
     avalon.scan(document.body);
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
@@ -82,7 +90,7 @@ avalon.ready(function() {
     FastClick.attach(document.body);
 
 	initShareSetting();
-    
+    getShareCode();
     var loadheight = $('#indexDiv').height(),hasNext=true,isloadPage=false;
     $(window).scroll(function (event) {
         loadheight = $('#indexDiv').height();

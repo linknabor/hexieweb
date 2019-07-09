@@ -40,8 +40,8 @@ avalon.ready(function() {
         common.invokeApi(n, a, i, null, e, r)
     }
 	function initShareSetting(product){
-		var title = rule.name;
-		var link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+o.ruleId;
+		var title = o.rule.name;
+		var link=MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId+"&from=singlemessage&isappinstalled=0&shareCode="+o.shareCode;
 		var img=product.smallPicture;
 		var desc="我在合协社区参与了一个"+rule.name+"的团购，大家一起来参与吧";
 		initShareConfig(title,link,img,desc);
@@ -69,13 +69,15 @@ avalon.ready(function() {
 	function getMessageId(){
 		o.ruleId=getUrlParam("ruleId");
 		o.share_page=('1'==getUrlParam("share"));
+		o.shareCode=getUrlParam("shareCode");
 	}
 	
 
     o = avalon.define({
         $id: "root",
         ruleId:"",
-        share_page:false,
+		share_page:false,
+		shareCode:"",
         product: {
         	pictureList:[]
         },
@@ -111,7 +113,8 @@ avalon.ready(function() {
 		},
         gotosgrouprulr:function(){
         		location.href=MasterConfig.C('basePageUrl')+"group/sgrouprule.html";
-        }
+		},
+
     });
 
     avalon.scan(document.body);

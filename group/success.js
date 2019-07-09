@@ -2,13 +2,17 @@ avalon.ready(function() {
 	function getOrderId(){
 		o.orderId=getUrlParam("orderId");
 		o.type=getUrlParam("type");
+		o.shareCode=getUrlParam("shareCode");
+		o.name=getUrlParam("name");
+		o.img=getUrlParam("img");
 	}
 	function notifyPaySuccess() {
         common.invokeApi("GET", "notifyPayed/"+o.orderId, null, null, function(n) {
     	}, function() {
     		
     	});
-    }
+	}
+	
 	function initShareSetting(order){
 		var title = order.productName;
 		var link=MasterConfig.C('basePageUrl')+"group/onsalesindex.html";
@@ -69,7 +73,10 @@ avalon.ready(function() {
     var o = avalon.define({
         $id: "root",
         order:{seedStr:""},
-        orderId:"",
+		orderId:"",
+		name:"",
+		img:"",
+		shareCode:"",
         coupon:{id:0},
         goback:function(){
         	if(o.type==4){
@@ -86,7 +93,8 @@ avalon.ready(function() {
     getOrderId();
     notifyPaySuccess();
     query();
-    initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
+	initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
+	initShareConfig(name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId=228&from=singlemessage&isappinstalled=0&shareCode="+o.shareCode,img,"快来参加合协社区的优惠商品抢购吧");
     
     avalon.scan(document.body);
 });

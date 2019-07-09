@@ -49,7 +49,7 @@ avalon.ready(function() {
 			console.log(JSON.stringify(n));
 			o.product = n.result;
 		    setTimeout(initSwipe,1000);
-			initShareConfig(o.rule.name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"快来参加合协社区的优惠商品抢购吧");
+			initShareConfig(o.rule.name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId+"&shareCode="+o.shareCode,o.product.smallPicture,"快来参加合协社区的优惠商品抢购吧");
         },
         r = function(n) {
 			console.log("error");
@@ -62,13 +62,15 @@ avalon.ready(function() {
     }
     
 	function getMessageId(){
-		o.ruleId=getUrlParam("ruleId");
+        o.ruleId=getUrlParam("ruleId");
+        o.shareCode=getUrlParam("shareCode");
 	}
 	
 
     o = avalon.define({
         $id: "root",
         ruleId:"",
+        shareCode:"",
         product: {
         	pictureList:[]
         },
@@ -91,12 +93,12 @@ avalon.ready(function() {
             o.showDetail = !o.showDetail;
         },
         goclassify:function(){
-        	location.href="rgroups.html?type="+o.rule.productType;
+        	location.href="rgroups.html?type="+o.rule.productType+"&shareCode="+o.shareCode;
         },
         buy:function(){
 
         	if(common.checkRegisterStatus()&&o.rule.id){
-        		location.href="../buy.html?type=4&ruleId="+o.rule.id;
+        		location.href="../buy.html?type=4&ruleId="+o.rule.id+"&shareCode="+o.shareCode;
         	}
         },
         golist:function(){
