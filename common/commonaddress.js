@@ -14,6 +14,34 @@ function queryAddress() {
     common.invokeApi(n, a, i, null, e, r)
 }
 
+/** 根据shareCode找出分享者所在的小区 */
+function queryAddrByShareCode() {
+	let code = getUrlParam("shareCode");
+    var n = "GET",
+    a = "getAddressByShareCode/"+code,
+    i = null,
+    e = function(n) {
+        o.addr.receiveName = n.result.buyer.name;
+        o.addr.tel = n.result.buyer.tel;
+        o.addr.distinct = n.result.address.county;
+        o.addr.county.name = n.result.address.county;
+        o.addr.county.id = n.result.address.countyId;
+        o.addr.city.name = n.result.address.city;
+        o.addr.city.id = n.result.address.cityId;
+        o.addr.province.name = n.result.address.province;
+        o.addr.province.id = n.result.address.provinceId;
+        o.addr.xiaoquName = n.result.address.xiaoquName;
+        o.addr.xiaoquId = n.result.address.xiaoquId
+        o.addr.xiaoquAddress = n.result.address.xiaoquAddress;
+        
+    },
+    r = function(n) {
+    	alert("获取地址信息失败！");
+		o.addr.sharedAddresses = {};
+    };
+    common.invokeApi(n, a, i, null, e, r)
+}
+
 function defaultAddress() {
 //	alert("defaultAddress....");
 	if (o.addr.addresses.length > 0) {
@@ -159,8 +187,9 @@ var addrModel={
     xiaoquName:'',
 	addresses:[],
 	toAddAddress : function(){
-
         o.control.currentPage = "addAddressForm";
+        queryAddrByShareCode();
+        
     },
 	check: function(address) {
 		/*自己添加的*/
