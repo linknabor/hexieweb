@@ -113,10 +113,10 @@
 				<span class="fl fs15">手机号</span>
 				<input type="tel" placeholder="请输入手机号码" class="fr fs14 hidden-input" ms-duplex-number="addr.tel"/>
 			</div>
-			<div ms-click="addr.chooseRegion" style="color: #3b3937"  class="input-wrap lite-divider menu-link">
+			<div style="color: #3b3937"  class="input-wrap lite-divider menu-link">
 				<span class="fl fs15">所在地区</span>
 				<span class="fr fs14" style="color: #aeaeae" ms-visible="!addr.distinct">请选择所在地区</span>
-				<span class="fr fs14" ms-visible="distinct">{{addr.distinct}}</span>
+				<span class="fr fs14" ms-attr-readonly="true" ms-visible="distinct">{{addr.distinct}}</span>
 			</div>
 			<div ms-visible="addr.selectRegion==true">
 				<div class="tc">
@@ -125,15 +125,15 @@
 					<div class="region fl" ms-class-check="addr.currentRegionType==3">区县</div>
 				</div>
 				<div ms-css-height="addr.regionAreaHeight(addr.regions.length)" style="width:100%;clear:both;background-color: #e0dede;">
-					<div class="fs14 fl" ms-class-city="Math.floor(($index/4)%2)==0" ms-class-city2="Math.floor(($index/4)%2)==1" ms-repeat-region="addr.regions"  ms-click="addr.updateRegion(region)">{{region.name}}</div>
+					<div class="fs14 fl" ms-attr-readonly="true" ms-class-city="Math.floor(($index/4)%2)==0" ms-class-city2="Math.floor(($index/4)%2)==1" ms-repeat-region="addr.regions"  ms-click="addr.updateRegion(region)">{{region.name}}</div>
 				</div>
 				<div> &nbsp;</div>
 			</div>
 			<div style="clear: both;" ms-visible="addr.selectRegion==false">
-				<div class="input-wrap lite-divider  menu-link"  style="color: #3b3937" ms-click="addr.showLocation" >
+				<div class="input-wrap lite-divider  menu-link"  style="color: #3b3937" >
 					<span class="fl fs15">小区或大厦</span>
 					<span class="fr fs14"  style="color: #aeaeae" ms-visible="addr.xiaoquName==''">请输入小区或大厦</span>
-					<span class="fr fs14" ms-visible="addr.xiaoquName!=''">{{addr.xiaoquName}}</span>
+					<span class="fr fs14" ms-visible="addr.xiaoquName!=''" ms-attr-readonly="true">{{addr.xiaoquName}}</span>
 				</div>
 				<div class="input-wrap lite-divider">
 					<span class="fl fs15">小区地址</span>
