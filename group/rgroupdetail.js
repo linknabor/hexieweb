@@ -49,7 +49,7 @@ avalon.ready(function() {
 			console.log(JSON.stringify(n));
 			o.product = n.result;
 		    setTimeout(initSwipe,1000);
-			initShareConfig("代扔垃圾服务报名，推荐邻居最高享免单！",MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"小区报名满50人开通。");
+			initShareConfig("代扔垃圾服务报名，限时优惠中！",MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"小区报名满50人开通");
         },
         r = function(n) {
 			console.log("error");
