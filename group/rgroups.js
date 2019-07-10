@@ -3,10 +3,10 @@ avalon.ready(function() {
 	var page = 0;
 	$("#div11").hide();
 	function initShareSetting(){
-        var title = "社区团购";
+        var title = "社区服务";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroups.html";
-		var img=MasterConfig.C("basePageUrl")+"static/images/share_tuan.jpg";
-		var desc="【合协社区】为您提供精选商品，团购比特卖更优惠哦！";
+		var img=MasterConfig.C("basePageUrl")+"static/images/share_laji.png";
+		var desc="【合协社区】为您提供更好的服务！";
 		initShareConfig(title,link,img,desc);
 	}
     function query() {
@@ -79,7 +79,7 @@ avalon.ready(function() {
     });
     avalon.scan(document.body);
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-    common.setTitle("社区团购");
+    common.setTitle("社区服务");
     if(checkCodeAndLogin()){
     	setInterval(updateLeftTime,1000);
         checkFromShare();

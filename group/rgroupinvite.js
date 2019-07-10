@@ -109,7 +109,12 @@ avalon.ready(function() {
         	location.href="rgroups.html";
         },
 		goGroupProduct:function(){
-			location.href="rgroupdetail.html?ruleId="+o.ruleId;
+			let shareCode = getUrlParam("shareCode");
+			let url = "rgroupdetail.html?ruleId="+o.ruleId;
+			if(shareCode) {
+				url += "&shareCode="+shareCode;
+			}
+			location.href=url;
 		},
         gotosgrouprulr:function(){
         		location.href=MasterConfig.C('basePageUrl')+"group/sgrouprule.html";
