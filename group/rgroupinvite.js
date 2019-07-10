@@ -40,10 +40,10 @@ avalon.ready(function() {
         common.invokeApi(n, a, i, null, e, r)
     }
 	function initShareSetting(product){
-		var title = o.rule.name;
+		var title = "代扔垃圾服务报名，限时优惠中！";
 		var link=MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId;
 		var img=product.smallPicture;
-		var desc="我在合协社区参与了一个"+o.rule.name+"的团购，大家一起来参与吧";
+		var desc="小区报名满50人开通";
 		initShareConfig(title,link,img,desc);
 	}
     function product(productId) {

@@ -11,7 +11,7 @@ avalon.ready(function() {
 	}
 	
 	function initShareSetting(order){
-		var title = order.productName;
+		var title = "代扔垃圾服务报名，限时优惠中！";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		if(order.orderType==4){
 			link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+order.groupRuleId;
@@ -19,7 +19,7 @@ avalon.ready(function() {
 			link=MasterConfig.C('basePageUrl')+"group.html?groupId="+order.groupId;
 		}
 
-		var desc="分享给小伙伴们一个超赞的限时特惠活动！";
+		var desc="小区报名满50人开通";
 		var img=order.productPic;
 		if(order.seedStr!=null&&order.seedStr!=''){
 			title = "合协社区专享现金券";
