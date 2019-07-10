@@ -76,6 +76,7 @@ avalon.ready(function() {
         r = function(n) {
 			alert(n.message==null?"订单创建失败，请稍后重试！":n.message);
 			o.control.paying=false;
+			o.overlay=false;
         };
         common.invokeApi(n, a, i, null, e, r)
     }
@@ -98,12 +99,19 @@ avalon.ready(function() {
         	        // 支付成功后的回调函数
         		   alert("下单成功！");
 		    	   location.href=MasterConfig.C("basePageUrl")+"group/success.html?orderId="+o.model.order.id + "&type="+o.model.type;
-        	   }
+			   },
+			   fail:function(res) {
+				console.log(JSON.stringify(res))
+				},
+				cancel:function(res){
+					o.overlay=false;
+				}
         	});
         },
         r = function(n) {
         	alert(n.message==null?"支付请求失败，请稍后重试！":n.message);
-        	o.control.paying=false;
+			o.control.paying=false;
+			o.overlay=false;
         };
         common.invokeApi(n, a, i, null, e, r)
     }
@@ -136,7 +144,8 @@ avalon.ready(function() {
         	paying:false
         },
         location:'',
-        detaillocation:'',
+		detaillocation:'',
+		overlay:false,
         model:{
         	type:3,/**默认特卖*/
         	ruleId:"",
@@ -168,6 +177,7 @@ avalon.ready(function() {
 	        	}
 	        },
 	        pay: function() {
+				o.overlay=true;
 	        	if(o.control.paying){
 	        		alert("订单处理中，请勿重复提交！");
 	        		return;
@@ -211,7 +221,7 @@ avalon.ready(function() {
         /** 选择送货日期 */
         datechoooser:{
         	time: '任何时间',
-	        comment: '',
+			comment: '',
 	        timePicker: [
 	            {
 	                name: '工作日',
