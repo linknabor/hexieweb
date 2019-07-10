@@ -16,9 +16,9 @@ function queryAddress() {
 
 /** 根据shareCode找出分享者所在的小区 */
 function queryAddrByShareCode() {
-	let code = getUrlParam("shareCode");
+	let code = getUrlParam("ruleId");
     var n = "GET",
-    a = "getAddressByShareCode/"+code,
+    a = "getRegionByRuleId/"+code,
     i = null,
     e = function(n) {
         o.addr.receiveName = n.result.buyer.name;

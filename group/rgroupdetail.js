@@ -92,12 +92,12 @@ avalon.ready(function() {
             o.showDetail = !o.showDetail;
         },
         goclassify:function(){
-        	location.href="rgroups.html?type="+o.rule.productType+"&shareCode="+o.shareCode;
+        	location.href="rgroups.html?type="+o.rule.productType;
         },
         buy:function(){
-
+			let shareCode = getUrlParam("shareCode");
         	if(common.checkRegisterStatus()&&o.rule.id){
-        		location.href="../buy.html?type=4&ruleId="+o.rule.id+"&shareCode="+o.shareCode;
+        		location.href="../buy.html?type=4&ruleId="+o.rule.id+"&shareCode="+shareCode;
         	}
         },
         golist:function(){
