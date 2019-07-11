@@ -14,7 +14,7 @@ avalon.ready(function() {
 		var title = "代扔垃圾服务报名，限时优惠中！";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		if(order.orderType==4){
-			link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+order.groupRuleId;
+			link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		}else if(order.orderType==0&&order.groupId!=0){
 			link=MasterConfig.C('basePageUrl')+"group.html?groupId="+order.groupId;
 		}
