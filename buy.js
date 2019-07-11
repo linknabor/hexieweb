@@ -284,13 +284,13 @@ avalon.ready(function() {
         }
     });
     avalon.scan(document.body);
-    // if(common.checkRegisterStatus()) {
-    // 	getTypeAndId();
-    //     if(o.model.ruleId&&o.model.type){
-    //     	queryBuyInfo();
-    //     	queryCoupon();
-    //         checkFromShare(o.model.type,o.model.ruleId);
-    //     }
-    // }
+    if(common.checkRegisterStatus()) {
+    	getTypeAndId();
+        if(o.model.ruleId&&o.model.type){
+        	queryBuyInfo();
+        	queryCoupon();
+            checkFromShare(o.model.type,o.model.ruleId);
+        }
+    }
     FastClick.attach(document.body);
 });
