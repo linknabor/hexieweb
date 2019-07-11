@@ -16,9 +16,9 @@ function queryAddress() {
 
 /** 根据shareCode找出分享者所在的小区 */
 function queryAddrByShareCode() {
-	let code = getUrlParam("shareCode");
+	let code = getUrlParam("ruleId");
     var n = "GET",
-    a = "getAddressByShareCode/"+code,
+    a = "getRegionByRuleId/"+code,
     i = null,
     e = function(n) {
         o.addr.receiveName = n.result.buyer.name;
@@ -272,6 +272,10 @@ var addrModel={
     		alert("请填写完整相关信息！");
     		return;
     	}
+		if(o.addr.homeAddress==""){
+			alert("请填写楼号室号！");
+			return;
+		}
     	if(!(/^1[3-9][0-9]\d{4,8}$/.test(o.addr.tel))) {
     		alert("请填写正确的手机号！");
     		return;

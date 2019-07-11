@@ -33,7 +33,7 @@ avalon.ready(function() {
             o.order = n.result;
             o.timeStr = getTimeStr();
             o.groupStatusStr = getGroupState();
-            initShareConfig(o.order.productName,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.order.productThumbPic,"快来参加合协社区的优惠商品抢购吧");
+            initShareConfig("代扔垃圾服务报名，限时优惠中！",MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.order.productThumbPic,"小区报名满50人开通");
         },
         r = function() {
         	alert("获取订单信息失败！");

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
     <meta content="telephone=no" name="format-detection" />
     <meta charset="UTF-8">
-    <title>社区团购</title>
+    <title>社区服务</title>
     <link rel="stylesheet" href="../static/css/common.css?v=20160229">
     <link rel="stylesheet" href="../static/css/header.css?v=20160229">
     <link rel="stylesheet" href="../static/css/group/product.css?v=20160229">
@@ -109,11 +109,13 @@
 				<img alt="" class="product-image" ms-src="{{rgroup.productPic}}"/>
 				<div style="width:100%">
 					<div class="fl pt5" style="height:70px;width: 100%;">
-						<div class="product-name pl05 fs20 pt" style="margin-right: 75px;line-height: 15px;">{{rgroup.ruleName}}</div>
+						<div class="product-name pl05 fs20 pt" style="margin-right: 75px;line-height: 15px; font-size:14px">{{rgroup.ruleName}}</div>
 						<div class="mt1 ml1" >
+						<!--
 							<span class="highlight fs20">¥&nbsp;{{rgroup.price}}&nbsp;</span>
 							<span class="ori-price"><del>¥&nbsp;{{rgroup.oriPrice}}&nbsp;</del></span>
-							<span class="ml1 product-lefttime">{{leftTimeStrs($index)}}</span>
+							-->
+							<span class="product-lefttime" style="margin-left:-5%;">{{leftTimeStrs($index)}}</span>
 						</div>
 					</div>
 					<div class="fr process-left-border" id="processImg">
