@@ -178,7 +178,7 @@ avalon.ready(function() {
 	        	}
 	        },
 	        pay: function() {
-				if(o.datechoooser.bind_switch!='1') {
+				if(o.datechoooser.bind_switch!='1') { 
 					alert("请同意《代扔垃圾服务协议》后支付");
 	        		return;	
 				}
