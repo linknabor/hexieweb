@@ -102,6 +102,7 @@ avalon.ready(function() {
 			   },
 			   fail:function(res) {
 				console.log(JSON.stringify(res))
+				o.overlay=false;
 				},
 				cancel:function(res){
 					o.overlay=false;
@@ -177,11 +178,15 @@ avalon.ready(function() {
 	        	}
 	        },
 	        pay: function() {
+				if(o.datechoooser.bind_switch!='1') {
+					alert("请同意《代扔垃圾服务协议》后支付");
+	        		return;	
+				}
 				o.overlay=true;
 	        	if(o.control.paying){
 	        		alert("订单处理中，请勿重复提交！");
 	        		return;
-	        	}
+				}
 	        	var order = {
 	        			orderType:o.model.type,
 	        			productId:o.model.product.id,
@@ -239,7 +244,8 @@ avalon.ready(function() {
 	                checked: true
 	            }
 	        ],
-	        modalShown: false,
+			modalShown: false,
+			bind_switch:"1",
 	        showModal: function() {
 	            o.datechoooser.modalShown = true;
 	        },
@@ -256,7 +262,15 @@ avalon.ready(function() {
 	            o.datechoooser.time = o.datechoooser.timePicker[idx].name;
 	            o.model.receiveTimeType = o.datechoooser.timePicker[idx].value;
 	            o.datechoooser.modalShown = false;
-	        }
+			},
+			CheckBoxSelected:function(){
+				if(o.datechoooser.bind_switch!='0'){
+					o.datechoooser.bind_switch='0'
+				}else {
+					o.datechoooser.bind_switch='1'
+				}
+			}
+			
         }
     });
 
@@ -270,13 +284,13 @@ avalon.ready(function() {
         }
     });
     avalon.scan(document.body);
-    if(common.checkRegisterStatus()) {
-    	getTypeAndId();
-        if(o.model.ruleId&&o.model.type){
-        	queryBuyInfo();
-        	queryCoupon();
-            checkFromShare(o.model.type,o.model.ruleId);
-        }
-    }
+    // if(common.checkRegisterStatus()) {
+    // 	getTypeAndId();
+    //     if(o.model.ruleId&&o.model.type){
+    //     	queryBuyInfo();
+    //     	queryCoupon();
+    //         checkFromShare(o.model.type,o.model.ruleId);
+    //     }
+    // }
     FastClick.attach(document.body);
 });
