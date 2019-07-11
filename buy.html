@@ -164,6 +164,37 @@
     opacity: .80;
     filter: alpha(opacity=80);
 }
+
+
+.addse:after {
+	content: '\2713';
+	position: absolute;
+	top: -7px;
+	left: 0px;
+	color: rgb(59, 58, 58);
+	width: 100%;
+	text-align: center;
+	font-size: 1.4em;
+	padding: 1px 0 0 0;
+	vertical-align: text-top;
+}
+.chendad{
+	background-color: #FFF;
+	border: 1px solid #C1CACA;
+	width:18px;
+	height: 18px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	margin-right: 2px;
+	top: 5px;
+}
+.chk_1 {
+	display: none;
+}
+ .checkadd {
+	 color: rgb(122, 112, 112);
+ }
 </style>
 </head>
 
@@ -202,7 +233,11 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="line p15 fs15" style="position: relative;">
+		<label class="chendad "  ms-class-addse="datechoooser.bind_switch==1" for="checkbox_a1"></label>
+		<input type="checkbox" id="checkbox_a1" name="flag" class="chk_1 " checked ms-click="datechoooser.CheckBoxSelected()"/>
+		<a class="checkadd" href="./protocol.html" >同意<span  style="border-bottom: 1px solid rgb(122, 112, 112);">《代扔垃圾服务协议》</span> </a>
+	</div>
 	<div class="line p15 fs15">
 		<span>商品价格</span> <span class="fr highlight">¥&nbsp;{{model.productAmount}}</span>
 	</div>
