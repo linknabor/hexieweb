@@ -9,6 +9,10 @@ var MasterConfig = function() {
         /uat/.test(location.origin)?'https://uat.e-shequ.com/weixin/':
         'https://www.e-shequ.com/weixin/',
         
+        payPageFolder:/127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
+        'https://www.e-shequ.com/pay/',
+
         appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
         /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
         'wxbd214f5765f346c1',
@@ -16,13 +20,14 @@ var MasterConfig = function() {
         bindAppId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
         /uat/.test(location.origin)?'wx9ffe0a2b5a64a285':
         'wxa48ca61b68163483',
-
-        payPageSuffix:"hx",
+        // payPageFolder:"https://test.e-shequ.com/pay/",
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
         shop_name: "合协",
+        payPageSuffix:"hx",
+
         is_debug:true
     },
 
@@ -33,7 +38,7 @@ var MasterConfig = function() {
     e
 } ();
 //角色
-var Config1 = function() {
+var Config = function() {
     var t = {
         download: {
         },
@@ -338,7 +343,7 @@ updateUserStatus(user) {
         end = MasterConfig.C("oauthUrlPostFix");
         location.href = t + "appid=" + e + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
     },
-    initShareConfig(title,link,img,desc){
+    initShareConfig(title,link,img,desc,wx){
         if(link.indexOf(MasterConfig.C("basePageUrl"))>=0
                 &&link.indexOf('shareCode')<0
                 &&getCookie("shareCode")!=null&&getCookie("shareCode")!=''){
