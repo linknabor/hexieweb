@@ -49,7 +49,7 @@ avalon.ready(function() {
 			console.log(JSON.stringify(n));
 			o.product = n.result;
 		    setTimeout(initSwipe,1000);
-			initShareConfig(o.rule.name,MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"快来参加合协社区的优惠商品抢购吧");
+			initShareConfig("代扔垃圾服务报名，限时优惠中！",MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.ruleId,o.product.smallPicture,"小区报名满50人开通");
         },
         r = function(n) {
 			console.log("error");
@@ -62,9 +62,10 @@ avalon.ready(function() {
     }
     
 	function getMessageId(){
-		o.ruleId=getUrlParam("ruleId");
+        o.ruleId=getUrlParam("ruleId");
+     
 	}
-	
+    
 
     o = avalon.define({
         $id: "root",
@@ -94,9 +95,13 @@ avalon.ready(function() {
         	location.href="rgroups.html?type="+o.rule.productType;
         },
         buy:function(){
-        	let shareCode = getUrlParam("shareCode");
+			let shareCode = getUrlParam("shareCode");
         	if(common.checkRegisterStatus()&&o.rule.id){
-        		location.href="../buy.html?type=4&ruleId="+o.rule.id+"&shareCode="+shareCode;
+				let url = "../buy.html?type=4&ruleId="+o.rule.id;
+				if(shareCode){
+					url+= "&shareCode="+shareCode;
+				}
+        		location.href=url;
         	}
         },
         golist:function(){

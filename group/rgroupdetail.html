@@ -98,16 +98,18 @@
 			<div class="bounce2"></div>
 			<div class="bounce3"></div>
 		</div>
-		        
+		<!--        
 		<div id="fade" class="black_overlay">
 		</div>
 		
 	<div class="rule_intro" ms-click="gotosgrouprulr">
 	 <img alt="" src="../static/images/group/img_tuangou_zhifu.png" style="width: 100%;">
 	</div>
+
 	<div style="width:100%;">
 	<img alt="" src="../static/images/group/img_tuangou_zhifu.png" style="width: 100%;"/>
 	</div>
+		-->
 	<div class="device">
 	    <div class="swiper-container">
 	        <div class="swiper-wrapper">
@@ -120,15 +122,24 @@
 	</div>
 	<div class="product-info p15">
 		<div class="product-detail-name fs16">{{rule.name}}</div>
+		
 		<div style="width: 100%;height:30px;">
 			<div class="highlight fs22 fl three_div">¥&nbsp;{{rule.price}}&nbsp;</div>
+			<div class="ori-price2 fl three_div" style="margin-top:3%"><span>满<span class="highlight" >{{rule.groupMinNum}}</span>人开通</span></div>
+
+			<!--
 			<div class="highlight fl fs14 three_div" style="padding-top:8px">{{rule.discount}}&nbsp;</div>
 			<div class="ori-price2 three_div"  style="padding-top:8px">运费&nbsp;&nbsp;<span class="highlight">¥{{rule.postageFee}}</span></div>
+			-->
 		</div>
+		
 		<div style="width: 100%;height:20px">
+		<!--
 			<div class="ori-price2 fl three_div">市场价<del>¥&nbsp;{{product.oriPrice}}</del></div>
-			<div class="ori-price2 fl three_div">目标份数<span class="highlight" >{{rule.groupMinNum}}</span>份</div>
+			-->
+			<!--
 			<div class="ori-price2 three_div" ms-visible="rule.freeShippingNum<999"><span class="highlight">{{rule.freeShippingNum}}</span>件包邮</div>
+			-->
 		</div>
 		<div style="width:100%;height:1px">&nbsp;</div>
 	</div>
@@ -146,15 +157,15 @@
 	</div>
 
 	<div class="rgroup-info bb3">
-		<div class="fl " style="margin-top:23px;margin-left:15px;color:#999;font-size: 14px;">团购进度</div>
+		<div class="fl " style="margin-top:23px;margin-left:15px;color:#999;font-size: 14px;">报名进度</div>
 		<div class="fr plr10" style="border-left:#d5d59d 1px solid ;"  id="processImg">
 		<canvas width="70px" height="70px" ms-class-process-img="drawP(rule.process)"></canvas>
 		</div>
-		<div class="fr" style="margin-top:23px;color:#333;font-size: 15px;margin-right: 15px;">已参团份数<span style="color:#FF9933;font-size:15px;margin-left: 5px;">{{rule.currentNum}}</span></div>
+		<div class="fr" style="margin-top:23px;color:#333;font-size: 15px;margin-right: 15px;">已报名人数<span style="color:#FF9933;font-size:15px;margin-left: 5px;">{{rule.currentNum}}</span></div>
 	</div>
 	
 	<div class="p15 mb15">
-		<div class="section-title" style="padding-left:0px;padding-top:0px;"  ms-click="toggleDetail">商品详情<i class="icon more-icon align-right fr" ms-class-top-icon="showDetail"></i></div>
+		<div class="section-title" style="padding-left:0px;padding-top:0px;"  ms-click="toggleDetail">报名规则<i class="icon more-icon align-right fr" ms-class-top-icon="showDetail"></i></div>
 		<ul class="" style="padding-top: 3px;">
 			<li class="detail-item" ms-html="product.serviceDesc"></li>
 		</ul>
@@ -173,13 +184,15 @@
 		<div class="submit-btn ov fs16"  ms-class-useless="rule.leftSeconds < 0"  ms-click="buy" >立即购买</div>
 	</div>-->
 	<div class="btn-home-fixed" style="color: white; position: fixed;width: 100%;bottom: 0px;">
+	<!--
 		<span  class="fl" 
 			style="height:40px;line-height:40px;width:36%;background-color:#444;text-align:center;font-size:15px;" ms-click="goclassify">
 			更多团购
 		</span>
+		-->
 		<span  class="fl" 
-			style="height:40px;line-height:40px;width:64%;background-color:#ff8a00;text-align: center;font-size:15px;"  ms-click="buy" ms-class-useless="rule.leftSeconds < 0">
-			马上参团
+			style="height:40px;line-height:40px;width:100%;background-color:#ff8a00;text-align: center;font-size:15px;"  ms-click="buy" ms-class-useless="rule.leftSeconds < 0">
+			马上报名
 		</span>
 	</div>
 <script>

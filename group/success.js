@@ -8,17 +8,18 @@ avalon.ready(function() {
     	}, function() {
     		
     	});
-    }
+	}
+	
 	function initShareSetting(order){
-		var title = order.productName;
-		var link=MasterConfig.C('basePageUrl')+"group/onsalesindex.html";
+		var title = "代扔垃圾服务报名，限时优惠中！";
+		var link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		if(order.orderType==4){
-			link=MasterConfig.C('basePageUrl')+"group/rgroupinvite.html?ruleId="+order.groupRuleId;
+			link=MasterConfig.C('basePageUrl')+"group/rgroupdetail.html?ruleId="+order.groupRuleId;
 		}else if(order.orderType==0&&order.groupId!=0){
 			link=MasterConfig.C('basePageUrl')+"group.html?groupId="+order.groupId;
 		}
 
-		var desc="分享给小伙伴们一个超赞的限时特惠活动！";
+		var desc="小区报名满50人开通";
 		var img=order.productPic;
 		if(order.seedStr!=null&&order.seedStr!=''){
 			title = "合协社区专享现金券";
@@ -69,7 +70,7 @@ avalon.ready(function() {
     var o = avalon.define({
         $id: "root",
         order:{seedStr:""},
-        orderId:"",
+		orderId:"",
         coupon:{id:0},
         goback:function(){
         	if(o.type==4){
@@ -86,7 +87,6 @@ avalon.ready(function() {
     getOrderId();
     notifyPaySuccess();
     query();
-    initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-    
+	initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
     avalon.scan(document.body);
 });

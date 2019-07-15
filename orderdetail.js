@@ -32,7 +32,8 @@ avalon.ready(function() {
             console.log(JSON.stringify(n));
             o.order = n.result;
             o.timeStr = getTimeStr();
-			o.groupStatusStr = getGroupState();
+            o.groupStatusStr = getGroupState();
+            initShareConfig("代扔垃圾服务报名，限时优惠中！",MasterConfig.C("basePageUrl")+"group/rgroupdetail.html?ruleId="+o.order.groupRuleId,o.order.productThumbPic,"小区报名满50人开通");
         },
         r = function() {
         	alert("获取订单信息失败！");
@@ -133,7 +134,7 @@ avalon.ready(function() {
         groupLeftTime:"已结束"
     });
 
-    initWechat(['chooseWXPay']) ;
+    initWechat(['chooseWXPay,onMenuShareTimeline','onMenuShareAppMessage']) ;  
     getOrderId();
     getOrder();
     avalon.scan(document.body);

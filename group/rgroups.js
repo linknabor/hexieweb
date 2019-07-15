@@ -1,11 +1,12 @@
 avalon.ready(function() {
 	var firstQuery = true;
 	var page = 0;
+	$("#div11").hide();
 	function initShareSetting(){
-		var title = "社区团购";
+        var title = "社区服务";
 		var link=MasterConfig.C('basePageUrl')+"group/rgroups.html";
-		var img=MasterConfig.C("basePageUrl")+"static/images/share_tuan.jpg";
-		var desc="【合协社区】为您提供精选商品，团购比特卖更优惠哦！";
+		var img=MasterConfig.C("basePageUrl")+"static/images/share_laji.png";
+		var desc="【合协社区】为您提供更好的服务！";
 		initShareConfig(title,link,img,desc);
 	}
     function query() {
@@ -14,6 +15,14 @@ avalon.ready(function() {
         i = null,
         e = function(n) {
             o.rgroups = n.result;
+			if(o.rgroups.length ==0) {
+				
+				$("#div11").html("<span style='font-size: 18px;'>您的小区尚未开通报名，敬请期待！</span>");
+				//alert("您的小区尚未开通报名，敬请期待！");
+				$("#div11").show();
+				$("#div12").hide();
+				return false;
+			}
             if(firstQuery) {
        	    	commonui.initPage();
        	    	firstQuery = false;
@@ -43,9 +52,14 @@ avalon.ready(function() {
     function drawItem(item,process) {
     	drawProcess($("#products canvas")[item],35,35,28,process,'#E5E2DD','#FF8A00','#FF8A00');
     }
+    function getShareCode(){
+        o.shareCode=getUrlParam("shareCode");
+        
+	}
     var o = avalon.define({
         $id: "root",
         rgroups: [],
+        shareCode:"",
         drawP:function(item,process){
         	console.log("---->"+item+":"+process );
         	drawItem(item,process);
@@ -60,11 +74,12 @@ avalon.ready(function() {
         },
         gotosgrouprulr:function(){
         	location.href=MasterConfig.C('basePageUrl')+"group/sgrouprule.html";
-        }
+        },
+      
     });
     avalon.scan(document.body);
     initWechat(['onMenuShareTimeline','onMenuShareAppMessage']);
-    common.setTitle("社区团购");
+    common.setTitle("社区服务");
     if(checkCodeAndLogin()){
     	setInterval(updateLeftTime,1000);
         checkFromShare();
@@ -73,7 +88,7 @@ avalon.ready(function() {
     FastClick.attach(document.body);
 
 	initShareSetting();
-    
+    getShareCode();
     var loadheight = $('#indexDiv').height(),hasNext=true,isloadPage=false;
     $(window).scroll(function (event) {
         loadheight = $('#indexDiv').height();

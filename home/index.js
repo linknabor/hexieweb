@@ -27,3 +27,8 @@ avalon.ready(function() {
     common.setTitle("生活服务");
     checkFromShare();
 });
+
+
+function notOpen(){
+	alert("当前功能暂未开放。");	
+}
