@@ -116,7 +116,7 @@ function setCookie(e, o, n) {
          console.log("需要删除的cookie名字："+keys);
          if (keys) {
           for (var i =  keys.length; i--;)
-               ocument.cookie=keys[i]+"=0; expire="+date.toGMTString()+"; path=/";
+               document.cookie=keys[i]+"=0; expire="+date.toGMTString()+"; path=/";
           }
             }
 
