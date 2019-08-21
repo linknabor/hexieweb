@@ -243,9 +243,9 @@ window.common = {
             end = MasterConfig.C("oauthUrlPostFix");
             location.href = t + "appid=" + MasterConfig.C("appId") + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect"
         } else common.alert("start api login"),
+        clearAllCookie()
         this.invokeApi("POST", "login/" + o, null,
         function() {
-            clearAllCookie()
             AJAXFlag = !1;
         },
         function(x) {
