@@ -108,6 +108,17 @@ function setCookie(e, o, n) {
     null !== n && void 0 !== n && (i = "expires=" + new Date(1e3 * n) + "; "),
     document.cookie = t + i + "path=/"
 }
+//清除cookie
+ function clearAllCookie() {
+         var date=new Date();
+         date.setTime(date.getTime()-10000);
+         var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+         console.log("需要删除的cookie名字："+keys);
+         if (keys) {
+          for (var i =  keys.length; i--;)
+               ocument.cookie=keys[i]+"=0; expire="+date.toGMTString()+"; path=/";
+          }
+            }
 
 //判断是不是微信环境
 function isWeChatBrowser() {
@@ -234,7 +245,8 @@ window.common = {
         } else common.alert("start api login"),
         this.invokeApi("POST", "login/" + o, null,
         function() {
-            AJAXFlag = !1
+            clearAllCookie()
+            AJAXFlag = !1;
         },
         function(x) {
             common.updateUserStatus(x.result);
