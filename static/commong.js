@@ -185,7 +185,7 @@ function isRegisted(){
  //没注册 跳转注册页
 function toRegisterAndBack(){
     var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
-    location.href=MasterConfig.C('basePageUrl')+"person/index.html#/register?comeFrom="+encodeURIComponent(n);
+    location.href=MasterConfig.C('basePageUrl')+"person/indexgui.html#/register?comeFrom="+encodeURIComponent(n);
 }
 
 
@@ -248,7 +248,6 @@ window.common = {
 updateUserStatus(user) {
     var duration = new Date().getTime()/1000 + 3600*24*30;
     setCookie("UID", user.uid,duration);
-    setCookie('userid',user.id,duration);
     setCookie("currentAddrId", user.currentAddrId, duration);
     setCookie("tel", user.tel, duration);
     setCookie("shareCode", user.shareCode, duration);
