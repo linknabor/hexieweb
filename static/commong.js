@@ -14,7 +14,6 @@ var MasterConfig = function() {
         // shop_name: "贵州幸福家园",
         // is_debug:true
          
-        
         baseUrl: "https://test.e-shequ.com/wechat/hexie/wechat/",
         basePageUrl:"https://test.e-shequ.com/weixin/",
         payPageFolder:"https://test.e-shequ.com/pay/",
@@ -91,7 +90,6 @@ function dealWithAjaxData(o, e, i, r) {
 }
 //没授权在授权登录
 function reLogin() {
-    alert('reLogin');
     setCookie("UID", "", 0),
     common.login(!0)
 }
@@ -108,17 +106,7 @@ function setCookie(e, o, n) {
     null !== n && void 0 !== n && (i = "expires=" + new Date(1e3 * n) + "; "),
     document.cookie = t + i + "path=/"
 }
-//清除cookie
- function clearAllCookie() {
-         var date=new Date();
-         date.setTime(date.getTime()-10000);
-         var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-         console.log("需要删除的cookie名字："+keys);
-         if (keys) {
-          for (var i =  keys.length; i--;)
-               document.cookie=keys[i]+"=0; expire="+date.toGMTString()+"; path=/";
-          }
-            }
+
 
 //判断是不是微信环境
 function isWeChatBrowser() {
@@ -149,7 +137,6 @@ function checkCodeAndLogin(){
     var getData = common._GET();
     var b = getData.bind;
     var o = getData.code;
-    alert(getData)
     if(!b&&o){
         common.login();
         return false;
@@ -243,7 +230,6 @@ window.common = {
             end = MasterConfig.C("oauthUrlPostFix");
             location.href = t + "appid=" + MasterConfig.C("appId") + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect"
         } else common.alert("start api login"),
-        clearAllCookie()
         this.invokeApi("POST", "login/" + o, null,
         function() {
             AJAXFlag = !1;
@@ -261,7 +247,8 @@ window.common = {
     /**变更才需要重设置*/
 updateUserStatus(user) {
     var duration = new Date().getTime()/1000 + 3600*24*30;
-    setCookie("UID", user.uid,  duration);
+    setCookie("UID", user.uid,duration);
+    setCookie('userid',user.id,duration);
     setCookie("currentAddrId", user.currentAddrId, duration);
     setCookie("tel", user.tel, duration);
     setCookie("shareCode", user.shareCode, duration);
