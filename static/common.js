@@ -200,7 +200,13 @@ function isRegisted(){
  //没注册 跳转注册页
 function toRegisterAndBack(){
     var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah();
-    location.href=MasterConfig.C('basePageUrl')+"person/index.html?#/register?comeFrom="+encodeURIComponent(n);
+    let appurl='';
+    if(getUrlParam('oriApp')){
+        appurl='oriApp='+getUrlParam('oriApp');
+    }else {
+        appurl='';
+    }
+    location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n);
 }
 
 
