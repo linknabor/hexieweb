@@ -16,7 +16,7 @@ window.config = {
 		person_index:{			
 			url1: pay+yy+'orderpay.html',//商品订单 团购订单  服务订单
 			// url2: html+'repair/index.html',//报修单	
-			url2: html+'repair/youyi.html',//报修单		
+			url2: 'https://test.e-shequ.com/weixin/repair/youyi.html',//报修单		
 			url3: html+'wuye/index.html?#/myHouse',//绑定房屋 我是业主
 		},
 		person_footer:{			
@@ -39,7 +39,8 @@ window.config = {
 			url1: pay+yy+'orderpay.html'
 		},
 		repair_success:{
-			url1: html+'wuye/index.html'
+			// url1: html+'wuye/index.html'
+			url1: 'https://test.e-shequ.com/weixin/person/index.html'
 		},
 		//商品订单板块
 		orderpay_commentxiu:{
