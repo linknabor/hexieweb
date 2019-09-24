@@ -102,6 +102,9 @@ function dealWithAjaxData(o, e, i, r) {
 }
 //没授权在授权登录
 function reLogin() {
+	setTimeout(function(){
+		console.log("waiting 1s for relogin.")
+	},1000)
     setCookie("UID", "", 0),
     common.login(!0)
 }
@@ -297,6 +300,7 @@ updateUserStatus(user) {
     setCookie("currentAddrId", user.currentAddrId, duration);
     setCookie("tel", user.tel, duration);
     setCookie("shareCode", user.shareCode, duration);
+	setCookie("appId", user.appId);
 },
      //入口程序 检查状态
     checkRegisterStatus:function(){
@@ -384,7 +388,10 @@ updateUserStatus(user) {
             if(link.indexOf('?')<link.length-1){
                 link = link + "&";
             }
+
             link = link + "shareCode="+getCookie("shareCode");
+			var appId = getCookie("appId");
+			link += "&oriApp=" + appId;
         }
     
         wx.ready(function(){
