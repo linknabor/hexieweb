@@ -40,7 +40,7 @@ window.config = {
 		},
 		repair_success:{
 			// url1: html+'wuye/index.html'
-			url1: 'https://test.e-shequ.com/weixin/person/index.html'
+			url1: 'https://test.e-shequ.com/weixin/person/youyi.html'
 		},
 		//商品订单板块
 		orderpay_commentxiu:{
