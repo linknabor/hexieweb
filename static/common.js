@@ -273,10 +273,11 @@ window.common = {
 			t = MasterConfig.C("oauthUrl"),
 		    end = MasterConfig.C("oauthUrlPostFix");
 			var url = t + "appid=" ;
-			if(oriApp){
+			var mainAppId = MasterConfig.C("appId") ;
+			if(oriApp && oriApp!=mainAppId){
 				url +=  oriApp + "&component_appid=" + MasterConfig.C("componentAppId"); 
 			}else{
-				url +=  MasterConfig.C("appId") 
+				url +=  mainAppId;
 			}
 			url+="&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
 			console.log("url:"+url);
