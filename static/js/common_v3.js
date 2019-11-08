@@ -1,22 +1,22 @@
 var MasterConfig = function() {
     var t = {
                 
-       // baseUrl: "https://test.e-shequ.com/wechat/hexie/wechat/",
-        //basePageUrl:"https://test.e-shequ.com/weixin/",
+       // baseUrl: "https://test.e-shequ.cn/wechat/hexie/wechat/",
+        //basePageUrl:"https://test.e-shequ.cn/weixin/",
         //appId: "wx89c743b2fa762a2c",
         
-        //baseUrl: "https://test.e-shequ.com/wechat-sit/hexie/wechat/",
-        //basePageUrl:"https://test.e-shequ.com/wechat-sit/hexie/",
+        //baseUrl: "https://test.e-shequ.cn/wechat-sit/hexie/wechat/",
+        //basePageUrl:"https://test.e-shequ.cn/wechat-sit/hexie/",
 
-        baseUrl: "https://www.e-shequ.com/wechat/hexie/wechat/",
-        basePageUrl:"https://www.e-shequ.com/weixin/",
+        baseUrl: "https://www.e-shequ.cn/wechat/hexie/wechat/",
+        basePageUrl:"https://www.e-shequ.cn/weixin/",
         appId: "wxbd214f5765f346c1",
         
         oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
         oauthUrlPostFix:"&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
         bindAppId: "wxa48ca61b68163483",
         
-		//payPageFolder:"https://test.e-shequ.com/pay/",
+		//payPageFolder:"https://test.e-shequ.cn/pay/",
         payPageSuffix:"hx",		//hexie
 
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
@@ -46,7 +46,7 @@ var Config = function() {
             no_goods: "更多新品正在陆续推出..."
         },
         user_info: {
-            avatar: "https://www.e-shequ.com/weixin/static/images/logo.jpg",
+            avatar: "https://www.e-shequ.cn/weixin/static/images/logo.jpg",
             nickname: "游客",
             levelname: "普通会员"
         },
@@ -56,7 +56,7 @@ var Config = function() {
             2 : "大楼VIP"
         },
         coupon:{
-            seedImg:"https://www.e-shequ.com/weixin/static/img/banner/banner_market_shuiguo.jpg"
+            seedImg:"https://www.e-shequ.cn/weixin/static/img/banner/banner_market_shuiguo.jpg"
         }
     },
     e = {};
