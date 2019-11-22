@@ -1,20 +1,20 @@
 //开发环境
 var MasterConfig = function() {
     var t = {
-        baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.cn/wechat/hexie/wechat/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.cn/wechat/hexie/wechat/':
+        baseUrl: /127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/wechat/hexie/wechat/':
         'https://www.e-shequ.cn/wechat/hexie/wechat/',
         
-        basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.cn/weixin/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.cn/hexie/weixin/':
+        basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/':
         'https://www.e-shequ.cn/weixin/',
         
-        basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.cn/weixin/pay/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.cn/hexie/weixin/pay/':
-        'https://www.e-shequ.cn/weixin/pay/',
+        basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
+        'https://www.e-shequ.cn/weixin/',
 
-        payPageFolder:/127|test/.test(location.origin)?'https://test.e-shequ.cn/pay/':
-        /uat/.test(location.origin)?'https://uat.e-shequ.cn/pay/':
+        payPageFolder:/127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
         'https://www.e-shequ.cn/pay/',
 
         appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
@@ -215,6 +215,7 @@ function toRegisterAndBack(){
 
 var AJAXFlag = !0;
 window.common = {
+    newname:"合协社区",
     isDebug: !1,
     getApi: function(e) {
         var o = parseInt(getCookie("BackendPort"));
@@ -263,6 +264,27 @@ window.common = {
         };
         common.invokeApi(n, a, i, null, e, r);
     },
+    GetImages:function(type) {
+        let imgUrl=getCookie(type);
+        if(imgUrl == undefined ||imgUrl == ''){
+            let n = "GET",
+            a = "userInfo?oriApp="+getUrlParam('oriApp'),
+            i = null,
+            e = function(n) {
+                var duration = new Date().getTime()/1000 + 3600*24*30;
+                for(var j=0;j<n.result.bgImageList.length;j++){
+                    setCookie(n.result.bgImageList[j].type,n.result.bgImageList[j].imgUrl,duration)
+                } 
+                location.reload();
+            },
+            r = function() { 
+            };
+            common.invokeApi(n, a, i, null, e, r);
+        }else {
+            imgUrl=getCookie(type)
+        }
+        return imgUrl;
+   },
      //授权
     login: function() {
 		var o = this._GET().code;
@@ -415,4 +437,4 @@ updateUserStatus(user) {
 //checkBindAndBind();
 checkCodeAndLogin();
 common.setTitle(MasterConfig.C("shop_name") + "社区");
-// export default common
+// export {common,MasterConfig,getUrlParam} 
