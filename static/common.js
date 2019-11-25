@@ -31,8 +31,6 @@ var MasterConfig = function() {
 
 		oauthUrlPostSilent:"&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
         baidu_map_key:"RUWUgrEEF5VjoaWsstMMZwOD",
-        shop_name: "社区",
-        payPageSuffix:"hx",
 
         is_debug:true
     },
@@ -328,10 +326,6 @@ updateUserStatus(user) {
     alert: function(e) {
         "" === getCookie("DevDebug") ? console.log(e) : alert(e)
     },
-    //设置title
-    setTitle: function(e) {
-        $("title").text(e)
-    },
 
     addParamObject:function(e, name,value){
         e[name]=value;
@@ -401,5 +395,4 @@ updateUserStatus(user) {
 };
 
 checkCodeAndLogin();
-common.setTitle(MasterConfig.C("shop_name"));
 // export {common,MasterConfig,getUrlParam} 
