@@ -166,7 +166,7 @@ function isRegisted(){
 }
  //没注册 跳转注册页
 function toRegisterAndBack(){
-    var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah();
+    var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
     let appurl='';
     if(getUrlParam('oriApp')){
         appurl='oriApp='+getUrlParam('oriApp');
@@ -283,7 +283,7 @@ window.common = {
         function(x) {
             common.updateUserStatus(x.result);
             AJAXFlag = !0,
-            location.href = location.origin +common.removeParamFromUrl(["code"])+common.addParamHsah();
+            location.href = location.origin +common.removeParamFromUrl(["code"]);
         })
     },
     /**变更才需要重设置*/
@@ -350,7 +350,7 @@ updateUserStatus(user) {
     },
     removeParamFromUrl: function(e) {
         // console.log(location.pathname);
-        return location.pathname + common.buildUrlParamString(common.removeParamObject(e));
+        return location.pathname + common.buildUrlParamString(common.removeParamObject(e))+common.addParamHsah();
     },
     buildUrlParamString: function(e) {
         var o = "";
@@ -361,7 +361,7 @@ updateUserStatus(user) {
     },
     wechatAuthorize: function() {
         var e = MasterConfig.C("appId");
-        var n = location.origin + common.removeParamFromUrl(["from", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah(),
+        var n = location.origin + common.removeParamFromUrl(["from", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]),
         t = MasterConfig.C("oauthUrl");
         end = MasterConfig.C("oauthUrlPostFix");
         location.href = t + "appid=" + e + "&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
