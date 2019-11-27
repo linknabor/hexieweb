@@ -349,8 +349,8 @@ updateUserStatus(user) {
         return  location.hash 
     },
     removeParamFromUrl: function(e) {
-        // console.log(location.pathname);
-        return location.pathname + common.buildUrlParamString(common.removeParamObject(e))+common.addParamHsah();
+        let  timestamp = (new Date()).valueOf()
+        return location.pathname + common.buildUrlParamString(common.removeParamObject(e))+'?t='+timestamp+common.addParamHsah();
     },
     buildUrlParamString: function(e) {
         var o = "";
