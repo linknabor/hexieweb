@@ -257,11 +257,12 @@ window.common = {
    },
      //授权
     login: function() {
+		var timestamp="";
 		var o = this._GET().code;
 		var oriApp = getUrlParam("oriApp");
 		var param = {"oriApp":oriApp};
         if (common.alert("code: " + o), void 0 === o) {
-			var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]),
+			var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah(),
 			t = MasterConfig.C("oauthUrl"),
 		    end = MasterConfig.C("oauthUrlPostFix");
 			var url = t + "appid=" ;
@@ -282,8 +283,25 @@ window.common = {
         },
         function(x) {
             common.updateUserStatus(x.result);
-            AJAXFlag = !0,
-            location.href = location.origin +common.removeParamFromUrl(["code"]);
+            AJAXFlag = !0;
+			
+		if(document.URL.indexOf('.html?t=') < 0) {
+			 timestamp= (new Date()).valueOf();
+		}
+		var url= location.origin +common.removeParamFromUrl(["code"]);
+		if(url.indexOf('?')<0){
+			url+='?';
+		}else {
+			url+='&';
+		}
+		if(timestamp!=""){
+			url+='t='+timestamp;
+		}else{
+			url=url.substring(0,url.length-1);
+		}
+		url+=common.addParamHsah();
+//		alert(url);
+        location.href =url;
         })
     },
     /**变更才需要重设置*/
@@ -349,8 +367,7 @@ updateUserStatus(user) {
         return  location.hash 
     },
     removeParamFromUrl: function(e) {
-        let  timestamp = (new Date()).valueOf()
-        return location.pathname + common.buildUrlParamString(common.removeParamObject(e))+'?t='+timestamp+common.addParamHsah();
+        return location.pathname + common.buildUrlParamString(common.removeParamObject(e));
     },
     buildUrlParamString: function(e) {
         var o = "";
