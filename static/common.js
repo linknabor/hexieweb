@@ -9,7 +9,7 @@ var MasterConfig = function() {
         /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/':
         'https://www.e-shequ.cn/weixin/',
         
-        basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.com/pay/':
+        basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/pay/':
         /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
         'https://www.e-shequ.cn/weixin/',
 
@@ -255,6 +255,11 @@ window.common = {
         }
         return imgUrl;
    },
+   getoriApp:function() {
+        var oriapp=getUrlParam('oriApp')?'oriApp='+getUrlParam('oriApp'):'';
+        return  oriapp;
+   },
+
      //授权
     login: function() {
 		var timestamp="";
@@ -300,7 +305,6 @@ window.common = {
 			url=url.substring(0,url.length-1);
 		}
 		url+=common.addParamHsah();
-//		alert(url);
         location.href =url;
         })
     },
