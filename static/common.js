@@ -256,7 +256,7 @@ window.common = {
         return imgUrl;
    },
    getoriApp:function() {
-        var oriapp=getUrlParam('oriApp')?'oriApp='+getUrlParam('oriApp'):'';
+        var oriapp=getUrlParam('oriApp')?'oriApp='+getUrlParam('oriApp'):'state=123';
         return  oriapp;
    },
 
