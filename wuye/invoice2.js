@@ -156,13 +156,11 @@ $(document).ready(function() {
 			mobile: tel
 		},
 		e = function(n) {
-			// alert("验证码已下发，请查收短信");
-			$('#getyzm').text(n.result)
+			alert("验证码已下发，请查收短信");
 			wait = 60;
 		},
-		r = function(n) {
-			// alert("验证码获取失败,请重新获取");
-			$('#getyzm').text(n.message)
+		r = function() {
+			alert("验证码获取失败,请重新获取");
 			wait = 60;
 			$('.button1').val()="重新获取";
 		};
