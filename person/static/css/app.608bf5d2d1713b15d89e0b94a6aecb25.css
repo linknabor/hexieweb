@@ -315,11 +315,11 @@ body {
   margin-right: 10px;
 }
 
-.reg[data-v-8e25ca74] {
+.reg[data-v-5a2337db] {
     background-color: #fffff8;
     padding-bottom: 1px;
 }
-.zzmb[data-v-8e25ca74] {
+.zzmb[data-v-5a2337db] {
     z-index: 100000;
     position: fixed;
     top: 0;
@@ -332,7 +332,7 @@ body {
     height: 100%;
     display: block;
 }
-#phoneAjax[data-v-8e25ca74] {
+#phoneAjax[data-v-5a2337db] {
     position: fixed;
     top: 20%;
     left: 50%;
@@ -350,24 +350,24 @@ body {
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
 }
-.info-wrap[data-v-8e25ca74] {
+.info-wrap[data-v-5a2337db] {
     padding: 4px;
     /* border-bottom: 5px solid #f9f9e9; */
     font-size: 12px;
     color: #3b3937;
 }
-.input-wrap[data-v-8e25ca74] {
+.input-wrap[data-v-5a2337db] {
     overflow: hidden;
     line-height: 45px;
 }
-.lite-divider[data-v-8e25ca74] {
+.lite-divider[data-v-5a2337db] {
     border-bottom: 1px solid #d4cfc8;
     padding-left: 15px;
 }
-.fs15[data-v-8e25ca74] {
+.fs15[data-v-5a2337db] {
     font-size: 15px;
 }
-.hidden-input[data-v-8e25ca74] {
+.hidden-input[data-v-5a2337db] {
     height: 20px;
     margin-top: 12px;
     border: none;
@@ -375,13 +375,13 @@ body {
     background-color: transparent;
     text-align: right;
 }
-.fs14[data-v-8e25ca74] {
+.fs14[data-v-5a2337db] {
     font-size: 14px;
 }
-.pr15[data-v-8e25ca74] {
+.pr15[data-v-5a2337db] {
     padding-right: 15px;
 }
-.btn-plain[data-v-8e25ca74] {
+.btn-plain[data-v-5a2337db] {
     display: inline-block;
     padding: 0 20px;
     height: 27px;
@@ -390,32 +390,33 @@ body {
     border-radius: 3px;
     border: 1px solid #bfbfbf;
 }
-.btn-fixed[data-v-8e25ca74] {
+.btn-fixed[data-v-5a2337db] {
     position:fixed;
     color: #fff;
     left: 3%;
     right: 3%;
     bottom: 10px;
 }
-.submit-btn[data-v-8e25ca74] {
+.submit-btn[data-v-5a2337db] {
     height: 44px;
     line-height: 44px;
     background: #ff8a00;
     text-align: center;
 }
-.fs16[data-v-8e25ca74] {
+.fs16[data-v-5a2337db] {
     font-size: 16px;
 }
-.ov[data-v-8e25ca74] {
+.ov[data-v-5a2337db] {
     overflow: hidden;
     padding: 1px;
 }
-.useless[data-v-8e25ca74] {
+.useless[data-v-5a2337db] {
 	  background-color: #D7D5D4;
 }
-.messages[data-v-8e25ca74] {
+.messages[data-v-5a2337db] {
     padding:15px;
     color:red;
+    font-size: 15px;
 }
 
 .bind[data-v-2a8ac0cc] {
