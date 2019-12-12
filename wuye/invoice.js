@@ -160,6 +160,7 @@ $(document).ready(function() {
 			wait = 60;
 		},
 		r = function(n) {
+			
 			// alert("验证码获取失败,请重新获取");
 			$('#getyzm').text(n.message)
 			wait = 60;
