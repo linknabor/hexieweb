@@ -156,8 +156,7 @@ $(document).ready(function() {
 			mobile: tel
 		},
 		e = function(n) {
-			// alert("验证码已下发，请查收短信");
-			$('#getyzm').text(n.result)
+			alert("验证码已下发，请查收短信");
 			wait = 60;
 		},
 		r = function(n) {
