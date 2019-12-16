@@ -63,7 +63,7 @@ var common = {
         var o = parseInt(getCookie("BackendPort"));
         return MasterConfig.C("baseUrl") + (o ? ":" + o: "") + "/" + e;
     },
-    invokeApi: function(e, o, n, t, i, r) {
+    invokeApi: function(e, o, n, t, i, r,c) {
         if (common.alert("url: " + o), AJAXFlag) { (null === t || void 0 === t) && (t = function() {}),
             (null === i || void 0 === i) && (i = function() {}),
             (null === r || void 0 === r) && (r = function() {});
@@ -75,6 +75,7 @@ var common = {
                 },
                 dataType: "json",
                 beforeSend: t,
+                complete:c,
                 success: function(e) {
                     common.alert("success data: " + JSON.stringify(e));
 					dealWithAjaxData(o, e, i, r);

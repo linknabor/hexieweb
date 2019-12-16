@@ -16,12 +16,17 @@ $(document).ready(function() {
 	var tempCreditCode = "";  //公司识别码临时变量
 	var showcom = "";  //是否允许公司开具发票标识  0：不能开具公司发票；1：允许开具
 	var invoice_title_type = "01";  //默认发票开具类型 01：个人；02：公司
+	var Token="";//接受标识
 	//获取发票抬头
 	function getInvoiceInfo() {
 		commonui.showAjaxLoading();
 		var n = "POST",
 		a = "getInvoice?trade_water_id="+trade_water_id,
-        i = null,
+		i = null,
+		c = function(xhr,data) {
+			//获取请求头标识
+			Token=xhr.getResponseHeader('Access-Control-Allow-Token');
+		},
         e = function(n) {
 			if(n.result!=null) {
 				if(n.result.pdf!=null) {
@@ -58,7 +63,7 @@ $(document).ready(function() {
         	commonui.showMessage("无法加载发票信息！");
         	commonui.hideAjaxLoading();
         };
-        common.invokeApi(n, a, i, null, e, r)
+        common.invokeApi(n, a, i, null, e, r,c)
 	}
 	function aa()
 	{
@@ -145,7 +150,11 @@ $(document).ready(function() {
 		if( !reg.test(phoneNumber)){
 			alert('请输入正确的手机号')
 		}else{
-			yzmreq(phoneNumber)
+			if(trade_water_id == "" || trade_water_id.length !=18) {
+				alert('交易号不正确')
+			}else {
+				yzmreq(phoneNumber)
+			}
 		}	
 	});
 	
@@ -153,7 +162,12 @@ $(document).ready(function() {
 		var n = "POST",
 		a = "getyzm1",
 		i = {
-			mobile: tel
+			mobile: tel,
+			// trade_water_id:trade_water_id
+		},
+		b = function(xhr) {
+			//  setRequestHeader设置头部
+			xhr.setRequestHeader('Access-Control-Allow-Token',Token)
 		},
 		e = function(n) {
 			alert("验证码已下发，请查收短信");
@@ -166,7 +180,7 @@ $(document).ready(function() {
 			wait = 60;
 			$('.button1').val()="重新获取";
 		};
-		common.invokeApi(n, a, i, null, e, r)
+		common.invokeApi(n, a, i, b, e, r)
 	};
 	
 	//验证码倒计时
