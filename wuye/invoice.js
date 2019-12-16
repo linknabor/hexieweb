@@ -161,10 +161,9 @@ $(document).ready(function() {
 	
 	function yzmreq(tel){//请求验证码
 		var n = "POST",
-		a = "getyzm1",
+		a = "getyzm1?trade_water_id="+trade_water_id,
 		i = {
-			mobile: tel,
-			trade_water_id:trade_water_id
+			mobile: tel
 		},
 		b = function(xhr) {
 			//  setRequestHeader设置头部
