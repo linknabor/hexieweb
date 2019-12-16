@@ -62,7 +62,7 @@ $(document).ready(function() {
         r = function() {
 			alert("无法加载发票信息！")
         	// commonui.showMessage("无法加载发票信息！");
-        	// commonui.hideAjaxLoading();
+        	commonui.hideAjaxLoading();
         };
         common.invokeApi(n, a, i, null, e, r,c)
 	}
