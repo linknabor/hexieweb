@@ -60,8 +60,9 @@ $(document).ready(function() {
 			commonui.hideAjaxLoading();
         },
         r = function() {
-        	commonui.showMessage("无法加载发票信息！");
-        	commonui.hideAjaxLoading();
+			alert("无法加载发票信息！")
+        	// commonui.showMessage("无法加载发票信息！");
+        	// commonui.hideAjaxLoading();
         };
         common.invokeApi(n, a, i, null, e, r,c)
 	}
@@ -163,7 +164,7 @@ $(document).ready(function() {
 		a = "getyzm1",
 		i = {
 			mobile: tel,
-			// trade_water_id:trade_water_id
+			trade_water_id:trade_water_id
 		},
 		b = function(xhr) {
 			//  setRequestHeader设置头部
