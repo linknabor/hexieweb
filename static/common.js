@@ -192,7 +192,7 @@ window.common = {
         return MasterConfig.C("baseUrl") + (o ? ":" + o: "") + "/" + e;
     },
     //定义请求方法
-    invokeApi: function(e, o, n, t, i, r) {
+    invokeApi: function(e, o, n, t, i, r,c) {
         if (common.alert("url: " + o), AJAXFlag) { (null === t || void 0 === t) && (t = function() {}),
             (null === i || void 0 === i) && (i = function() {}),
             (null === r || void 0 === r) && (r = function() {});
@@ -204,6 +204,7 @@ window.common = {
                 },
                 dataType: "json",
                 beforeSend: t,
+                complete: c,
                 success: function(e) {
                     common.alert("success data: " + JSON.stringify(e));
                     dealWithAjaxData(o, e, i, r);
