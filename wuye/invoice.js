@@ -34,14 +34,20 @@ $(document).ready(function() {
 					$('#pdfClick').attr('href',n.result.pdf);
 					$('.card').hide();
 				}
-				tempSelfTitle = n.result.invoice_title;  //个人抬头
-				tempCspTitle =  n.result.csp_invoice_title;  //公司抬头
+				// tempSelfTitle = n.result.invoice_title;  //个人抬头
+				// tempCspTitle =  n.result.csp_invoice_title;  //公司抬头
 				tempCreditCode = n.result.credit_code;//公司识别码
 				
 				showcom = n.result.showcom;  //是否允许公司开
 				invoice_title_type = n.result.invoice_title_type; //发票开具类型
+				if(invoice_title_type=='01') {
+					tempSelfTitle = n.result.invoice_title
+				}else if(invoice_title_type=='02'){
+					tempCspTitle = n.result.invoice_title
+				}
 				telInput.val(n.result.mobile);  //手机号
 				
+
 				//判断公司是否显示 1是允许公司选项显示 0是不允许公司选项
 				if(showcom == 0){
 					$('#csp').css('display','none');
