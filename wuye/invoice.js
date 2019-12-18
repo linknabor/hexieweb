@@ -1,5 +1,9 @@
 $(document).ready(function() {
-	
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		if (r != null) return unescape(r[2]); return null; //返回参数值
+	}
 
 	var trade_water_id  =getUrlParam("trade_water_id");//交易编号,接口ur获取
 	var type = '01';//类型’
@@ -12,12 +16,17 @@ $(document).ready(function() {
 	var tempCreditCode = "";  //公司识别码临时变量
 	var showcom = "";  //是否允许公司开具发票标识  0：不能开具公司发票；1：允许开具
 	var invoice_title_type = "01";  //默认发票开具类型 01：个人；02：公司
+	var Token="";//接受标识
 	//获取发票抬头
 	function getInvoiceInfo() {
 		commonui.showAjaxLoading();
 		var n = "POST",
 		a = "getInvoice?trade_water_id="+trade_water_id,
-        i = null,
+		i = null,
+		c = function(xhr,data) {
+			//获取请求头标识
+			Token=xhr.getResponseHeader('Access-Control-Allow-Token');
+		},
         e = function(n) {
 			if(n.result!=null) {
 				if(n.result.pdf!=null) {
@@ -25,14 +34,20 @@ $(document).ready(function() {
 					$('#pdfClick').attr('href',n.result.pdf);
 					$('.card').hide();
 				}
-				tempSelfTitle = n.result.invoice_title;  //个人抬头
-				tempCspTitle =  n.result.csp_invoice_title;  //公司抬头
+				// tempSelfTitle = n.result.invoice_title;  //个人抬头
+				// tempCspTitle =  n.result.csp_invoice_title;  //公司抬头
 				tempCreditCode = n.result.credit_code;//公司识别码
 				
 				showcom = n.result.showcom;  //是否允许公司开
 				invoice_title_type = n.result.invoice_title_type; //发票开具类型
+				if(invoice_title_type=='01') {
+					tempSelfTitle = n.result.invoice_title
+				}else if(invoice_title_type=='02'){
+					tempCspTitle = n.result.invoice_title
+				}
 				telInput.val(n.result.mobile);  //手机号
 				
+
 				//判断公司是否显示 1是允许公司选项显示 0是不允许公司选项
 				if(showcom == 0){
 					$('#csp').css('display','none');
@@ -51,10 +66,11 @@ $(document).ready(function() {
 			commonui.hideAjaxLoading();
         },
         r = function() {
-        	commonui.showMessage("无法加载发票信息！");
+			alert("无法加载发票信息！")
+        	// commonui.showMessage("无法加载发票信息！");
         	commonui.hideAjaxLoading();
         };
-        common.invokeApi(n, a, i, null, e, r)
+        common.invokeApi(n, a, i, null, e, r,c)
 	}
 	function aa()
 	{
@@ -141,26 +157,36 @@ $(document).ready(function() {
 		if( !reg.test(phoneNumber)){
 			alert('请输入正确的手机号')
 		}else{
-			yzmreq(phoneNumber)
+			if(trade_water_id == "" || trade_water_id.length !=18) {
+				alert('交易号不正确')
+			}else {
+				yzmreq(phoneNumber)
+			}
 		}	
 	});
 	
 	function yzmreq(tel){//请求验证码
 		var n = "POST",
-		a = "getyzm1",
+		a = "getyzm1?trade_water_id="+trade_water_id,
 		i = {
 			mobile: tel
+		},
+		b = function(xhr) {
+			//  setRequestHeader设置头部
+			xhr.setRequestHeader('Access-Control-Allow-Token',Token)
 		},
 		e = function(n) {
 			alert("验证码已下发，请查收短信");
 			wait = 60;
 		},
-		r = function() {
-			alert("验证码获取失败,请重新获取");
+		r = function(n) {
+			
+			// alert("验证码获取失败,请重新获取");
+			$('#getyzm').text(n.message)
 			wait = 60;
 			$('.button1').val()="重新获取";
 		};
-		common.invokeApi(n, a, i, null, e, r)
+		common.invokeApi(n, a, i, b, e, r)
 	};
 	
 	//验证码倒计时
