@@ -150,7 +150,7 @@ $(document).ready(function() {
 	});
 	
 	$('.button1').click(function(){//获取验证码
-		time(this);
+		
 		//获取手机号值
 		var phoneNumber = telInput.val();
 		var reg = /^1[3-9][0-9]\d{8}$/;
@@ -178,13 +178,15 @@ $(document).ready(function() {
 		e = function(n) {
 			alert("验证码已下发，请查收短信");
 			wait = 60;
+			time(this);
 		},
 		r = function(n) {
 			
 			// alert("验证码获取失败,请重新获取");
 			$('#getyzm').text(n.message)
 			wait = 60;
-			$('.button1').val()="重新获取";
+			time(this);
+			// $('.button1').val()="重新获取";
 		};
 		common.invokeApi(n, a, i, b, e, r)
 	};
