@@ -148,9 +148,9 @@ $(document).ready(function() {
 			isClick = false;
 		}
 	});
-	
+	var  _this;
 	$('.button1').click(function(){//获取验证码
-		
+		_this=this;
 		//获取手机号值
 		var phoneNumber = telInput.val();
 		var reg = /^1[3-9][0-9]\d{8}$/;
@@ -160,12 +160,12 @@ $(document).ready(function() {
 			if(trade_water_id == "" || trade_water_id.length !=18) {
 				alert('交易号不正确')
 			}else {
-				yzmreq(phoneNumber)
+				yzmreq(phoneNumber,_this)
 			}
 		}	
 	});
 	
-	function yzmreq(tel){//请求验证码
+	function yzmreq(tel,_this){//请求验证码
 		var n = "POST",
 		a = "getyzm1?trade_water_id="+trade_water_id,
 		i = {
@@ -178,14 +178,14 @@ $(document).ready(function() {
 		e = function(n) {
 			alert("验证码已下发，请查收短信");
 			wait = 60;
-			time(this);
+			time(_this);
 		},
 		r = function(n) {
 			
 			// alert("验证码获取失败,请重新获取");
 			$('#getyzm').text(n.message)
 			wait = 60;
-			time(this);
+			time(_this);
 			// $('.button1').val()="重新获取";
 		};
 		common.invokeApi(n, a, i, b, e, r)
