@@ -35,13 +35,17 @@
             top:50%;
             transform: translate(-50%,-50%);
         }
+        img {
+            border-style: none;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div>
         <div id="login" >
             <div class="actimg">
-                <img  src="../static/static/img/c3d7f369-4a5e-4c4a-9fb9-a4b9d274c7e1.gif" alt="" >
+                <img  src="../static/img/c3d7f369-4a5e-4c4a-9fb9-a4b9d274c7e1.gif" alt="" >
             </div>
         </div>
    </div>
@@ -65,7 +69,7 @@
         }
         function info() {
             var n = "post",
-            a = "/card/preActivate",
+            a = "card/preActivate",
             i = paramsUrl,
             e = function(n) {
                  console.log(JSON.stringify(n));
