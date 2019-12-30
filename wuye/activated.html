@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+    content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="0" />
@@ -59,14 +58,14 @@
         var search = location.search; //获取location的search属性，保存在search中
         var params = {}; //创建空对象params
         params = search.slice(1);
-        console.log(params)
 
         function info() {
-            var n = "get",
-                a = "card/preActivate?" + params;
-            i = null,
+            var n = "post",
+                a = "card/preActivate?"+params;
+                i = null,
                 e = function (n) {
                     console.log(JSON.stringify(n));
+                    $('#login').hide();
                 },
                 r = function () {};
             common.invokeApi(n, a, i, null, e, r);
