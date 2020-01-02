@@ -165,19 +165,19 @@ function isRegisted(){
     return tel&&tel!='null';
 }
  //没注册 跳转注册页
-function toRegisterAndBack(Status){
+function toRegisterAndBack(){
     var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
     let appurl='';
+    //1未领卡  //2领卡未激活
+    var cardStatus=getCookie('cardStatus');
     if(getUrlParam('oriApp')){
         appurl='oriApp='+getUrlParam('oriApp');
     }else {
         appurl='';
-    }
+    };
    
-    if(Status == '1'||Status=='null'){
-        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/welfare?comeFrom="+encodeURIComponent(n)+common.addParamHsah();  
-    }else if(Status == '2') {
-        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
+    if(cardStatus == '1'||cardStatus=='null'){
+        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/welfare"
     }else {
         location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
     }
@@ -344,17 +344,8 @@ updateUserStatus(user) {
             common.login();/**不应该出现*/
             return false;
         }
-        if(getUrlParam('oriApp')=="wxa48ca61b68163483"){
-            //1未领卡  //2领卡未激活
-            var cardStatus=getCookie('cardStatus');
-            if(!isRegisted()&& cardStatus=='2'){
-                toRegisterAndBack(cardStatus);
-            }else if(!isRegisted()&& (cardStatus=='1'||cardStatus=='null')){
-                toRegisterAndBack(cardStatus);
-            }
-            return false;
-        }else {
-            alert("请先完成注册！");
+
+        if(!isRegisted()){              
             toRegisterAndBack();
             return false;
         }
