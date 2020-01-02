@@ -8,7 +8,7 @@ var MasterConfig = function() {
         basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
         /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/':
         'https://www.e-shequ.cn/weixin/',
-        
+
         basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/pay/':
         /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
         'https://www.e-shequ.cn/weixin/',
@@ -165,7 +165,7 @@ function isRegisted(){
     return tel&&tel!='null';
 }
  //没注册 跳转注册页
-function toRegisterAndBack(){
+function toRegisterAndBack(Status){
     var n = location.origin + common.removeParamFromUrl(["from", "bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"]);
     let appurl='';
     if(getUrlParam('oriApp')){
@@ -173,7 +173,14 @@ function toRegisterAndBack(){
     }else {
         appurl='';
     }
-    location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
+   
+    if(Status == '1'||Status=='null'){
+        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/welfare?comeFrom="+encodeURIComponent(n)+common.addParamHsah();  
+    }else if(Status == '2') {
+        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
+    }else {
+        location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
+    }
 }
 //判断当前是那个公众号
 function Getofficial() {
@@ -302,7 +309,9 @@ window.common = {
 		if(document.URL.indexOf('.html?t=') < 0) {
 			 timestamp= (new Date()).valueOf();
 		}
+
 		var url= location.origin +common.removeParamFromUrl(["code","appid","state"]);
+
 		if(url.indexOf('?')<0){
 			url+='?';
 		}else {
@@ -335,7 +344,16 @@ updateUserStatus(user) {
             common.login();/**不应该出现*/
             return false;
         }
-        if(!isRegisted()){
+        if(getUrlParam('oriApp')=="wxa48ca61b68163483"){
+            //1未领卡  //2领卡未激活
+            var cardStatus=getCookie('cardStatus');
+            if(!isRegisted()&& cardStatus=='2'){
+                toRegisterAndBack(cardStatus);
+            }else if(!isRegisted()&& (cardStatus=='1'||cardStatus=='null')){
+                toRegisterAndBack(cardStatus);
+            }
+            return false;
+        }else {
             alert("请先完成注册！");
             toRegisterAndBack();
             return false;
