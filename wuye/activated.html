@@ -9,7 +9,6 @@
     <meta http-equiv="expires" content="0" />
     <title></title>
     <script src="../static/jquery.js"></script>
-    <script src="../static/common.js?v=123"></script>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style>
         #login {
@@ -60,20 +59,45 @@
         var params = {}; //创建空对象params
         params = search.slice(1);
 
+        var  baseUrl= /127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/':
+            /uat/.test(location.origin)?'https://uat.e-shequ.com/wechat/hexie/wechat/':
+            'https://www.e-shequ.cn/wechat/hexie/wechat/';
+
         function info() {
-            var n = "post",
-                a = "card/preActivate?"+params;
-                i = null,
-                e = function (n) {
+            $.ajax({
+                url:baseUrl+"getUrlJsSign",
+                type:'post',
+                dataType:'json',
+                data:{url:window.location.href.split('#')[0]},
+                success:function(n){
+                    wx.config({
+                            appId: n.result.appId, // 必填，公众号的唯一标识
+                            timestamp: n.result.timestamp , // 必填，生成签名的时间戳
+                            nonceStr: n.result.nonceStr, // 必填，生成签名的随机串
+                            signature: n.result.signature,// 必填，签名，见附录1
+                            jsApiList: ['closeWindow'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        });
+                },
+                error:function(){
+
+                }
+            })
+            
+            $.ajax({
+                url:baseUrl+"card/preActivate?"+params,
+                type:'post',
+                dataType:'json',
+                data:{},
+                success:function(){
                     wx.ready(function(){ 
 					     wx.closeWindow();
 			    	})
-                    
                 },
-                r = function () {};
-            common.invokeApi(n, a, i, null, e, r);
+                error:function(){
+
+                }
+            })
         }
-        common.initWechat(['closeWindow']);
         info();
     </script>
 </body>
