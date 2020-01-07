@@ -176,7 +176,7 @@ function toRegisterAndBack(){
         appurl='';
     };
    
-    if(cardStatus == '1'||cardStatus=='null'){
+    if(cardStatus == '1'||cardStatus==null || cardStatus=='0' ){
         location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/welfare"
     }else {
         location.href=MasterConfig.C('basePageUrl')+"person/index.html?"+appurl+"#/register?comeFrom="+encodeURIComponent(n)+common.addParamHsah();
