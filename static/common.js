@@ -196,6 +196,7 @@ function Getofficial() {
 
 var AJAXFlag = !0;
 window.common = {
+    skey:"abcdefgabcdefg12",
     newname:"社区",
     isDebug: !1,
     getApi: function(e) {
@@ -216,10 +217,11 @@ window.common = {
                 dataType: "json",
                 beforeSend: t,
                 complete: c,
-                success: function(e) {
+                success: function(e,textStatus, request) {
                     common.alert("success data: " + JSON.stringify(e));
                     dealWithAjaxData(o, e, i, r);
-
+                    var token = request.getResponseHeader("Authorization");
+                    window.localStorage.setItem(token,token);//保存token
                 },
                 error: function(e) {
                     common.alert("error data: " + JSON.stringify(e));
@@ -304,9 +306,10 @@ window.common = {
         function() {
             AJAXFlag = !1
         },
-        function(x) {
+        function(x,textStatus, request) {
             if(x.result!=null){
                common.updateUserStatus(x.result);
+               window.localStorage.setItem(sk, x.result.sk);//保存秘钥还未解密
             }
             AJAXFlag = !0;
 			
