@@ -221,7 +221,7 @@ window.common = {
                     common.alert("success data: " + JSON.stringify(e));
                     dealWithAjaxData(o, e, i, r);
                     var token = request.getResponseHeader("Authorization");
-                    window.localStorage.setItem(token,token);//保存token
+                    window.localStorage.setItem('token',token);//保存token
                 },
                 error: function(e) {
                     common.alert("error data: " + JSON.stringify(e));
@@ -309,7 +309,7 @@ window.common = {
         function(x,textStatus, request) {
             if(x.result!=null){
                common.updateUserStatus(x.result);
-               window.localStorage.setItem(sk, x.result.sk);//保存秘钥还未解密
+               window.localStorage.setItem('sk', x.result.sk);//保存秘钥还未解密
             }
             AJAXFlag = !0;
 			
