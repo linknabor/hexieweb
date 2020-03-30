@@ -255,7 +255,7 @@ window.common = {
         window.localStorage.setItem(key, value);
     },
     //获取localstoragge数据
-    GetImages:function(this,type) {
+    GetImages:function(type) {
         let imgUrl=window.localStorage.getItem(type);
         if(imgUrl == undefined ||imgUrl == '' ){
             let n = "GET",
