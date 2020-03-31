@@ -196,7 +196,7 @@ function Getofficial() {
 
 var AJAXFlag = !0;
 window.common = {
-    skey:"abcdefgabcdefg12",
+    skey:"cneshequ20150701",
     newname:"社区",
     isDebug: !1,
     getApi: function(e) {
