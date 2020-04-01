@@ -8,6 +8,10 @@ var MasterConfig = function() {
         basePageUrl:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
         /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/':
         'https://www.e-shequ.cn/weixin/',
+        
+        basedhzj3Url:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
+        /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/':
+        'https://www.e-shequ.cn/dhzj3/weixin/',
 
         basePageUrlpay:/127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/pay/':
         /uat/.test(location.origin)?'https://uat.e-shequ.com/pay/':
@@ -196,7 +200,6 @@ function Getofficial() {
 
 var AJAXFlag = !0;
 window.common = {
-    skey:"cneshequ20150701",
     newname:"社区",
     isDebug: !1,
     getApi: function(e) {
@@ -217,12 +220,10 @@ window.common = {
                 dataType: "json",
                 beforeSend: t,
                 complete: c,
-                success: function(e,textStatus, request) {
+                success: function(e) {
                     common.alert("success data: " + JSON.stringify(e));
-                    var token = request.getResponseHeader("Authorization");
-                    window.localStorage.setItem('token',token);//保存token
-                    window.localStorage.setItem('secret', e.result.sk);//保存秘钥还未解密
                     dealWithAjaxData(o, e, i, r);
+
                 },
                 error: function(e) {
                     common.alert("error data: " + JSON.stringify(e));
@@ -266,7 +267,7 @@ window.common = {
                 for(var j=0;j<n.result.bgImageList.length;j++){
                     window.localStorage.setItem(n.result.bgImageList[j].type,n.result.bgImageList[j].imgUrl,duration)
                 } 
-                location.reload();
+                imgUrl=window.localStorage.getItem(type)
             },
             r = function() { 
             };
@@ -307,7 +308,7 @@ window.common = {
         function() {
             AJAXFlag = !1
         },
-        function(x,textStatus, request) {
+        function(x) {
             if(x.result!=null){
                common.updateUserStatus(x.result);
             }
