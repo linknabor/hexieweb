@@ -37,8 +37,7 @@
         }
 
         function  alipayAuthorize() {
-            appId = /127|test/.test(location.origin)?'2021001161682727':
-                /uat/.test(location.origin)?'2021001161682727' : '2021001161682727';
+            appId = /127|test/.test(location.origin)?'2021001161682727': /uat/.test(location.origin)?'2021001161682727' : '2021001161682727';
 
             let authorize_url = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=APPID&scope=SCOPE&redirect_uri=ENCODED_URL";
             //
@@ -75,11 +74,9 @@
 
         function weixinAuthorize() {
 
-            appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
-                /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
+            appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e': /uat/.test(location.origin)?'wx9ffe0a2b5a64a285': 'wxbd214f5765f346c1',
 
-            let componentAppId = /127|test/.test(location.origin)?'wx4d706a1a7a139d1f':
-                /uat/.test(location.origin)?'wx4d706a1a7a139d1f' : 'wx0d408844b35d85e2';
+            let componentAppId = /127|test/.test(location.origin)?'wx4d706a1a7a139d1f': /uat/.test(location.origin)?'wx4d706a1a7a139d1f' : 'wx0d408844b35d85e2';
 
             let authorize_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=123&component_appid=COMPONENT_APPID#wechat_redirect";
 
