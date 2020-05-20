@@ -17,9 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <script>
 
-        var baseurl = /127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/': /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/': 'https://www.e-shequ.cn/weixin/',
+        var baseurl = /127|test|localhost/.test(location.origin) ? 'https://test.e-shequ.com/weixin/' : 'https://test.e-shequ.com/weixin/';
         var requrl = baseurl + "wuye/otherPay.html"+window.location.search;
-        var wechat_url = /127|test/.test(location.origin)?'https://test.e-shequ.com/wechat/hexie/wechat/': /uat/.test(location.origin)?'https://uat.e-shequ.com/wechat/hexie/wechat/': 'https://www.e-shequ.cn/wechat/hexie/wechat/',
+        var wechat_url = /127|test|localhost/.test(location.origin) ? 'https://test.e-shequ.com/wechat/hexie/wechat' :
+            'https://test.e-shequ.com/wechat/hexie/wechat';
 
         var appId = "";
         function query() {
@@ -36,7 +37,8 @@
         }
 
         function  alipayAuthorize() {
-            appId = /127|test/.test(location.origin)?'2021001161682727': /uat/.test(location.origin)?'2021001161682727' : '2021001161682727';
+            appId = /127|test/.test(location.origin)?'2021001161682727':
+                /uat/.test(location.origin)?'2021001161682727' : '2021001161682727';
 
             let authorize_url = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=APPID&scope=SCOPE&redirect_uri=ENCODED_URL";
             //
@@ -73,9 +75,11 @@
 
         function weixinAuthorize() {
 
-            appId: /127|test/.test(location.origin)?'wx95f46f41ca5e570e': /uat/.test(location.origin)?'wx9ffe0a2b5a64a285': 'wxbd214f5765f346c1',
+            appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
+                /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
 
-            let componentAppId = /127|test/.test(location.origin)?'wx4d706a1a7a139d1f': /uat/.test(location.origin)?'wxc65085912aca5444' : 'wx0d408844b35d85e2';
+            let componentAppId = /127|test/.test(location.origin)?'wx4d706a1a7a139d1f':
+                /uat/.test(location.origin)?'wx4d706a1a7a139d1f' : 'wx0d408844b35d85e2';
 
             let authorize_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=123&component_appid=COMPONENT_APPID#wechat_redirect";
 
@@ -129,6 +133,7 @@
         var user_id = "";
         var sect_name = "";
         var fee_name = "";
+        var qrcode_id = "";
         function getUrlParam() {
             let theRequest = {};
             let paramUrl = window.location.search.substr(1);
@@ -151,6 +156,7 @@
             fee_id = theRequest.fee_id;
             sect_name = theRequest.sect_name;
             fee_name = theRequest.fee_name;
+            qrcode_id = theRequest.qrcode_id;
 
             openid = getParam(paramUrl, "openid");
             user_id = getParam(paramUrl, "user_id");
@@ -201,6 +207,7 @@
             list.remark = $("#remark").val();
             list.sect_id = sect_id;
             list.fee_id = fee_id;
+            list.qrcode_id = qrcode_id;
             if("Alipay" === checkclient) {
                 list.openid = user_id;
             } else if("WeiXin" === checkclient) {
@@ -219,6 +226,10 @@
                     $("#phoneAjax").addClass("hidden");
 
                     if("Alipay" === checkclient) {
+                        if(false == n.success) {
+                            alert(n.message);
+                            return;
+                        }
                         let tranNo = n.result.packageId;
                         ap.tradePay({
                             tradeNO: tranNo
@@ -229,6 +240,10 @@
 
                         });
                     } else if("WeiXin" === checkclient) {
+                        if(false == n.success) {
+                            alert(n.message);
+                            return;
+                        }
                         wx.config({
                             appId: n.result.appid, // 必填，公众号的唯一标识
                             timestamp: n.result.timestamp, // 必填，生成签名的时间戳
@@ -448,7 +463,7 @@
     </div>
 
     <div style="text-align:center;padding-top: 5%">
-        <input style="background: #FFA54F;border-radius: 10px;width: 300px;height:50px;font-size: 20px;color: white" type="button" onclick="pay()" value="确认支付"/>
+        <input style="background: #ff9834;border-radius: 10px;width: 300px;height:50px;font-size: 20px;color: white;cursor: pointer; -webkit-appearance: none;" type="button" onclick="pay()" value="确认支付"/>
     </div>
 
 
