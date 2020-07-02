@@ -285,7 +285,6 @@ window.common = {
 
      //授权
     login: function() {
-
 		var timestamp="";
 		var o = this._GET().code;
 		var oriApp = getUrlParam("oriApp");
@@ -301,10 +300,8 @@ window.common = {
 			var url = t + "appid=" ;
 			
 			if(oriApp){
-			
 				url +=  oriApp + "&component_appid=" + MasterConfig.C("componentAppId"); 
 			}else{
-
 				url +=  mainAppId;
 			}
 			url+="&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
