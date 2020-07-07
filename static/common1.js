@@ -210,7 +210,7 @@ function Getofficial() {
 }
 
 var AJAXFlag = !0;
-var requrl = MasterConfig.C("basePageUrl")+"orderpay.html"+window.location.search+"?#/scanpay";
+var requrl = MasterConfig.C("basePageUrl")+"wuyepay.html?#/scanpay"+window.location.search;
 
 window.common = {
     newname:"社区",
@@ -376,7 +376,7 @@ window.common = {
                         if(res.success) {
                             let user_id = res.result.userid;
                             // console.log('user_id:'+user_id);
-                            location.href = MasterConfig.C("basePageUrl") + "orderpay.html" + window.location.search + "?#/scanpay" + "&user_id=" + user_id;
+                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html#/scanpay" + window.location.search + "?#/scanpay" + "&user_id=" + user_id;
                         }else {
                             alert('请刷新重试')
                         }
@@ -393,8 +393,8 @@ window.common = {
         let authorize_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=123&component_appid=COMPONENT_APPID#wechat_redirect";
         let o = this._GET().code;
         // console.log("o:" + o);
-        if( o == undefined) { //没有code授权触发
-            let authorize = authorize_url.replace("ADDID",MasterConfig.C("appId")),replace("REDIRECT_URI",encodeURIComponent(requrl)).replace("COMPONENT_APPID",MasterConfig.C("componentAppId"));
+        if( o === undefined) { //没有code授权触发
+            let authorize = authorize_url.replace("APPID",MasterConfig.C("appId")).replace("REDIRECT_URI",encodeURIComponent(requrl)).replace("COMPONENT_APPID",MasterConfig.C("componentAppId"));
             // console.log("author:" + authorize);
             location.href = authorize;
         }else {
@@ -410,7 +410,7 @@ window.common = {
                         if(res.success) {
                             let openid = res.result.openid;
                             // console.log("openid:"+openid);
-                            location.href = MasterConfig.C("basePageUrl") + "orderpay.html"+ window.location.search + "&openid+" + openid;
+                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html#/scanpay"+ window.location.search + "&openid+" + openid;
                         }else {
                             alert("请刷新重试");
                         }
