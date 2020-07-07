@@ -8,55 +8,26 @@
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="expires" content="0"/>
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
-    <script src="jquery-3.2.1.min.js"></script>
-    <script src="base64.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.inc.min.js"></script>
+
     <title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">  
     <script>
 
-        var appId = /127|test|localhost/.test(location.origin) ? 'wx95f46f41ca5e570e' : 'wx5b1a7c252c3cbc26';
-        var baseurl = /127|test|localhost/.test(location.origin) ? 'https://test.e-shequ.com/weixin/' : 'https://test.e-shequ.com/weixin/';
-        var requrl = baseurl + "wuye/otherPay.html"+window.location.search;
-        var wechat_url = /127|test|localhost/.test(location.origin) ? 'https://test.e-shequ.com/wechat/hexie/wechat' :
-            'https://test.e-shequ.com/wechat/hexie/wechat';
-        var authorize_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE&component_appid=component_appid#wechat_redirect";
+        var baseurl = /127|test/.test(location.origin)?'https://test.e-shequ.com/weixin/':
+            /uat/.test(location.origin)?'https://uat.e-shequ.com/hexie/weixin/' : 'https://www.e-shequ.cn/weixin/';
+     
+		function getUrlParam() {
+            let theRequest = {};
+            let paramUrl = window.location.search.substr(1);
+            console.log(paramUrl);
+            let param = getParam(paramUrl, "param");
+            console.log(param);
+			location.href=baseurl + "otherPay.html?param="+param;
+		}
 
-        //query(); //执行
-
-        function query() {
-            var o = gercode().code;
-            console.log("o:" + o);
-
-            if (o === undefined) {
-                location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
-                    appId + "&redirect_uri=" + encodeURIComponent(requrl) + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-            } else {
-                let oid = getParam(window.location.search, "openid");
-                if(oid != null) {
-
-                    wechat_url += "/authorize/" + o + "/"+ appid;
-                    $.ajax({
-                        type: 'post',
-                        url: url,
-                        dataType: "json",
-                        data: {},
-                        success: function (res) {
-                            if (res.success) {
-                                let openid = res.result.openid;
-                                location.href = bsurl + "wuye/otherPay.html"+ window.location.search +"&openid=" + openid;
-                            } else {
-                                alert('请刷新重试');
-                            }
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        }
-                    })
-                }
-            }
-        }
-
-        function getParam(url, name) {
+		function getParam(url, name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = url.match(reg);  //匹配目标参数
             if (r != null) {
@@ -66,160 +37,7 @@
             }
         }
 
-        var sect_id = "";
-        var fee_id = "";
-
-        function getUrlParam() {
-            let theRequest = {};
-            let param = window.location.search.substr(1);
-            console.log(param);
-            param = getParam(param, "param");
-
-            console.log(param);
-            param = strAnsi2Unicode(decode64(param));
-            console.log(param);
-            let params = param.split("&");
-            for(var i = 0; i < params.length; i ++) {
-                theRequest[params[i].split("=")[0]]=unescape(params[i].split("=")[1]);
-            }
-            console.log(theRequest);
-            $("#sect_name").text(theRequest.sect_name);
-            $("#fee_name").text(theRequest.fee_name);
-
-            sect_id = theRequest.sect_id;
-            fee_id = theRequest.fee_id;
-            console.log(gercode().code);
-        }
-
-        function gercode() {
-            var e = location.search,
-                o = {};
-
-            if ("" === e || void 0 === e) return o;
-            e = e.substr(1).split("&");
-            for (let n in e) {
-                let t = e[n].split("=");
-                o[t[0]] = t[1]
-            }
-            return o.from && delete o.code,o
-        }
-
-        window.onload = function(){
-            getUrlParam();
-        };
-
-        function pay() {
-            var list = {};
-            list.money = $("#money").val();
-            list.remark = $("#remark").val();
-            list.sect_id = sect_id;
-            list.fee_id = fee_id;
-            console.log(JSON.stringify(list));
-
-            $.ajax({
-                type : "POST",
-                contentType: "application/json;charset=UTF-8",
-                url : wechat_url + "/requestOtherPay",
-                data : JSON.stringify(list),
-                success : function(n) {
-                    wx.chooseWXPay({
-                        "timestamp":n.result.timestamp,
-                        "nonceStr":n.result.nonceStr,
-                        "package":n.result.pkgStr,
-                        "signType":n.result.signType,
-                        "paySign":n.result.signature,
-                        success: function (res) {
-                            alert("支付成功");
-                        }
-                    });
-                },
-                error : function(e){
-                    console.log(e.status);
-                    console.log(e.responseText);
-                    alert("支付请求失败，请稍后重试！");
-                }
-            });
-        }
-
-    </script>
-
-    <style type="text/css">
-        .card {
-            margin-bottom: 15px;
-            border: 1px solid #d4cfc8;
-            border-radius: 3px;
-            color: #363636;
-            background: #FFFFFF;
-            height: 300px;
-        }
-
-        .hidden {
-            visibility: hidden
-        }
-
-        .line{
-            margin-top: 15%;
-            margin-left: 8%;
-            margin-right: 0;
-            width: 84%;
-            border-bottom: 1px solid #FFA54F;
-
-        }
-
-        .logintxt{
-            border-right: #ffffff 0 solid;
-            border-top: #ffffff 0 solid;
-            font-size: 9pt; /*www.52css.com*/
-            border-left: #ffffff 0 solid;
-            border-bottom: #c0c0c0 1px solid;
-            background-color: #ffffff;
-            width: 90%;
-            height: 30px;
-        }
-
-        .line_context {
-            text-align:left;
-            width: 100%;
-            padding-left: 8%;
-        }
-
-        .family {
-            font-size: 15px;
-            font-weight: bold;
-            font-family: 微软雅黑,sans-serif;
-        }
-    </style>
-</head>
-<body style="background: #F5F5F5">
-<div style="padding: 0 5% 35% 5%;">
-    <div id="phoneAjax" class="hidden">
-        <img src="../static/images/common/loading.gif" style="width:40px;height:40px;vertical-align: middle;">
-    </div>
-
-    <div class="card">
-        <div style="text-align:center;padding-top: 10%" class="family">
-            <div style="text-align:left;width: 25%;float:left;padding-left: 8%;">项目名称：</div>
-            <div style="text-align:left;width: 67%;float: left"><span id="sect_name"></span></div>
-        </div>
-
-        <div class="line"></div>
-
-        <div style="text-align:center;padding-top: 6%" class="family">
-            <div class="line_context"><span id="fee_name"></span></div>
-        </div>
-
-        <div style="text-align:center;padding-top: 12%">
-            <div class="line_context"><input class="logintxt" type="text" id="money" name="money" value="" placeholder="￥请输入支付金额"/></div>
-        </div>
-
-        <div style="text-align:center;padding-top: 12%">
-            <div class="line_context"><input class="logintxt" type="text" id="remark" name="remark" value="" placeholder="请输入备注（选填）"/></div>
-        </div>
-    </div>
-
-    <div style="text-align:center;padding-top: 5%">
-        <input style="background: #FFA54F;border-radius: 10px;width: 300px;height:50px;font-size: 20px;color: white" type="button" onclick="pay()" value="确认支付"/>
-    </div>
-</div>
+		getUrlParam();
+      </script>
 </body>
 </html>

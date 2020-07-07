@@ -26,7 +26,7 @@ var MasterConfig = function() {
         'wxbd214f5765f346c1',
         
         componentAppId: /127|test/.test(location.origin)?'wx4d706a1a7a139d1f':
-        /uat/.test(location.origin)?'wxc65085912aca5444':
+        /uat/.test(location.origin)?'wx4d706a1a7a139d1f':
         'wx0d408844b35d85e2',
         
 		oauthUrl: "https://open.weixin.qq.com/connect/oauth2/authorize?",
@@ -285,7 +285,6 @@ window.common = {
 
      //授权
     login: function() {
-
 		var timestamp="";
 		var o = this._GET().code;
 		var oriApp = getUrlParam("oriApp");
@@ -301,10 +300,8 @@ window.common = {
 			var url = t + "appid=" ;
 			
 			if(oriApp){
-			
 				url +=  oriApp + "&component_appid=" + MasterConfig.C("componentAppId"); 
 			}else{
-
 				url +=  mainAppId;
 			}
 			url+="&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
