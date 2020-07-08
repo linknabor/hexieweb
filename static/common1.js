@@ -210,7 +210,7 @@ function Getofficial() {
 }
 
 var AJAXFlag = !0;
-var requrl = MasterConfig.C("basePageUrl")+"wuyepay.html?#/scanpay"+window.location.search;
+var requrl = MasterConfig.C("basePageUrl")+"wuyepay.html"+window.location.search + '#/scanpay';
 
 window.common = {
     newname:"社区",
@@ -376,7 +376,7 @@ window.common = {
                         if(res.success) {
                             let user_id = res.result.userid;
                             // console.log('user_id:'+user_id);
-                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html#/scanpay" + window.location.search + "?#/scanpay" + "&user_id=" + user_id;
+                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html" + window.location.search + "&user_id=" + user_id + '#/scanpay';
                         }else {
                             alert('请刷新重试')
                         }
@@ -410,7 +410,7 @@ window.common = {
                         if(res.success) {
                             let openid = res.result.openid;
                             // console.log("openid:"+openid);
-                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html#/scanpay"+ window.location.search + "&openid+" + openid;
+                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html"+ window.location.search + "&openid+" + openid + '#/scanpay';
                         }else {
                             alert("请刷新重试");
                         }
@@ -547,5 +547,5 @@ window.common = {
 
 };
 Getofficial();
-checkCodeAndLogin();
+// checkCodeAndLogin();
 // export {common,MasterConfig,getUrlParam} 
