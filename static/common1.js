@@ -410,7 +410,7 @@ window.common = {
                         if(res.success) {
                             let openid = res.result.openid;
                             // console.log("openid:"+openid);
-                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html"+ window.location.search + "&openid+" + openid + '#/scanpay';
+                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html"+ window.location.search + "&openid=" + openid + '#/scanpay';
                         }else {
                             alert("请刷新重试");
                         }
