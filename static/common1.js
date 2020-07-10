@@ -359,6 +359,7 @@ window.common = {
     alipayAuthorize() {
         let authorize_url = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=APPID&scope=SCOPE&redirect_uri=ENCODED_URL";
         let o = this.gerAuthcode().auth_code;
+        let  requrl = MasterConfig.C("basePageUrl")+"wuyepay.html"+window.location.search + '?#/scanpay?';
         if(o === undefined) { //没有code获取code
             let authorize = authorize_url.replace("APPID",MasterConfig.C("alipayappId")).replace("SCOPE","auth_base").replace("ENCODED_URL",encodeURIComponent(requrl));
             // console.log("authorize:"+authorize);
@@ -376,7 +377,12 @@ window.common = {
                         if(res.success) {
                             let user_id = res.result.userid;
                             // console.log('user_id:'+user_id);
-                            location.href = MasterConfig.C("basePageUrl") + "wuyepay.html" + window.location.search + "&user_id=" + user_id + '#/scanpay';
+							var basurl =MasterConfig.C("basePageUrl") + "wuyepay.html" + window.location.search;
+							 basurl = basurl.substr(0,basurl.length-1);
+							var urls = basurl + "&user_id=" + user_id  +window.location.hash
+						//	alert(urls)
+                           location.href =urls ;
+                         //   location.href = MasterConfig.C("basePageUrl") + "wuyepay.html" + window.location.search + "&user_id=" + user_id + '#/scanpay';
                         }else {
                             alert('请刷新重试')
                         }
@@ -409,6 +415,7 @@ window.common = {
                     success:function(res) {
                         if(res.success) {
                             let openid = res.result.openid;
+
                             // console.log("openid:"+openid);
                             location.href = MasterConfig.C("basePageUrl") + "wuyepay.html"+ window.location.search + "&openid=" + openid + '#/scanpay';
                         }else {
@@ -462,11 +469,12 @@ window.common = {
         o
     },
     gerAuthcode:function() {
-        var e = location.search,
+        var e = location.hash,
             o = {};
 
         if ("" === e || void 0 === e) return o;
-        e = e.substr(1).split("&");
+        var indx=e.indexOf('?')+1;
+        e = e.substr(indx).split("&");
         for (let n in e) {
             let t = e[n].split("=");
             o[t[0]] = t[1]
