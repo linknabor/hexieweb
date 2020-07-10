@@ -371,7 +371,7 @@ window.common = {
                 $.ajax({
                     type:'post',
                     url:url,
-                    dedaType:'json',
+                    dataType:'json',
                     data:{},
                     success:function(res) {
                         if(res.success) {
