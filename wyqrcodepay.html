@@ -251,13 +251,11 @@
                 dataType : "json",
                 success : function(n) {
                     if("Alipay" === checkclient) {
-                        alert('123')
                         if(false == n.success) {
                             alert(n.message);
                             return;
                         }
                         let tranNo = n.result.packageId;
-                        alert(tranNo)
                         ap.tradePay({
                             tradeNO: tranNo
                         }, function(res){
