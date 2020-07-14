@@ -91,10 +91,12 @@
     }
     //开具发票
     function invoice() {
-        location.href=baseurl+'wuye/invoice.html';
+
+        location.href=baseurl+'wuye/invoice.html?trade_water_id='+trade_water_id;
     }
     $(function () {
         query();
+        let trade_water_id = getUrlParam('trade_water_id')
         // let name = getUrlParam('name');
         // name = decode(name);
         // let money = getUrlParam('money');

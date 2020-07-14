@@ -260,7 +260,9 @@
                                 // &name="+encode(name)+"&money=33
                                location.href= baseurl+'wypay_success.html?trade_water_id='+n.result.trade_water_id;
                             }
-                            ap.call("closeWebview");
+                            if(res.resultCode =="6001") {
+                                ap.call("closeWebview");
+							}
 
                         });
                     } else if("WeiXin" === checkclient) {
