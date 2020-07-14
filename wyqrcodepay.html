@@ -256,9 +256,9 @@
                         ap.tradePay({
                             tradeNO: tranNo
                         }, function(res){
-                            if(res.resultCode === "9000") {
-                                ap.call("closeWebview");
-                            }
+                            // if(res.resultCode === "9000") {
+                            //     ap.call("closeWebview");
+                            // }
                             // ?name="+encode(name)+"&money=33
                             location.href= baseurl+'wypay_success.html';
 
@@ -283,7 +283,7 @@
                             "paySign":n.result.paysign,
                             "appId":n.result.appid,
                             success: function (res) {
-                                wx.closeWindow();
+                                // wx.closeWindow();
                                 // ?name="+encode(name)+"&money=33
                                 location.href= baseurl+'wypay_success.html';
                             }
