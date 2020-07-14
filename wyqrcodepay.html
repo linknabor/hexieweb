@@ -256,11 +256,11 @@
                         ap.tradePay({
                             tradeNO: tranNo
                         }, function(res){
-                            // if(res.resultCode === "9000") {
-                            //     ap.call("closeWebview");
-                            // }
-                            // ?name="+encode(name)+"&money=33
-                            location.href= baseurl+'wypay_success.html';
+                            if(res.resultCode === "9000") {
+                                // &name="+encode(name)+"&money=33
+                               location.href= baseurl+'wypay_success.html?trade_water_id='+n.result.trade_water_id;
+                            }
+                            ap.call("closeWebview");
 
                         });
                     } else if("WeiXin" === checkclient) {
@@ -284,8 +284,8 @@
                             "appId":n.result.appid,
                             success: function (res) {
                                 // wx.closeWindow();
-                                // ?name="+encode(name)+"&money=33
-                                location.href= baseurl+'wypay_success.html';
+                                // &name="+encode(name)+"&money=33
+                                location.href= baseurl+'wypay_success.html?trade_water_id='+n.result.trade_water_id;
                             }
                         });
                     }
