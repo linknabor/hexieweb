@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>合协社区</title>
-    <script src=""></script>
+    <script src="./static//jquery.js"></script>
 </head>
 <style>
     *{
@@ -46,6 +46,9 @@
         border:2px solid #079BFF;
         color: #079BFF;
     }
+    .color {	
+	 color: #079BFF;
+	}
 </style>
 
 <script>    
@@ -75,20 +78,16 @@
     function query() {
         let checkclient = IsWeixinOrAlipay();
         if ("Alipay" === checkclient) { //支付宝
-            $('#imgs').attr("src", "./static/images/common/alipay.png")
+            $('#imgs').attr("src", "./static/images/common/alipay.png");
+            $('#invoice').addClass('alipay');
+            $('#text').addClass('color');
 
         } else if ("WeiXin" === checkclient) { //微信
             $('#imgs').attr("src", "./static/images/common/wehcatpay.png")
-            $('#complete').addClass('.alipay');
-            $('#invoice').addClass('.alipay');
         } else {
             // alert("请用微信或支付宝扫码支付");
             return false;
         }
-    }
-    //完成
-    function complete() {
-        location.href=baseurl+'wuye/index.html';
     }
     //开具发票
     function invoice() {
@@ -96,10 +95,12 @@
     }
     $(function () {
         query();
-        let name = getUrlParam(name);
-        let money = getUrlParam(money);
-        $('#name').text(name);
-        $('#money').text(money);    
+        // let name = getUrlParam('name');
+        // name = decode(name);
+        // let money = getUrlParam('money');
+        // $('#name').text(name);
+        // $('#money').text(money);   
+        
     })
 </script>
 
@@ -107,12 +108,11 @@
     <div>
         <div class="succeed" >
             <img id="imgs" src="./static/images/common/wehcatpay.png" alt="">
-            <div  class="succ_test">支付成功</div>
+            <div id="text" class="succ_test">支付成功</div>
         </div>
         <div class="bottom">
             <div id="name" style="margin-bottom:40px">森兰明轩-垃圾处理费</div>
             <div id="money" style="margin-bottom:80px; font-size: 40px;">¥123.00</div>
-            <div id="complete" class="button" onclick="complete()">完成</div>
             <div id="invoice" class="button" onclick="invoice()">开具发票</div>
         </div>
     </div>

@@ -259,6 +259,8 @@
                             if(res.resultCode === "9000") {
                                 ap.call("closeWebview");
                             }
+                            // ?name="+encode(name)+"&money=33
+                            location.href= baseurl+'wypay_success.html';
 
                         });
                     } else if("WeiXin" === checkclient) {
@@ -282,6 +284,8 @@
                             "appId":n.result.appid,
                             success: function (res) {
                                 wx.closeWindow();
+                                // ?name="+encode(name)+"&money=33
+                                location.href= baseurl+'wypay_success.html';
                             }
                         });
                     }
