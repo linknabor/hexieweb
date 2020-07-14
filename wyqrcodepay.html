@@ -212,7 +212,6 @@
         //页面加载完执行
         window.onload = function(){
             getUrlParam();
-            let checkclient = IsWeixinOrAlipay();
             if(openid != undefined || user_id != undefined) {
                  pay();
             }
@@ -236,17 +235,15 @@
             list.ruleType = ruleType; //减免规则类型
             list.reductionAmt = reductionAmt;//减免金额
             if("Alipay" === checkclient) {
-                list.alipayUserId = user_id;
-                url = "/getPrePayInfoAlipay";
+                list.openid = user_id;
             } else if("WeiXin" === checkclient) {
                 list.openid = openid;
-                url = "/getPrePayInfo";
             }
             
             $.ajax({
                 type : "POST",
                 contentType: "application/json;charset=UTF-8",
-                url : wechat_url + url,
+                url : wechat_url + '/getPrePayInfo4Qrcode',
                 data : JSON.stringify(list),
                 dataType : "json",
                 success : function(n) {
@@ -299,23 +296,6 @@
 
         //比onload先执行
         $(function () {
-
-            let theRequest = {};
-            let paramUrl = window.location.search.substr(1);
-            let param = getParam(paramUrl, "param");
-            param = strAnsi2Unicode(decode64(param));
-
-            let params = param.split("&");
-            for(var i = 0; i < params.length; i ++) {
-                theRequest[params[i].split("=")[0]]=unescape(params[i].split("=")[1]);
-            }
-
-            // appId = theRequest.appid;
-            // if(undefined === appId) {
-            //     appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
-            //     /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
-            // }
-
             query(); //判断环境授权执行
 
         });
