@@ -97,13 +97,14 @@
     $(function () {
         query();
         trade_water_id = getUrlParam('trade_water_id')
-        var sect_name = getUrlParam(sect_name);
-            sect_name = decode(sect_name);
-        var fee_name = getUrlParam(fee_name);
-            fee_name = decode(fee_name);
-        var tran_amt = getUrlParam(tran_amt);
-        let name = sect_name+'-'+fee_name;
-            console.log(sect_name+'-'+fee_name+'-'+tran_amt)
+        var sect_name = getUrlParam('sect_name');
+            sect_name = decodeURI(sect_name);
+        var fee_name = getUrlParam('fee_name');
+            fee_name = decodeURI(fee_name);
+        var tran_amt = getUrlParam('tran_amt');
+            tran_amt=Number(tran_amt).toFixed(2)
+        let name = sect_name+'-  '+fee_name;
+            // console.log(sect_name+'-'+fee_name+'-'+tran_amt)
         $('#name').text(name);
         $('#money').text(tran_amt);   
         

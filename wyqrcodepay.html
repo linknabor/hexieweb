@@ -291,7 +291,7 @@
                             "appId":n.result.appid,
                             success: function (res) {
                                 // wx.closeWindow();
-                                location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encode(sect_name)+"&fee_name="+encode(fee_name)+"&tran_amt="+tran_amt;
+                                location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encodeURI(encodeURI(sect_name))+"&fee_name="+encodeURI(encodeURI(fee_name))+"&tran_amt="+tran_amt;
                             }
                         });
                     }
