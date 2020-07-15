@@ -263,7 +263,7 @@
                             tradeNO: tranNo
                         }, function(res){
                             if(res.resultCode === "9000") {
-                               location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encode(sect_name)+"&fee_name="+encode(fee_name)+"&tran_amt="+tran_amt;
+                               location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encodeURI(encodeURI(sect_name))+"&fee_name="+encodeURI(encodeURI(fee_name))+"&tran_amt="+tran_amt;
                             }
                             if(res.resultCode =="6001") {
                                 ap.call("closeWebview");
