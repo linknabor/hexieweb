@@ -180,6 +180,9 @@
         var ruleType = "";
         var openid = "";
         var user_id = "";
+        var sect_name = "";
+        var fee_name = "";
+        var tran_amt = ""
 
         //获取支付参数
         function getUrlParam() {
@@ -205,6 +208,9 @@
             reduceAmt = theRequest.reduceAmt;
             reductionAmt = theRequest.reduction_amt;   
             ruleType = theRequest.rule_type;
+            sect_name = theRequest.sect_name;
+            fee_name = theRequest.fee_name;
+            tran_amt = theRequest.tran_amt;
 
             openid = getParam(paramUrl, "openid");
             user_id = getParam(paramUrl, "user_id");
@@ -257,8 +263,7 @@
                             tradeNO: tranNo
                         }, function(res){
                             if(res.resultCode === "9000") {
-                                // &name="+encode(name)+"&money=33
-                               location.href= baseurl+'wypay_success.html?trade_water_id='+n.result.trade_water_id;
+                               location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encode(sect_name)+"&fee_name="+encode(fee_name)+"&tran_amt="+tran_amt;
                             }
                             if(res.resultCode =="6001") {
                                 ap.call("closeWebview");
@@ -286,8 +291,7 @@
                             "appId":n.result.appid,
                             success: function (res) {
                                 // wx.closeWindow();
-                                // &name="+encode(name)+"&money=33
-                                location.href= baseurl+'wypay_success.html?trade_water_id='+n.result.trade_water_id;
+                                location.href= baseurl+"wypay_success.html?trade_water_id="+n.result.trade_water_id+"&sect_name="+encode(sect_name)+"&fee_name="+encode(fee_name)+"&tran_amt="+tran_amt;
                             }
                         });
                     }

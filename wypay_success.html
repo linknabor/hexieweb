@@ -97,11 +97,15 @@
     $(function () {
         query();
         trade_water_id = getUrlParam('trade_water_id')
-        // let name = getUrlParam('name');
-        // name = decode(name);
-        // let money = getUrlParam('money');
-        // $('#name').text(name);
-        // $('#money').text(money);   
+        var sect_name = getUrlParam(sect_name);
+            sect_name = decode(sect_name);
+        var fee_name = getUrlParam(fee_name);
+            fee_name = decode(fee_name);
+        var tran_amt = getUrlParam(tran_amt);
+        let name = sect_name+'-'+fee_name;
+            console.log(sect_name+'-'+fee_name+'-'+tran_amt)
+        $('#name').text(name);
+        $('#money').text(tran_amt);   
         
     })
 </script>
@@ -113,8 +117,8 @@
             <div id="text" class="succ_test">支付成功</div>
         </div>
         <div class="bottom">
-            <div id="name" style="margin-bottom:40px">森兰明轩-垃圾处理费</div>
-            <div id="money" style="margin-bottom:80px; font-size: 40px;">¥123.00</div>
+            <div id="name" style="margin-bottom:40px"></div>
+            <div id="money" style="margin-bottom:80px; font-size: 40px;"></div>
             <div id="invoice" class="button" onclick="invoice()">开具发票</div>
         </div>
     </div>
