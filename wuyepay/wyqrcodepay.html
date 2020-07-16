@@ -183,6 +183,7 @@
         var sect_name = "";
         var fee_name = "";
         var tran_amt = ""
+        var appid = "";
 
         //获取支付参数
         function getUrlParam() {
@@ -211,6 +212,8 @@
             sect_name = theRequest.sect_name;
             fee_name = theRequest.fee_name;
             tran_amt = theRequest.tran_amt;
+            appid = theRequest.appid;
+
 
             openid = getParam(paramUrl, "openid");
             user_id = getParam(paramUrl, "user_id");
@@ -240,6 +243,8 @@
             list.reduceAmt = reduceAmt;
             list.ruleType = ruleType; //减免规则类型
             list.reductionAmt = reductionAmt;//减免金额
+            list.appid = appid;
+
             if("Alipay" === checkclient) {
                 list.openid = user_id;
             } else if("WeiXin" === checkclient) {
