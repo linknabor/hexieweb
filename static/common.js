@@ -285,7 +285,6 @@ window.common = {
 
      //授权
     login: function() {
-
 		var timestamp="";
 		var o = this._GET().code;
 		var oriApp = getUrlParam("oriApp");
@@ -301,10 +300,8 @@ window.common = {
 			var url = t + "appid=" ;
 			
 			if(oriApp){
-			
 				url +=  oriApp + "&component_appid=" + MasterConfig.C("componentAppId"); 
 			}else{
-
 				url +=  mainAppId;
 			}
 			url+="&redirect_uri=" + encodeURIComponent(n) +end+ "#wechat_redirect";
@@ -355,23 +352,23 @@ window.common = {
         setCookie("appId", user.appId);
     },
     //存储公共userinfo中参数的cookie
-    updatecookie(cardStatus,cardService,userId,appid,cspId,sectId,cardPayService,bgImageList,wuyeTabsList){
-        var duration = new Date().getTime()/1000 + 3600*24*30;
-        setCookie("cardStatus", cardStatus,duration);
-        setCookie("cardService", cardService,duration);
-        setCookie('userId',userId,duration);
-        setCookie('appid',appid,duration);
-        setCookie('cspId',cspId,duration);
-        setCookie('sectId',sectId,duration);
-        setCookie('cardPayService',cardPayService,duration);
-
-        for(var j=0;j<bgImageList.length;j++){
-            common.localSet(bgImageList[j].type,bgImageList[j].imgUrl)
-        }
-
-        if(wuyeTabsList) {
-            common.localSet('wuyeTabsList',JSON.stringify(wuyeTabsList));
-        }
+    updatecookie(cardStatus,cardService,userId,appid,cspId,sectId,cardPayService,bgImageList,wuyeTabsList,qrCode){
+            var duration = new Date().getTime()/1000 + 3600*24*30;
+            setCookie("cardStatus", cardStatus,duration);
+            setCookie("cardService", cardService,duration);
+            setCookie('userId',userId,duration);
+            setCookie('appid',appid,duration);
+            setCookie('cspId',cspId,duration);
+            setCookie('sectId',sectId,duration);
+            setCookie('cardPayService',cardPayService,duration);
+            setCookie('qrCode',qrCode,duration);
+            for(var j=0;j<bgImageList.length;j++){
+                common.localSet(bgImageList[j].type,bgImageList[j].imgUrl)
+            }
+    
+            if(wuyeTabsList) {
+                common.localSet('wuyeTabsList',JSON.stringify(wuyeTabsList));
+            }
     },
      //入口程序 检查状态
     checkRegisterStatus:function(){
