@@ -76,8 +76,9 @@
         }
 
         function weixinAuthorize() {
-            appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
-               /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
+
+            //appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
+             //   /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
 
             let componentAppId = /127|test/.test(location.origin)?'wx4d706a1a7a139d1f':
                 /uat/.test(location.origin)?'wxc65085912aca5444' : 'wx0d408844b35d85e2';
@@ -135,15 +136,6 @@
         var sect_name = "";
         var fee_name = "";
         var qrcode_id = "";
-
-        var buildlist = []; //小区楼宇
-        var build_id = "";//楼宇id
-        var unitList = [];//门派
-        var unit_id = "";//门派id
-        var houseList = [];// 室号
-        var house_id = "";//室号id
-        var ischeckaddr = ""; //是否显示地址
-
         function getUrlParam() {
             let theRequest = {};
             let paramUrl = window.location.search.substr(1);
@@ -170,81 +162,7 @@
 
             openid = getParam(paramUrl, "openid");
             user_id = getParam(paramUrl, "user_id");
-            ischeckaddr = theRequest.is_check_addr;
-
-            if(ischeckaddr == '1') {
-                $('#showaddr').show();
-            }else {
-                $('#showaddr').hide();
-            }
-          
         }
-
-        function getall() {
-            getCellMng(sect_id,"", "","03");
-            getCellMng(sect_id,"0","","02");
-            getCellMng(sect_id,"0","0","01");
-        }
-
-        function getCellMng(sect_id,build_id,house_id,data_type) {
-            var params = {
-                sect_id,
-                build_id,
-                unit_id,
-                data_type
-            };
-            $.ajax({
-                type:'get',
-                url:wechat_url+'/getHeXieCellById?regionname=',
-                data:params,
-                dataType : "json",
-                success:function(res) {
-                    if(res.success) {
-                        let InfoList = res.result;
-                        if (Array.isArray(InfoList) && InfoList.length <= 0) {
-                       
-                        } else {
-                            if ("03" == data_type) {
-                                buildList = InfoList.build_info;
-                                buildList.unshift({ id: "0", name: "请选择" });
-                                for(var i=0;i<buildList.length;i++){
-                                    $('#build').append('<option  value='+buildList[i].id+'>'+buildList[i].name+'</option>')
-                                }
-                            } else if ("02" == data_type) {
-                                $('#unit').empty();
-                                unitList = InfoList.unit_info;
-                                unitList.unshift({ id: "0", name: "请选择" });
-                                for(var i=0;i<unitList.length;i++){
-                                    $('#unit').append('<option  value='+unitList[i].id+'>'+unitList[i].name+'</option>')
-                                }
-                            } else if ("01" == data_type) {
-                                $('#house').empty();
-                                houseList = InfoList.house_info;
-                                houseList.unshift({ id: "0", name: "请选择" });
-                                for(var i=0;i<houseList.length;i++){
-                                    $('#house').append('<option  value='+houseList[i].id+'>'+houseList[i].name+'</option>')
-                                }
-                            }
-                        }
-                    }else {
-                        if ("03" == data_type) {
-                            buildList =[];
-                            unitList = [];
-                            houseList = [];
-                        } else if ("02" == data_type) {
-                            unitList = [];
-                            houseList = [];
-                        } else if ("01" == data_type) {
-                            houseList = [];
-                        }
-                    }
-                },
-                error:function(res) {
-                    console.log(res.message);
-                }
-            })
-        }
-        
 
         function gercode() {
             var e = location.search,
@@ -360,7 +278,6 @@
                     $("#phoneAjax").addClass("hidden");
                 }
             });
-            getall();
         }
 
         function IsWeixinOrAlipay() {
@@ -378,21 +295,22 @@
         }
 
         $(function () {
-			// let theRequest = {};
-            // let paramUrl = window.location.search.substr(1);
-            // let param = getParam(paramUrl, "param");
-            // param = strAnsi2Unicode(decode64(param));
 
-            // let params = param.split("&");
-            // for(var i = 0; i < params.length; i ++) {
-            //     theRequest[params[i].split("=")[0]]=unescape(params[i].split("=")[1]);
-            // }
+			let theRequest = {};
+            let paramUrl = window.location.search.substr(1);
+            let param = getParam(paramUrl, "param");
+            param = strAnsi2Unicode(decode64(param));
+
+            let params = param.split("&");
+            for(var i = 0; i < params.length; i ++) {
+                theRequest[params[i].split("=")[0]]=unescape(params[i].split("=")[1]);
+            }
 			
-			// appId = theRequest.appid;
-			// if(undefined === appId) {
-			// 	appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
-            //     /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
-			// }
+			appId = theRequest.appid;
+			if(undefined === appId) {
+				appId = /127|test/.test(location.origin)?'wx95f46f41ca5e570e':
+                /uat/.test(location.origin)?'wx9ffe0a2b5a64a285' : 'wxbd214f5765f346c1';
+			}
 			
             query(); //执行
 
@@ -415,30 +333,6 @@
             $("#remark").focus(function () {
                 $(".num_key").hide();
             });
-
-            //点击楼宇
-            $('#build').change(function(){
-                build_id = $('#build option:selected').val();
-                unit_id ='';
-                house_id = '';
-                unitList = [];
-                houseList = [];
-                getCellMng(sect_id,build_id, "", "02");
-                getCellMng(sect_id,build_id, "0", "01");
-            })
-
-            //点击门牌
-            $('#unit').change(function(){
-                unit_id = $('#unit option:selected').val();
-                house_id = '';
-                houseList = [];
-                getCellMng(sect_id,build_id,unit_id , "01");
-            })
-
-            //点击室号
-            $('#house').change(function(){
-                house_id = $('#house option:selected').val();
-            })
         });
 
     </script>
@@ -450,7 +344,7 @@
             border-radius: 3px;
             color: #363636;
             background: #FFFFFF;
-            padding-bottom:15%;
+            height: 300px;
         }
 
         .hidden {
@@ -579,24 +473,10 @@
 			-moz-border-radius: 15px;
 			-webkit-border-radius: 15px
 		}
-
-        .input-row {
-            background-color: #ffffff;
-            width: 82%;
-            height: 30px;
-            line-height: 30px;
-            padding-top: 5%;
-            font-size: 13px;
-            font-family: 微软雅黑,sans-serif;
-        }
-        .input-row select {
-            width:82%;
-            height: 28px;
-        }
     </style>
 </head>
 <body style="background: #F5F5F5">
-<div style="height: 100%; padding: 0 5% 0 5%;">
+<div style="height: 100%; padding: 0 5% 75% 5%;">
     <div id="phoneAjax" class="hidden">
         <img src="./static/images/common/loading.gif" style="width:40px;height:40px;vertical-align: middle;">
     </div>
@@ -612,26 +492,6 @@
         <div style="text-align:center;padding-top: 6%" class="family">
             <div class="line_context"><span id="fee_name"></span></div>
         </div>
-
-        <div id="showaddr">
-            <div class="line_context">
-                <div class="input-row">
-                    <label>楼宇：</label>
-                    <select class="virtual-input" name="builds" id="build">
-                    </select>
-                </div>
-                <div class="input-row">
-                    <label>门牌：</label>
-                    <select class="virtual-input" name="units" id="unit">
-                    </select>
-                </div>
-                <div class="input-row">
-                    <label>室号：</label>
-                    <select class="virtual-input" name="houses" id="house">
-                    </select>
-                </div>
-            </div>
-        </div> 
 
         <div style="text-align:center;padding-top: 12%">
             <div class="line_context"><input class="logintxt" type="text" id="money" name="money" value="" placeholder="￥请输入支付金额" onfocus="this.blur()"/></div>
