@@ -233,7 +233,7 @@
                                     }
                                 }else {
                                     $('#house').empty();
-                                    ouseList = InfoList.house_info;
+                                    houseList = InfoList.house_info;
                                     houseList.unshift({ id: "0", name: "请选择" });
                                     for(var i=0;i<houseList.length;i++){
                                         $('#house').append('<option  value='+houseList[i].id+'>'+houseList[i].name+'</option>')
@@ -301,8 +301,9 @@
                 alert("请使用微信或支付宝扫码支付");
                 return;
             }
-            if(house_id == '') {
+            if(house_id == '' || house_id == 0) {
                 alert('请选择地址');
+                $("#phoneAjax").addClass("hidden");
                 return;
             }
             var list = {};
