@@ -188,10 +188,10 @@
         function getall() {
             getCellMng(sect_id,"", "","03");
             getCellMng(sect_id,"0","","02");
-            // getCellMng(sect_id,"0","0","01");
+            getCellMng(sect_id,"0","0","01","11");
         }
 
-        function getCellMng(sect_id,build_id,house_id,data_type) {
+        function getCellMng(sect_id,build_id,house_id,data_type,show_type) {
             var params = {
                 sect_id:sect_id,
                 build_id:build_id,
@@ -225,12 +225,18 @@
                                     $('#unit').append('<option  value='+unitList[i].id+'>'+unitList[i].name+'</option>')
                                 }
                             } else if ("01" == data_type) {
-                                $('#house').empty();
-                                houseList = InfoList.house_info;
-                                houseList.unshift({ id: "0", name: "请选择" });
-                                for(var i=0;i<houseList.length;i++){
-                                    $('#house').append('<option  value='+houseList[i].id+'>'+houseList[i].name+'</option>')
+                                if(show_type == 11) {
+                                    houseList = InfoList.house_info;
+                                    houseList.unshift({ id: "0", name: "请选择" });
+                                }else {
+                                    $('#house').empty();
+                                    houseList = InfoList.house_info;
+                                    houseList.unshift({ id: "0", name: "请选择" });
+                                    for(var i=0;i<houseList.length;i++){
+                                        $('#house').append('<option  value='+houseList[i].id+'>'+houseList[i].name+'</option>')
+                                    }
                                 }
+
                             }
                         }
                     }else {
