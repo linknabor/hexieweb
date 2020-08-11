@@ -301,8 +301,8 @@
                 alert("请使用微信或支付宝扫码支付");
                 return;
             }
-            if(house_id == '' || house_id == 0) {
-                alert('请选择地址');
+            if(ischeckaddr == '1' && (house_id == '' || house_id == 0)) {
+                alert('请选择房屋地址');
                 $("#phoneAjax").addClass("hidden");
                 return;
             }
