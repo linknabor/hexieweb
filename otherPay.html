@@ -188,7 +188,7 @@
         function getall() {
             getCellMng(sect_id,"", "","03");
             getCellMng(sect_id,"0","","02");
-            getCellMng(sect_id,"0","0","01");
+            // getCellMng(sect_id,"0","0","01");
         }
 
         function getCellMng(sect_id,build_id,house_id,data_type) {
@@ -292,7 +292,10 @@
                 alert("请使用微信或支付宝扫码支付");
                 return;
             }
-
+            if(house_id == '') {
+                alert('请选择地址');
+                return;
+            }
             var list = {};
             list.money = $("#money").val();
             list.remark = $("#remark").val();
