@@ -180,7 +180,7 @@
                 $('#showaddr').hide();
             }
             
-            if(openid != "" || user_id != ""){
+            if(openid != null || user_id != null){
                getall();
             }
         }
@@ -200,9 +200,10 @@
                 appid:cull_appid,
             };
             $.ajax({
-                type:'get',
+                type:'post',
+                contentType: "application/json;charset=UTF-8",
                 url:wechat_url+'/getHeXieCellById4Qrcode?regionname=',
-                data:params,
+                data:JSON.stringify(params),
                 dataType : "json",
                 success:function(res) {
                     if(res.success) {
@@ -366,7 +367,6 @@
                     $("#phoneAjax").addClass("hidden");
                 }
             });
-            getall();
         }
 
         function IsWeixinOrAlipay() {
@@ -598,6 +598,7 @@
         .input-row select {
             width:80%;
             height: 28px;
+            outline: none;
         }
     </style>
 </head>
@@ -649,7 +650,7 @@
     </div>
 
     <div style="text-align:center;padding-top: 5%">
-        <input style="background: #ff9834;border-radius: 10px;width: 100%;height:50px;font-size: 20px;color: white;cursor: pointer; -webkit-appearance: none;" type="button" onclick="pay()" value="确认支付"/>
+        <input style="background: #ff9834;border-radius: 10px;width: 100%;height:50px;font-size: 20px;color: white;cursor: pointer; -webkit-appearance: none;outline: none;border: none;" type="button" onclick="pay()" value="确认支付"/>
     </div>
 
 
