@@ -287,6 +287,7 @@ window.common = {
              common.login(addoauthurl); 
           return false;
         }
+        return true;
     },
      //授权
     login: function(addoauthurl) {
