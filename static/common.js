@@ -282,9 +282,11 @@ window.common = {
 		var oriapp=getUrlParam('oriApp')?'oriApp='+getUrlParam('oriApp'):'oriApp='+mainAppId;
         return  oriapp;
    },
-
+    baselogin(){
+      vm.common.login(addoauthurl);    
+    },
      //授权
-    login: function() {
+    login: function(addoauthurl) {
 		var timestamp="";
 		var o = this._GET().code;
 		var oriApp = getUrlParam("oriApp");
@@ -294,9 +296,14 @@ window.common = {
 		}
 		var param = {"oriApp":oriApp};
         if (common.alert("code: " + o), void 0 === o) {
-			var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah(),
-			t = MasterConfig.C("oauthUrl"),
-		    end = MasterConfig.C("oauthUrlPostFix");
+            var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah();
+            var	t;
+            if(addoauthurl == 'base'){
+             t = MasterConfig.C("oauthUrlPostSilent");
+            }else {
+		     t = MasterConfig.C("oauthUrl");
+            }
+		    var end = MasterConfig.C("oauthUrlPostFix");
 			var url = t + "appid=" ;
 			
 			if(oriApp){
