@@ -283,7 +283,10 @@ window.common = {
         return  oriapp;
    },
     baselogin(addoauthurl){
-      common.login(addoauthurl);    
+        if(!getCookie("UID")){
+             common.login(addoauthurl); 
+          return false;
+        }
     },
      //授权
     login: function(addoauthurl) {
