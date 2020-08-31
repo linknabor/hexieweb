@@ -296,16 +296,15 @@ window.common = {
 		}
 		var param = {"oriApp":oriApp};
         if (common.alert("code: " + o), void 0 === o) {
-            var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah();
-            var	t;
-            if(addoauthurl == 'base'){
-             t = MasterConfig.C("oauthUrlPostSilent");
+			var n = location.origin + common.removeParamFromUrl(["from","bind", "code", "share_id", "isappinstalled", "state", "m", "c", "a"])+common.addParamHsah();
+             var  t = MasterConfig.C("oauthUrl");
+		    var  end;
+            if(addoauthurl == 'base') {
+                end = MasterConfig.C("oauthUrlPostSilent");
             }else {
-		     t = MasterConfig.C("oauthUrl");
+                end = MasterConfig.C("oauthUrlPostFix");
             }
-		    var end = MasterConfig.C("oauthUrlPostFix");
 			var url = t + "appid=" ;
-			
 			if(oriApp){
 				url +=  oriApp + "&component_appid=" + MasterConfig.C("componentAppId"); 
 			}else{
