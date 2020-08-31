@@ -283,7 +283,7 @@ window.common = {
         return  oriapp;
    },
     baselogin(addoauthurl){
-      vm.common.login(addoauthurl);    
+      common.login(addoauthurl);    
     },
      //授权
     login: function(addoauthurl) {
