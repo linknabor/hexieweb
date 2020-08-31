@@ -282,7 +282,7 @@ window.common = {
 		var oriapp=getUrlParam('oriApp')?'oriApp='+getUrlParam('oriApp'):'oriApp='+mainAppId;
         return  oriapp;
    },
-    baselogin(){
+    baselogin(addoauthurl){
       vm.common.login(addoauthurl);    
     },
      //授权
