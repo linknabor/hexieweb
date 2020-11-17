@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="origin">
+    <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>支付完成</title>
+    <script type="text/javascript" charset="UTF-8" src="https://wx.gtimg.com/pay_h5/goldplan/js/jgoldplan-1.0.0.js">
+    </script>
+
+    <style>
+        #toOrder {
+            width: 200px;
+            height: 50px;
+            margin: 200px auto;
+            color: #fff;
+            background-color: red;
+            text-align: center;
+            font-size: 20px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+        <div id="toOrder">返回</div>
+    </div>
+
+    <script>
+					 window.onload=function(){
+						//初始化小票
+						var initData = {
+							action: 'onIframeReady',
+							displayStyle: 'SHOW_CUSTOM_PAGE'
+						}
+						var initPostData = JSON.stringify(initData)
+						parent.postMessage(initPostData, 'https://payapp.weixin.qq.com')
+                    }
+                    var detailLink = 'https://test.e-shequ.cn/weixin/ticket/receipt.html';
+                    //注册点击事件(去详情)
+                    document.getElementById("toOrder").onclick = function () {
+                        var mchData = {
+                            action: 'jumpOut',
+                            jumpOutUrl: detailLink //跳转的页面
+                        }
+                        var postData = JSON.stringify(mchData)
+						console.log();
+                        parent.postMessage(postData, 'https://payapp.weixin.qq.com')
+                    }
+    </script>
+</body>
+
+</html>
